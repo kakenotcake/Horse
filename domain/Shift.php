@@ -1,5 +1,6 @@
 <?php
-/*
+/* WILL NOT BE USING CLASS!!
+
  * Copyright 2015 by Adrienne Beebe, Connor Hargus, Phuong Le, 
  * Xun Wang, and Allen Tucker. This program is part of RMHP-Homebase, which is free 
  * software.  It comes with absolutely no warranty. You can redistribute and/or 
@@ -13,7 +14,7 @@
  * @author Allen Tucker and Xun Wang
  */
 
-include_once(dirname(__FILE__).'/../database/dbShifts.php');
+/*include_once(dirname(__FILE__).'/../database/dbShifts.php');
 include_once(dirname(__FILE__).'/../database/dbPersons.php');
 
 class Shift {
@@ -35,7 +36,7 @@ class Shift {
      * construct an empty shift with a certain number of vacancies
      */
 
-    function __construct($yy_mm_ddhours, $venue, $vacancies, $persons, $removed_persons, $sub_call_list, $notes) {
+   /* function __construct($yy_mm_ddhours, $venue, $vacancies, $persons, $removed_persons, $sub_call_list, $notes) {
     	$this->yy_mm_dd = substr($yy_mm_ddhours, 0, 8);
         $this->hours = substr($yy_mm_ddhours, 9);
         $i = strpos($this->hours, "-");
@@ -72,7 +73,7 @@ class Shift {
      *          . $this->start_time . "-" . $this->end_time . $this->venue
      *          && $this->hours == substr($this->id, 9)
      */
-    function set_start_end_time($st, $et) {
+   /* function set_start_end_time($st, $et) {
         if (0 <= $st && $st < $et && $et < 24 &&
                 strpos(substr($this->id, 9), "-") !== false) {
             $this->start_time = $st;
@@ -94,7 +95,7 @@ class Shift {
      * @return the number of vacancies in this shift.
      */
 
-    function num_vacancies() {
+   /* function num_vacancies() {
         return $this->vacancies;
     }
 
@@ -130,7 +131,7 @@ class Shift {
     /*
      * getters and setters
      */
-    function get_yy_mm_dd() {
+    /*function get_yy_mm_dd() {
     	return $this->yy_mm_dd;
     }
 
@@ -209,4 +210,4 @@ class Shift {
     
 }
 
-?>
+?>*/

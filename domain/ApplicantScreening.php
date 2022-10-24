@@ -1,5 +1,6 @@
 <?php
-/* test
+/*WILL NOT BE USING CLASS!!!
+
  * Copyright 2015 by Adrienne Beebe, Connor Hargus, Phuong Le, 
  * Xun Wang, and Allen Tucker. This program is part of RMHP-Homebase, which is free 
  * software.  It comes with absolutely no warranty. You can redistribute and/or 
@@ -12,7 +13,7 @@
  * @author Jackson Moniaga
  * @version March 4, 2012
  */
-class ApplicantScreening {
+/*class ApplicantScreening {
 
     private $type; // Unique identifier for this screening template -- reflects
     // type of position for which it will be used. 
@@ -25,7 +26,7 @@ class ApplicantScreening {
      * constructor for all ApplicantScreenings
      */
 
-    function __construct($t, $c, $s, $st) {
+   /** function __construct($t, $c, $s, $st) {
         $this->type = $t;
         $this->creator = $c;
         if ($s == "")
@@ -38,7 +39,7 @@ class ApplicantScreening {
     /**
      * getter functions
      */
-    function get_type() {
+   /* function get_type() {
         return $this->type;
     }
 
@@ -58,7 +59,7 @@ class ApplicantScreening {
      * Setter functions
      */
 
-    function set_type($new_type) {
+  /*  function set_type($new_type) {
         $this->type = $new_type;
     }
 
@@ -76,4 +77,4 @@ class ApplicantScreening {
 
 }
 
-?>
+?>*/

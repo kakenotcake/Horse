@@ -1,5 +1,6 @@
 <?php
-/*
+/* WILL NOT BE USING CLASS!!
+
  * Copyright 2015 by Adrienne Beebe, Connor Hargus, Phuong Le, 
  * Xun Wang, and Allen Tucker. This program is part of RMHP-Homebase, which is free 
  * software.  It comes with absolutely no warranty. You can redistribute and/or 
@@ -12,7 +13,7 @@
  * @author Maxwell Palmer
  */
 
-class SCL {
+/*class SCL {
 
     private $id;   // yy-mm-dd:hours:venue, the same id as the shift it belongs to
     private $persons;  // array of person information arrays
@@ -26,7 +27,7 @@ class SCL {
      * makes a scl object.  from either the db or from the generating form in edit shifts
      */
 
-    function __construct($id, $persons, $status, $vacancies, $time) {
+    /*function __construct($id, $persons, $status, $vacancies, $time) {
         $this->id = $id;
         $this->persons = $persons;
         $this->status = $status;
@@ -72,4 +73,4 @@ class SCL {
 
 }
 
-?>
+?>*/
