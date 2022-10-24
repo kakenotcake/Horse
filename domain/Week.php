@@ -1,5 +1,6 @@
 <?php
-/*
+/* WILL NOT BE USING CLASS!!
+
  * Copyright 2015 by Adrienne Beebe, Connor Hargus, Phuong Le, 
  * Xun Wang, and Allen Tucker. This program is part of RMHP-Homebase, which is free 
  * software.  It comes with absolutely no warranty. You can redistribute and/or 
@@ -11,7 +12,7 @@
  * @author Connor Hargus, Oliver Radwan, Judy Yang, Maxwell Palmer, and Allen Tucker
  * @version May 1, 2008, modified January 21, 2015
  */
-include_once('RMHdate.php');
+//include_once('RMHdate.php');
 /*
  * Week is an array of dates
  * Weeks start on Mondays
@@ -19,7 +20,7 @@ include_once('RMHdate.php');
  * the script will find the Monday of that week, and generate dates from there
  */
 
-class Week {
+/*class Week {
 
     private $id;    // id of the first day of the week, yy-mm-dd;venue, e.g., "02-06-12:house"
     private $dates;    // array of 7 RMHdates, beginning Monday
@@ -32,7 +33,7 @@ class Week {
      * Creates a new calendar week.
      */
 
-    function __construct($dates, $venue, $status) {
+   /* function __construct($dates, $venue, $status) {
         $this->dates = $dates;
         $this->venue = $venue;
         $this->status = $status;
@@ -75,4 +76,4 @@ class Week {
 
 }
 
-?>
+?>*/
