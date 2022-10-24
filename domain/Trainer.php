@@ -10,12 +10,14 @@ class Trainer {
     private $lastName; //string
     private $email; //string
     private $phone; //int
+    private $access; //int
     
-    function __construct($firstName, $lastName, $email, $phone) {
+    function __construct($firstName, $lastName, $email, $phone, $access) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->phone = $phone;
+        $this->access = $access;
     }
     function get_firstName() {
         return $this->firstName;
@@ -29,4 +31,9 @@ class Trainer {
     function get_phone() {
         return $this->phone;
     }
+
+    function get_access() {
+        return $this->access;
+    }
+
 }
