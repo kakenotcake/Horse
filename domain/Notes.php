@@ -9,13 +9,15 @@
 class Notes {
     private $horseName; //string
     private $date; //date format
+    private $timestamp; //int
     private $note; //string
     private $trainerFirstName; //string
     private $trainerLastName; //string
     
-    function __construct($horseName, $date, $note, $trainerFirstName, $trainerLastName) {
+    function __construct($horseName, $date, $timestamp, $note, $trainerFirstName, $trainerLastName) {
             $this->horseName = $horseName;
             $this->date = $date;
+            $this->timestamp = $timestamp;
             $this->note = $note;
             $this->trainerFirstName = $trainerFirstName;
             $this->trainerLastName = $trainerLastName;
@@ -25,6 +27,9 @@ class Notes {
     }
     function get_date() {
         return $this->date;
+    }
+    function get_timestamp() {
+        return $this->timestamp;
     }
     function get_note() {
         return $this->note;
