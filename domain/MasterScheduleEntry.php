@@ -1,5 +1,7 @@
 <?php
-/*
+/* WILL NOT BE USING CLASS!!
+
+
  * Copyright 2015 by Allen Tucker. This program is part of RMHP-Homebase, which is free 
  * software.  It comes with absolutely no warranty. You can redistribute and/or 
  * modify it under the terms of the GNU General Public License as published by the 
@@ -11,7 +13,7 @@
  * @version January 2, 2015
  */
 
-class MasterScheduleEntry {
+/*class MasterScheduleEntry {
 	private $venue; 		// "portland" or "bangor" for House or Family Room
 	private $day;           // "Mon", "Tue", ... "Sun"
 	private $week_no;       // week of month 1st-5th, or week of year 'odd' or 'even'
@@ -24,7 +26,7 @@ class MasterScheduleEntry {
 	/**
 	* constructor for all MasterScheduleEntries
 	*/
-	function __construct($venue, $day, $week_no, $hours, $slots, $persons, $notes){
+	/*function __construct($venue, $day, $week_no, $hours, $slots, $persons, $notes){
 		$this->venue = $venue;
 		$this->day = $day;
 		$this->week_no = $week_no;
@@ -42,7 +44,7 @@ class MasterScheduleEntry {
 	*  getter functions
 	*/
 	
-	function get_venue(){
+	/*function get_venue(){
 		return $this->venue;
 	}
 	function get_day(){
@@ -84,4 +86,4 @@ class MasterScheduleEntry {
 	}	
 }
 
-?>
+?>*/
