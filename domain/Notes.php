@@ -8,8 +8,8 @@
 
 class Notes {
     private $horseName; //string
-    private $date; //date format
-    private $timestamp; //int
+    private $noteDate; //date format
+    private $noteTimestamp; //timestamp
     private $note; //string
     private $trainerFirstName; //string
     private $trainerLastName; //string
