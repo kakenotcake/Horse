@@ -3,15 +3,15 @@
 class Person {
     private $firstName; //string
     private $lastName; //string
-    private $email; //string
     private $phone; //int
+    private $email; //string
     private $access; //int
     
-    function __construct($firstName, $lastName, $email, $phone, $access) {
+    function __construct($firstName, $lastName, $phone, $email, $access) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->email = $email;
         $this->phone = $phone;
+        $this->email = $email;
         $this->access = $access;
     }
     function get_firstName() {
