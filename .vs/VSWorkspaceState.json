@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\domain",
+    "\\lib"
   ],
-  "SelectedNode": "\\C:\\Users\\steph\\Source\\Repos\\Horse",
+  "SelectedNode": "\\domain\\Notes.php",
   "PreviewInSolutionExplorer": false
 }

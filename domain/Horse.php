@@ -7,6 +7,7 @@
  * and open the template in the editor.
  horse
  */
+// push test for Andrei Catuneanu Cica
 class Horse {
     private $horseName; //string
     private $color; //string
