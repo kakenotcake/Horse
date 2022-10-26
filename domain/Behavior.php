@@ -8,16 +8,16 @@
  */
 class Behavior {
    private $title; //string
-   private $level; //string
+   private $behaviorLevel; //string
    
-   function __construct($title, $level) {
+   function __construct($title, $behaviorLevel) {
        $this->title = $title;
-       $this->level = $level;
+       $this->behaviorLevel = $behaviorLevel;
    }
    function get_title() {
        return $this->title;
    }
-   function get_level() {
-       return $this->level;
+   function get_behaviorLevel() {
+       return $this->behaviorLevel;
    }
 }
