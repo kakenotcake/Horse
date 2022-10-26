@@ -8,21 +8,21 @@
  horse
  */
 class Horse {
-    private $name; //string
+    private $horseName; //string
     private $color; //string
     private $breed; //string - can be null if not known
     private $pastureNum; //int
     private $colorRank; //string
     
-    function __construct($name, $color, $breed, $pastureNum, $colorRank) {
-        $this->name = $name;
+    function __construct($horseName, $color, $breed, $pastureNum, $colorRank) {
+        $this->horseName = $name;
         $this->color = $color;
         $this->breed = $breed;
         $this->pastureNum = $pastureNum;
         $this->colorRank = $colorRank;
     }
-    function get_name() {
-        return $this->name;
+    function get_horseName() {
+        return $this->horseName;
     }
     function get_color() {
         return $this->color;
