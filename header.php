@@ -86,7 +86,7 @@
 	            echo('<br>master schedules: <a href="' . $path . 'viewSchedule.php?venue=portland'."".'">Portland, </a>');
 	            echo('<a href="' . $path . 'viewSchedule.php?venue=bangor'."".'">Bangor</a>');
 	            echo(' | Horses: <a href="' . $path . 'personSearch.php">search</a>, 
-				        <a href="horseEdit.php?id=' . 'new' . '">add, </a> <a href="viewScreenings.php?type=new">screenings</a>');
+				        <a href="horseEdit.php?horseName=' . 'new' . '">add, </a> <a href="viewScreenings.php?type=new">screenings</a>');
 	            echo(' | <a href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">reports</a>');
 	        }
 	        echo(' | <a href="' . $path . 'logout.php">logout</a><br>');
