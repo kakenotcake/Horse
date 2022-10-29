@@ -13,6 +13,9 @@ session_start();
 session_cache_expire(30);
 include_once('database/horsedb.php');
 include_once('domain/Horse.php');
+include_once('database/dbApplicantScreenings.php');
+include_once('domain/ApplicantScreeining.php');
+include_once('database/dbLog/php');
 $horseName = str_replace("_", " ", $_GET["horseName"]);
 
 if ($horseName == 'new') {
@@ -30,5 +33,18 @@ if ($horseName == 'new') {
         <title>
             Editing <?PHP echo($horse->get_horseName()); ?>
         </title>
+        <link rel="stylesheet" href="lib/jquery-ui.css" />
+        <link rel="stylesheet" href="styles.css" type="text/css" />
+        <script src="lib/jquery-1.9.1.js"></script>
+            <script src="lib/jquery-ui.js"></script>      
     </head>
-</html>
+    <body>
+        <div id=""container">
+            <?PHP include('header.php'); ?>
+            <div id=""content">
+                <?PHP include('horseForm.inc'); ?>
+            </div>
+            <?PHP include('footer.inc'); ?>
+        </div>
+    </body>
+</html>    
