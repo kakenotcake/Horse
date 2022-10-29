@@ -35,7 +35,7 @@ function add_horse($horse) {
 /*
  * remove a horse from horsedb table. If already there, return false
  */
-function remove_person($horseName) {
+function remove_horse($horseName) {
     $con=connect();
     $query = 'SELECT * FROM horsedb WHERE name = "' . $horseName . '"';
     $result = mysqli_query($con,$query);
