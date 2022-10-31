@@ -60,7 +60,7 @@ if ($id == 'new') {
                 <?PHP
                 include('personValidate.inc');
                 if ($_POST['_form_submit'] != 1)
-                //in this case, the form has not been submitted, so show it
+                    //in this case, the form has not been submitted, so show it
                     include('personForm.inc');
                 else {
                     //in this case, the form has been submitted, so validate it
