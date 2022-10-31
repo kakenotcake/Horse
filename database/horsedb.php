@@ -47,68 +47,68 @@ function remove_horse($horseName) {
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return true;
+}
     /*
      * @return a Horse from horsedb table matching a particular name. 
      * if not in table, return false
      */
-    function retrieve_horse($horseName) {
-        $con=connect();
-        $query = "SELECT * FROM horsedb WHERE name = '" . $horseName . "'";
-        $result = mysqli_query($con,$query);
-        if (mysqli_num_rows($result) !== 1) {
-            mysqli_close($con);
-            return false;
-        }
-        $result_row = mysqli_fetch_assoc($result);
-        $theHorse = make_a_horse($result_row);
-        return $theHorse;
+function retrieve_horse($horseName) {
+    $con=connect();
+    $query = "SELECT * FROM horsedb WHERE name = '" . $horseName . "'";
+    $result = mysqli_query($con,$query);
+    if (mysqli_num_rows($result) !== 1) {
+        mysqli_close($con);
+        return false;
     }
+    $result_row = mysqli_fetch_assoc($result);
+    $theHorse = make_a_horse($result_row);
+    return $theHorse;
+}
     
     /*
      * @return all rows from horsedb table ordered name
      * if none there, return false
      */
-    function getall_horsedb($name_from, $name_to) {
-        $con=connect();
-        $query = "SELECT * FROM horsedb";
-        $query.= " ORDER BY horseName";
-        $result = mysqli_query($con,$query);
-        if ($result == null || mysqli_num_rows($result) == 0) {
-            mysqli_close($con);
-            return false;
-        }
-        $result = mysqli_query($con,$query);
-        $theHorses = array();
-        while ($result_row = mysqli_fetch_assoc($result)) {
-            $theHorse = make_a_horse($result_row);
-            $theHorses[] = $theHorse;
-        }
-        return $theHorses;
-    }
-    function getall_horse_names() {
-        $con=connect();
-        $query = "SELECT horseName FROM horsedb ORDER BY horseName";
-        $result = mysqli_query($con,$query);
-        if ($result == null || mysqli_num_rows($result) == 0) {
-            mysqli_close($con);
-            return false;
-        }
-        $result = mysqli_query($con,$query);
-        $names = array();
-        while ($result_row = mysqli_fetch_assoc($result)) {
-            $names[] = $result_row['horseName'];
-        }
+function getall_horsedb($name_from, $name_to) {
+    $con=connect();
+    $query = "SELECT * FROM horsedb";
+    $query.= " ORDER BY horseName";
+    $result = mysqli_query($con,$query);
+    if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
-        return $names;
+        return false;
     }
+    $result = mysqli_query($con,$query);
+    $theHorses = array();
+    while ($result_row = mysqli_fetch_assoc($result)) {
+        $theHorse = make_a_horse($result_row);
+        $theHorses[] = $theHorse;
+    }
+    return $theHorses;
+}
+function getall_horse_names() {
+    $con=connect();
+    $query = "SELECT horseName FROM horsedb ORDER BY horseName";
+    $result = mysqli_query($con,$query);
+    if ($result == null || mysqli_num_rows($result) == 0) {
+        mysqli_close($con);
+        return false;
+    }
+    $result = mysqli_query($con,$query);
+    $names = array();
+    while ($result_row = mysqli_fetch_assoc($result)) {
+        $names[] = $result_row['horseName'];
+    }
+    mysqli_close($con);
+    return $names;
+}
     
-    function make_a_horse($result_row) {
-        $theHorse = new Horse(
+function make_a_horse($result_row) {
+    $theHorse = new Horse(
                 $result_row['horseName'],
                 $result_row['color'],
                 $result_row['breed'],
                 $result_row['pastureNum'],
                 $result_row['colorRank']);
-        return $theHorse;
-    }
+    return $theHorse;
 }
