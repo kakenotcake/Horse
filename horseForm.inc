@@ -39,6 +39,8 @@ if ($_SESSION['access_level'] == 0) {
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
 ?>
 <form method="POST">
+    <input type="hidden" name="old_name" value=<?PHP echo("\"" . $horseName . "\""); ?>>
+    <input type="hidden" name="_form_submit" value="1">
     <fieldset>
         <legend>Horse Information:</legend>
     <?php

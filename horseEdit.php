@@ -41,8 +41,62 @@ if ($horseName == 'new') {
     <body>
         <div id=""container">
             <?PHP include('header.php'); ?>
-            <div id=""content">
-                <?PHP include('horseForm.inc'); ?>
+            <div id="content">
+                <?PHP 
+                include('horseValidate.inc'); 
+                if ($_POST['_form_submit'] != 1)
+                    //in this case, the form has not been submitted, so show it
+                    include('horseForm.inc');
+                else {
+                    //in this case, the form has been submitted, so validate it
+                    $errors = validate_form($horse);
+                    //errors array lists problems on the form submitted
+                    if ($errors) {
+                        //display the errors and the form to fix
+                        show_errors($errors);
+                        $horse = new Horse($horse->get_horseName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
+                        include('horseForm.inc');
+                    }
+                    //this was a successful form submission; update the database and exit
+                    else 
+                        process_form($horseName,$horse);
+                        echo "</div>";
+                    include('footer.inc');
+                    echo('</div></body></html>');
+                    die();
+                    
+                }
+                /*
+                 * sanitizes data, concatenates needed data, and enters it all into a database
+                 */
+                function process_form($horseName,$horse) {
+                    if ($horse->get_horseName()=="new")
+                        //$horseName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['horseName']))));
+                        $horseName = $_POST['horseName'];
+                    else
+                        $horseName = $horse->get_horseName();
+                    $color = $_POST['color'];
+                    $breed = $_POST['breed'];
+                    $pastureNum = $_POST['pastureNum'];
+                    $colorRank = $_POST['colorRank'];
+                    
+                    //try to add a new person to the database
+                    if ($_POST['old_name']=='new') {
+                        //check if there's already an entry
+                        $dup = retrieve_horse($horseName);
+                        if ($dup) 
+                            echo('<p class="error">Unable to add to the database. <br>Another horse with the same name already exists.'); 
+                        else {
+                            $newhorse = new Horse($horseName, $color, $breed, $pastureNum, $colorRank);
+                            $result = add_horse($newhorse);
+                            if (!$result) 
+                                echo('<p class="error">Unable to add horse to the database. <br>Please report this error.');
+                            else 
+                                echo('<p>You have successfully added horse to the database. </p>');
+                        }
+                    }
+                }
+                ?>
             </div>
             <?PHP include('footer.inc'); ?>
         </div>
