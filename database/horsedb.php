@@ -51,7 +51,7 @@ function remove_horse($horseName) {
      * @return a Horse from horsedb table matching a particular name. 
      * if not in table, return false
      */
-    function retrieve_horse($name) {
+    function retrieve_horse($horseName) {
         $con=connect();
         $query = "SELECT * FROM horsedb WHERE name = '" . $horseName . "'";
         $result = mysqli_query($con,$query);
