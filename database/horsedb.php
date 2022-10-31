@@ -16,11 +16,11 @@ function add_horse($horse) {
     if (!$horse instanceof Horse) 
         die("Error: add_horse type mismatch");
     $con=connect();
-    $query = "SELECT * FROM horsedb WHERE horseName = '" . $horse->get_horseName(). "'";
+    $query = "SELECT * FROM horseDB WHERE horseName = '" . $horse->get_horseName(). "'";
     $result = mysqli_query($con,$query);
     //if there's no entry for this name, add it
     if ($result == null || mysqli_num_rows($result) == 0) {
-        mysqli_query($con, 'INSERT INTO horsedb VALUES("' .
+        mysqli_query($con, 'INSERT INTO horseDB VALUES("' .
                 $horse->get_horseName() . '","' .
                 $horse->get_color() . '","' .
                 $horse->get_breed() . '","' .
