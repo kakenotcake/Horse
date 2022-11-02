@@ -8,6 +8,8 @@
  * 
  */
 
+/*this is a test*/
+
 session_start();
 session_cache_expire(30);
 ?>
