@@ -15,26 +15,30 @@ class Horse {
     private $pastureNum; //int
     private $colorRank; //string
     
-    function __construct($horseName, $color, $breed, $pastureNum, $colorRank) {
-        $this->horseName = $horseName;
-        $this->color = $color;
-        $this->breed = $breed;
-        $this->pastureNum = $pastureNum;
-        $this->colorRank = $colorRank;
+    public function constructHorse($N, $Co, $B, $P, $Cr) {
+        $this->horseName = $N;
+        $this->color = $Co;
+        $this->breed = $B;
+        $this->pastureNum = $P;
+        $this->colorRank = $Cr;
     }
-    function get_horseName() {
+
+    public function set_horseName($N) {
+        $this->horseName = $N;
+    }
+    public function get_horseName() {
         return $this->horseName;
     }
-    function get_color() {
+    public function get_color() {
         return $this->color;
     }
-    function get_breed() {
+    public function get_breed() {
         return $this->breed;
     }
-    function get_pastureNum() {
+    public function get_pastureNum() {
         return $this->pastureNum;
     }
-    function get_colorRank() {
+    public function get_colorRank() {
         return $this->colorRank;
     }
 }
