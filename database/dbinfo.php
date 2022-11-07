@@ -17,16 +17,44 @@
 
 function connect() {
     $host = "localhost"; 
+    $username = "homebasedb";
+    $password = "homebasedb";
     $database = "homebasedb";
-    $user = "homebasedb";
-    $pass = "homebasedb";
 
-    $con = mysqli_connect($host,$user,$pass,$database);
-    if (!$con) { echo "not connected to server"; return mysqli_error($con);}
+    //$con = mysqli_connect($host,$user,$pass,$database);
+    $con = mysqli_connect($host, $username, $password, $database);
+    if (!$con) { 
+        echo "not connected to server"; 
+        return mysqli_error($con);
+    }
     $selected = mysqli_select_db($con,$database);
-    if (!$selected) { echo "database not selected"; return mysqli_error($con); }
-    else return $con;
+    if (!$selected) { 
+        echo "database not selected"; 
+        return mysqli_error($con); 
+    }
+    else {
+        //echo("<p>We've got a connection!</p>");
+        //echo("<br>");
+        //echo("<strong>Database: " . $database . "</strong>");
+        return $con;
+    } 
     
 }
 
 ?>
+
+<?php 
+/*
+<HTML>
+    <HEAD>
+        <TITLE>
+            Database Info
+        </TITLE>
+    <HEAD>
+    <BODY>
+        <?php connect() ?>
+    </BODY>
+</HTML>
+*/
+?>
+

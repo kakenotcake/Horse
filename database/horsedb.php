@@ -7,27 +7,51 @@
  */
 include_once('dbinfo.php');
 include_once(dirname(__FILE__).'/../domain/Horse.php');
+//include_once('../domain/Horse.php');
+//include_once('../domain/o_Horse.php');
 
 /*
- * add a horse to horsesDB table: if already there, return false
+ * add a horse to horsedb table: if already there, return false
  */
 
+ 
 function add_horse($horse) {
-    if (!$horse instanceof Horse) 
+    
+    if (!$horse instanceof Horse) {
         die("Error: add_horse type mismatch");
+    }
+    
     $con=connect();
-    $query = "SELECT * FROM horseDB WHERE horseName = '" . $horse->get_horseName(). "'";
+    $query = "SELECT * FROM horsedb WHERE horseName='" . $horse->get_horseName() . "';";
+    //return $query;
     $result = mysqli_query($con,$query);
     //if there's no entry for this name, add it
-    if ($result == null || mysqli_num_rows($result) == 0) {
-        mysqli_query($con, 'INSERT INTO horseDB VALUES("' .
+
+    
+    if($result == null) {
+        return "Result is null";
+    }
+    else if(mysqli_num_rows($result) == 0) {
+        return "Query got no rows for " . $horse->get_horseName() . "";
+    }
+
+//    else
+
+    //Currently, the second condition is true. $result is NOT null!!
+    else if ($result == null || mysqli_num_rows($result) == 0) {
+
+        mysqli_query($con,'INSERT INTO horsedb VALUES("' .
                 $horse->get_horseName() . '","' .
                 $horse->get_color() . '","' .
                 $horse->get_breed() . '","' .
                 $horse->get_pastureNum() . '","' .
-                $horse->get_colorRank() . '","');
+                $horse->colorRank() . '");');							        
+
         mysqli_close($con);
         return true;
+    }
+    else {
+        return "nah";
     }
     mysqli_close($con);
     return false;
@@ -37,13 +61,13 @@ function add_horse($horse) {
  */
 function remove_horse($horseName) {
     $con=connect();
-    $query = 'SELECT * FROM horsedb WHERE name = "' . $horseName . '"';
+    $query = 'SELECT * FROM horsedb WHERE horseName = "' . $horseName . '"';
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
-    $query = 'DELETE FROM horsedb WHERE name = "' . $horseName . '"';
+    $query = 'DELETE FROM horsedb WHERE horseName = "' . $horseName . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return true;
@@ -54,9 +78,10 @@ function remove_horse($horseName) {
      */
 function retrieve_horse($horseName) {
     $con=connect();
-    $query = "SELECT * FROM horsedb WHERE name = '" . $horseName . "'";
+    $query = "SELECT * FROM horsedb WHERE horseName='" . $horseName . "';";
     $result = mysqli_query($con,$query);
-    if (mysqli_num_rows($result) !== 1) {
+
+    if (mysqli_num_rows($result) != 1) {
         mysqli_close($con);
         return false;
     }
@@ -71,8 +96,8 @@ function retrieve_horse($horseName) {
      */
 function getall_horsedb($name_from, $name_to) {
     $con=connect();
-    $query = "SELECT * FROM horsedb";
-    $query.= " ORDER BY horseName";
+    $query = "SELECT * FROM horsedb ORDER BY horseName";
+    //$query.= " ORDER BY horseName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
