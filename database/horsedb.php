@@ -25,11 +25,14 @@ function add_horse($horse) {
     $query = "SELECT * FROM horsedb WHERE horseName='" . $horse->get_horseName() . "';";
     //return $query;
     $result = mysqli_query($con,$query);
-    //if there's no entry for this name, add it
 
+
+    //if there's no entry for this name, add it
     //Currently, the second condition is true. $result is NOT null!!
+    //If there's no row for the horse to add,
     if ($result == null || mysqli_num_rows($result) == 0) {
         
+        //add the horse to the database/
         mysqli_query($con,'INSERT INTO horsedb VALUES("' .
                 $horse->get_horseName() . '","' .
                 $horse->get_color() . '","' .
@@ -37,14 +40,10 @@ function add_horse($horse) {
                 $horse->get_pastureNum() . '","' .
                 $horse->get_colorRank() . '");');							        
         
-
-        //This doesn't even work!
-        //mysqli_query("Owen", "Brown", "Human", 1, "Red");
         mysqli_close($con);
+
+        //Return that the horse was added.
         return true;
-    }
-    else {
-        return "nah";
     }
     mysqli_close($con);
     return false;
@@ -71,16 +70,26 @@ function remove_horse($horseName) {
      */
 function retrieve_horse($horseName) {
     $con=connect();
+
+    //Save the rows that have the horseName
     $query = "SELECT * FROM horsedb WHERE horseName='" . $horseName . "';";
     $result = mysqli_query($con,$query);
 
+    //If the horse does NOT exist in the database,
     if (mysqli_num_rows($result) != 1) {
         mysqli_close($con);
+
+        //return false to indiciate the horse can be added,
         return false;
     }
+    /*
     $result_row = mysqli_fetch_assoc($result);
     $theHorse = make_a_horse($result_row);
     return $theHorse;
+    */
+
+    //Return true to indicate the horse canNOT be added.
+    return true;
 }
     
     /*
