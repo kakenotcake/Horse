@@ -70,15 +70,16 @@ function process_form($horseName,$horse) {
         //echo("<p>LETS ADD!!!!!!</p>");
         //echo("<br>");
         $dup = retrieve_horse($horseName);
-        echo("<p>!!!" . $dup . "!!!!</p><br>");
-        if ($dup) {
-            echo('<p class="error">Unable to add to the database. <br>Another horse named ' . $horseName . 'already exists.'); 
+        //echo("<p>!!!" . $dup . "!!!!</p><br>");
+        if ($dup == true) {
+            echo('<p class="error">Unable to add to the database. <br>Another horse named ' . $horseName . ' already exists.<br><br>'); 
+            echo('<p>If you wish to add another horse, please click "Add Horse" after "Horse Actions."</p>');
         }
         else {            
-            echo("<p>ADDING HORSE</p><br>");
+            //echo("<p>ADDING HORSE</p><br>");
             $result = add_horse($horse);
-            echo('<p>Result: ' . $result . ".");
-            echo("<br>");
+            //echo('<p>Result: ' . $result . ".");
+            //echo("<br>");
             if (!$result) 
                 echo('<p class="error">Unable to add horse to the database. <br>Please report this error.');
             else 
@@ -147,9 +148,9 @@ function process_form($horseName,$horse) {
                             //$horse = new Horse($horse->get_horseName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
                         }
 
-                        //this was a successful form submission; update the database and exit
+                        //this was a successful form submission; attempt to update the database.
                         else {
-                            //$horseName works, but $horseToAdd->get_horseName() doesn't!
+                            /*
                             echo('<p>horse name: ' . $horseToAdd->get_horseName() . '.</p>');
                             echo("<br>");
                             echo('<p>horse color: ' . $horseToAdd->get_color() . '.</p>');
@@ -162,6 +163,7 @@ function process_form($horseName,$horse) {
                             //$horseToAdd->get_colorRank() works, but $colorRank doesn't!
                             echo('<p>horse color rank: ' . $horseToAdd->get_colorRank() . '.</p>');
                             echo("<br>");
+                            */
                             process_form($horseName,$horseToAdd);
                             echo ('</div>');
                        //include('footer.inc');
