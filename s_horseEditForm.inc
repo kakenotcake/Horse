@@ -1,8 +1,8 @@
 <?php
+//$con = mysqli_connect("localhost", "root", "", "homebasedb");
+//$sql = "SELECT horseName FROM 'horsedb'";
+//$all_horses = mysqli_query($con, $sql);
 
-$con = mysqli_connect("localhost", "root", "", "homebasedb");
-$sql = "SELECT horseName FROM 'horsedb'";
-$all_horses = mysqli_query($con, $sql);
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,7 +41,8 @@ if ($_SESSION['access_level'] == 0) {
         }
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
 ?> 
-<form method="POST" action="/Horse/o_horseEdit.php?formAction=horseChosen">
+
+<form method="POST" action="/Horse/s_horseEdit.php?formAction=horseChosen">
     <input type="hidden" name="old_name" value="new">
     <input type="hidden" name="_form_submit" value="1">
     <fieldset>
@@ -63,7 +64,7 @@ if ($_SESSION['access_level'] == 0) {
         <p>Breed<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="breed" tabindex="1" value="Different">
         <p>Pasture Number<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="pastureNum" value="1">
         <p>Color Rank<span style="font-size:x-small;color:FF0000">*</span>:<select name="colorRank" tabindex="1"> 
-
+        
         <p>Horse<span style ="font-size:x-small; color:FF0000">*<</span>:<select name="horseName" tabindex="1">
 <?PHP
 while($names = mysqli_fetch_array($all_horses, MYSQLI_ASSOC)):;
@@ -71,7 +72,7 @@ while($names = mysqli_fetch_array($all_horses, MYSQLI_ASSOC)):;
 ?>
 <option value = "<?php echo $names["horseName"];
 ?>">
->?php exho $names["horseName"];
+<?php echo $names["horseName"];
 ?>
 </option>
 <?php 
