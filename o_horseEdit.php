@@ -37,6 +37,8 @@ else if ($formAction == 'confirmAdd') {
     $horseColorRank = $_POST['colorRank'];
     //$horseToAdd = __constructHorse($horseName, $horseColor, $horseBreed, $horsePastureNum, $horseColorRank);
     $horseToAdd = new Horse($horseName, $horseColor, $horseBreed, $horsePastureNum, $horseColorRank);
+}else if($formAction == 'editHorse'){
+
 }
 else {
     $horseToAdd = retrieve_horse($name);
@@ -97,6 +99,8 @@ function process_form($horseName,$horse) {
                 }
                 else if($formAction == 'confirmAdd') {
                     echo('Add Horse');
+                }else if($formAction == 'editHorse'){
+                    echo('Select Horse to Edit');
                 }
                 else {
                     echo("IDK");
@@ -166,7 +170,11 @@ function process_form($horseName,$horse) {
                         }
                     } 
                 }
-                else {
+                else if ($formAction == 'editHorse'){
+                    include("s_horseEditForm.inc");
+                }
+                else{
+
 
                 }
                /*
