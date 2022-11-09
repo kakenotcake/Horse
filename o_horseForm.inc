@@ -10,6 +10,30 @@
  * shows a form for a person to be added or edited in the database
  * 
  */
+
+//Comment session branch out, keep the "if($horseName == 'new") branch!
+
+if($formAction == 'addHorse') {
+    echo('<p><strong>Add Horse to the System.</strong><br />');
+    echo('Please provide as much information as you can about the horse. ' . 
+            '<br>When finished, hit <b>Submit</b> at the bottom of this page.');
+    echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
+
+}
+
+if ($formAction == 'edit') {
+    //Have edit text
+    //Have edit form for selecting horse by name (redirects to this page) with $formAction = 'canEdit'
+
+
+}
+if($formAction = 'canEdit')
+{
+    //Display all fields BUT name to edit
+    //Pass $formAction = 'confirmEdit'
+}
+
+/*
 if ($_SESSION['access_level'] == 0) {
     echo('<p><strong>Add Horse to the System.</strong><br />');
     echo('Please provide as much information as you can about the horse. ' . 
@@ -36,7 +60,9 @@ if ($_SESSION['access_level'] == 0) {
             echo('</div></div></body></html>');
             die();
         }
+
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
+*/
 ?>
 <form method="POST" action="/Horse/o_horseEdit.php?formAction=confirmAdd">
     <input type="hidden" name="old_name" value="new">
@@ -58,7 +84,7 @@ if ($_SESSION['access_level'] == 0) {
         <p>Horse Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="Horace">'
         <p>Color<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="color" tabindex="1" value="Rainbow">
         <p>Breed<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="breed" tabindex="1" value="Different">
-        <p>Pasture Number<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="pastureNum" value="1">
+        <p>Pasture Number (Number between 1 and 11)<span style="font-size:x-small;color:FF0000">*</span>: <input type="number" name="pastureNum" min="1" max="11" value="1">
         <p>Color Rank<span style="font-size:x-small;color:FF0000">*</span>:<select name="colorRank" tabindex="1"> 
 <?PHP
 $colorRanks = array("Green", "Yellow", "Red");

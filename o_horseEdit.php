@@ -67,11 +67,15 @@ function process_form($horseName,$horse) {
     if ($_POST['old_name']=='new') {
 
         //check if there's already an entry
+        //echo("<p>LETS ADD!!!!!!</p>");
+        //echo("<br>");
         $dup = retrieve_horse($horseName);
+        echo("<p>!!!" . $dup . "!!!!</p><br>");
         if ($dup) {
             echo('<p class="error">Unable to add to the database. <br>Another horse named ' . $horseName . 'already exists.'); 
         }
         else {            
+            echo("<p>ADDING HORSE</p><br>");
             $result = add_horse($horse);
             echo('<p>Result: ' . $result . ".");
             echo("<br>");

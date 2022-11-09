@@ -14,7 +14,7 @@ include_once(dirname(__FILE__).'/../domain/Horse.php');
  * add a horse to horsedb table: if already there, return false
  */
 
- 
+//add a horse to phpMyAdmin database
 function add_horse($horse) {
     
     if (!$horse instanceof Horse) {
@@ -27,26 +27,19 @@ function add_horse($horse) {
     $result = mysqli_query($con,$query);
     //if there's no entry for this name, add it
 
-    
-    if($result == null) {
-        return "Result is null";
-    }
-    else if(mysqli_num_rows($result) == 0) {
-        return "Query got no rows for " . $horse->get_horseName() . "";
-    }
-
-//    else
-
     //Currently, the second condition is true. $result is NOT null!!
-    else if ($result == null || mysqli_num_rows($result) == 0) {
-
+    if ($result == null || mysqli_num_rows($result) == 0) {
+        
         mysqli_query($con,'INSERT INTO horsedb VALUES("' .
                 $horse->get_horseName() . '","' .
                 $horse->get_color() . '","' .
                 $horse->get_breed() . '","' .
                 $horse->get_pastureNum() . '","' .
-                $horse->colorRank() . '");');							        
+                $horse->get_colorRank() . '");');							        
+        
 
+        //This doesn't even work!
+        //mysqli_query("Owen", "Brown", "Human", 1, "Red");
         mysqli_close($con);
         return true;
     }
