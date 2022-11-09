@@ -59,26 +59,14 @@ if ($_SESSION['access_level'] == 0) {
         */
          //echo '<p>Horse Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="test">';
     ?>
-        <p>Horse Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="Horace">'
-        <p>Color<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="color" tabindex="1" value="Rainbow">
-        <p>Breed<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="breed" tabindex="1" value="Different">
-        <p>Pasture Number<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="pastureNum" value="1">
-        <p>Color Rank<span style="font-size:x-small;color:FF0000">*</span>:<select name="colorRank" tabindex="1"> 
         
-        <p>Horse<span style ="font-size:x-small; color:FF0000">*<</span>:<select name="horseName" tabindex="1">
+        <p>Horse Name (type a few letters): ;
+        <input type="text" name="h_name">;
+        
 <?PHP
-while($names = mysqli_fetch_array($all_horses, MYSQLI_ASSOC)):;
 
-?>
-<option value = "<?php echo $names["horseName"];
-?>">
-<?php echo $names["horseName"];
-?>
-</option>
-<?php 
-    endwhile;
     ?>
-</select>
+
 <script src="lib/>jquery-1.9.1.js"></script>
 <script src="lib/>jquery-ui.js"></script>
 </fieldset>
@@ -88,3 +76,27 @@ while($names = mysqli_fetch_array($all_horses, MYSQLI_ASSOC)):;
 
     ?>
 </form>
+
+
+<?php
+/*if($_POST['Submit']){
+    $name = trim(str_replace('\'', '&#39;',htmlentities($_POST['h_name'])));
+    $result = getonlythose_horseDB($name);
+    <p><strong>Search Results: </strong>
+    <p>Found sizeof($result);
+
+    if(sizeof($result) > 0){
+        echo('(select one for more info)');
+        echo('div id = "target" style="overflow: scroll; width: variable; height: 400px;">');
+        echo('<p><table><tr><td>Name</td></tr>');
+        foreach($result as $vol){
+            str_replace(" ", "_",$vol->get_id()) . ">".
+            $vol->get_horseName() "</td></tr"
+        }
+    }
+    echo '</table>';
+    echo '</div>';
+
+}
+*/
+?>
