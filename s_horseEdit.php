@@ -23,6 +23,11 @@ $oldCol;
 $oldNum;
 $oldBreed;
 $oldColLvl;
+$newName;
+$newCol;
+$newNum;
+$newBreed;
+$newColLvl; 
 
 //$horseName = str_replace("_", " ", $_POST["horseName"]);
 function process_form($title, $horseToEdit, $action){

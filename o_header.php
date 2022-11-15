@@ -24,7 +24,7 @@
         echo('<br><br>');
         echo('<a href="' . $path . 'o_index.php">home</a>');
         echo(' | <a href="' . $path . 'about.php">about</a>');
-        echo('</br>');
+         echo('</br>');
         //echo(' | <a href="' . $path . 'help.php?helpPage=' . $current_page . '" target="_BLANK">help</a>');
         //echo(' | calendars: <a href="' . $path . 'calendar.php?venue=portland'.''.'">Portland, </a>');
         //echo(' <a href="' . $path . 'calendar.php?venue=bangor'.''.'">Bangor</a>');
