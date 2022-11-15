@@ -59,9 +59,18 @@ if ($_SESSION['access_level'] == 0) {
         */
          //echo '<p>Horse Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="test">';
     ?>
-        
-        <p>Horse Name (type a few letters): ;
-        <input type="text" name="h_name">;
+
+        <p>Horse Name (type a few letters): 
+        <input type="text" name="h_name">
+        <p>Color of Horse: 
+        <input type = "text" name ="col">
+        <p> Pature Number: 
+        <input type = "text" name="pNum">
+        <p>Breed: 
+        <input type = "text" name="breed">
+        <p>Color Level:
+        <input type = "text" name="level";
+
         
 <?PHP
 

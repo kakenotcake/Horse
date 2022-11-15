@@ -137,3 +137,13 @@ function make_a_horse($result_row) {
                 $result_row['colorRank']);
     return $theHorse;
 }
+
+function edit_horse($horseToEdit, $title){
+    $con=connect();
+    //$query = "SELECT * FROM horsedb WHERE horseName='" . $horseName . "';";
+    $query = "UPDATE horsedb SET horseName='" .$horseToEdit->get_name()."', color='". $horseToEdit->get_color()"', breed='".$horseToEdit->get_breed(). "', pastureNum='".$horseToEdit->get_pastureNum()."', colorRank='".$horseToEdit->get_colorRank."' WHERE horseName='".$title."';"
+
+$result = mysqli_query($con,$query);
+   
+    return $result;
+}

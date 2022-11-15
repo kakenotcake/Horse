@@ -1,4 +1,4 @@
-<?php
+:<?php
 
 class Person {
     private $firstName; //string
