@@ -40,9 +40,9 @@
         echo('<strong>Behavior Actions</strong> ("Add Behavior" and "Edit Behavior" work!) | <a href="' . $path . 'personSearch.php"><u>Search Behaviors</u></a>, 
                          <a href="o_behaviorEdit.php?formAction=' . 'addBehavior' . '"><u>Add Behavior</u></a>, 
                          <a href="o_behaviorEdit.php?formAction=selectBehavior"><u>Edit Behavior</u></a>,
-                         <a href="o_behaviorEdit.php?formAction=removeBehavior"><u>Remove Behavior</u></a>);
+                         <a href="o_behaviorEdit.php?formAction=removeBehavior"><u>Remove Behavior</u></a>');
         echo('<br><br>');
-         echo('<strong>Trainer Actions</strong> (In progress, links later!) | <a href="' . $path . 'personSearch.php"><u>Search Trainers</u></a>, 
+        echo('<strong>Trainer Actions</strong> (In progress, links later!) | <a href="' . $path . 'personSearch.php"><u>Search Trainers</u></a>, 
                          <a href="o_horseEdit.php?horseName=' . 'new' . '"><u>Add Trainer</u></a>, 
                          <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Trainer</u></a>,
                          <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
