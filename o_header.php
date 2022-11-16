@@ -38,7 +38,7 @@
                          <u>Remove Horse</u>');
         echo('<br><br>');
         echo('<strong>Behavior Actions</strong> (In progress, links later!) | <a href="' . $path . 'personSearch.php"><u>Search Behaviors</u></a>, 
-                         <a href="o_horseEdit.php?horseName=' . 'new' . '"><u>Add Behavior</u></a>, 
+                         <a href="behaviorAdd.php?formAction=addBehavior"><u>Add Behavior</u></a>, 
                          <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Behavior</u></a>,
                          <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
                          <u>Remove Behavior</u>');
