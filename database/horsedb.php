@@ -43,9 +43,6 @@ function add_horse($horse) {
         mysqli_close($con);
         return true;
     }
-    else {
-        return "nah";
-    }
     mysqli_close($con);
     return false;
 }
