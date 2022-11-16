@@ -3,7 +3,7 @@
 <p>Use the dropdown menu to select the Horse.</p>
 <p>When finished, hit <b> Select Horse </b> at the bottom of this page </p><p>(<span style = "font-size:x-small;color:FF0000">*</span> required information).</p>
 
-<form method = "POST" action="/Horse/o_behaviorEdit.php?formAction=editBehavior">
+<form method = "POST" action="/Horse/s_horseEdit.php?formAction=editHorse">
 	<input type="hidden" name="old_name" value"new">
 	<input type-"hidden" name="_form_submit" value = "1">
 	<fieldset>

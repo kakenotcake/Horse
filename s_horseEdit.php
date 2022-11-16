@@ -84,6 +84,8 @@ if($formAction == 'editHorse'){
     echo("Add Horse Information");
 }else if($formAction == 'confirmAdd'){
     echo("Add Horse");
+}else if($formAction=='horseChosen'){
+    echo("Edit Horse");
 }
 else {
     
@@ -117,7 +119,7 @@ else {
 
                     include('s_selectHorseForm.inc');
                 
-                }else if($formAction == 'confirmEdit'){
+                }else if($formAction == 'horseChosen'){
                     include('horseValidate.inc');
                     $newName = $_POST['h_name'];
                     $newBreed = $_POST['breed'];
