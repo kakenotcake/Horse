@@ -24,3 +24,4 @@
 		<br>
 		<input type="submit" value="Select Horse"/>
 </form>
+
