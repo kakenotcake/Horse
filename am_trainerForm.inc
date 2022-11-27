@@ -80,12 +80,13 @@ if ($_SESSION['access_level'] == 0) {
          
         */
          //echo '<p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerName" tabindex="1" value="test">';
+      
     ?>
         <p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerName" tabindex="1" value="Horace">'
-        <p>Color<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="color" tabindex="1" value="Rainbow">
-        <p>Breed<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="breed" tabindex="1" value="Different">
-        <p>Pasture Number (Number between 1 and 11)<span style="font-size:x-small;color:FF0000">*</span>: <input type="number" name="pastureNum" min="1" max="11" value="1">
-        <p>Color Rank<span style="font-size:x-small;color:FF0000">*</span>:<select name="colorRank" tabindex="1"> 
+        <p>Trainer Last Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerLastName" tabindex="1" value="Rainbow">
+        <p>Phone Number<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="phoneNumber" tabindex="1" value="Different">
+        <p>User Name<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="username" tabindex="1" value="Different">
+        <p>Password<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="password" tabindex="1" value="Different">
 <?PHP
 $colorRanks = array("Green", "Yellow", "Red");
 foreach ($colorRanks as $cr) {
