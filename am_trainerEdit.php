@@ -6,62 +6,62 @@
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
  */
 /*
- * 	horseEdit.php
- *  oversees the editing of a horse to be added, changed, or deleted from the database
+ * 	trainerEdit.php
+ *  oversees the editing of a trainer to be added, changed, or deleted from the database
  */
 session_start();
 session_cache_expire(30);
-include_once('database/horsedb.php');
+include_once('database/trainerdb.php');
 include_once('database/dbinfo.php');
 include_once('domain/Horse.php');
 //$formAction = str_replace("_", " ", $_GET["formAction"]);
 $formAction = $_GET["formAction"];
-$horseToAdd;
-//$horseName = str_replace("_", " ", $_POST["horseName"]);
+$trainerToAdd;
+//$trainerName = str_replace("_", " ", $_POST["trainerName"]);
 
 if ($formAction == 'addHorse') {
-    //$horseToAdd = __constructHorse('new', null, null, null, null);
-    //$horseToAdd = new Horse('new', null, null, null, null);
+    //$trainerToAdd = __constructHorse('new', null, null, null, null);
+    //$trainerToAdd = new Horse('new', null, null, null, null);
 } 
 else if ($formAction == 'confirmAdd') {
-    //$newhorse = new Horse($horseName, $color, $breed, $pastureNum, $colorRank);
-    //$horsetoAdd = new Horse($horseName, $color, $breed, $pastureNum, $colorRank);
+    //$newtrainer = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
+    //$trainertoAdd = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
 
-    //horseName isn't passed through for some reason!
-    $horseName = $_POST['horseName'];
-    $horseColor = $_POST['color'];
-    $horseBreed = $_POST['breed'];
-    $horsePastureNum = $_POST['pastureNum'];
+    //trainerName isn't passed through for some reason!
+    $trainerName = $_POST['trainerName'];
+    $trainerColor = $_POST['color'];
+    $trainerBreed = $_POST['breed'];
+    $trainerPastureNum = $_POST['pastureNum'];
 
-    //horseColorRank isn't passed through for some reason!
-    $horseColorRank = $_POST['colorRank'];
-    //$horseToAdd = __constructHorse($horseName, $horseColor, $horseBreed, $horsePastureNum, $horseColorRank);
-    $horseToAdd = new Horse($horseName, $horseColor, $horseBreed, $horsePastureNum, $horseColorRank);
+    //trainerColorRank isn't passed through for some reason!
+    $trainerColorRank = $_POST['colorRank'];
+    //$trainerToAdd = __constructHorse($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
+    $trainerToAdd = new Horse($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
 }
 else {
-    $horseToAdd = retrieve_horse($name);
-    if (!$horse) {
-        echo('<p name="error">Error: there\'s no horse with this name in the database</p>' . $name);
+    $trainerToAdd = retrieve_trainer($name);
+    if (!$trainer) {
+        echo('<p name="error">Error: there\'s no trainer with this name in the database</p>' . $name);
         die();
     }
 }
 
-function process_form($horseName,$horse) {
+function process_form($trainerName,$trainer) {
     /*
-    if ($horse->get_horseName()=="new")
-        //$horseName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['horseName']))));
-        $horseName = $_POST['horseName'];
+    if ($trainer->get_trainerName()=="new")
+        //$trainerName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['trainerName']))));
+        $trainerName = $_POST['trainerName'];
     else
-        $horseName = $horse->get_horseName();
+        $trainerName = $trainer->get_trainerName();
     */
     /*
-    $horseName = $_POST['horseName'];
+    $trainerName = $_POST['trainerName'];
     $color = $_POST['color'];
     $breed = $_POST['breed'];
     $pastureNum = $_POST['pastureNum'];
     $colorRank = $_POST['colorRank'];
     
-    $horse = new Horse($horseName, $color, $breed, $pastureNum, $colorRank);
+    $trainer = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
     */
     //try to add a new person to the database
     if ($_POST['old_name']=='new') {
@@ -69,21 +69,21 @@ function process_form($horseName,$horse) {
         //check if there's already an entry
         //echo("<p>LETS ADD!!!!!!</p>");
         //echo("<br>");
-        $dup = retrieve_horse($horseName);
+        $dup = retrieve_trainer($trainerName);
         //echo("<p>!!!" . $dup . "!!!!</p><br>");
         if ($dup == true) {
-            echo('<p class="error">Unable to add to the database. <br>Another horse named ' . $horseName . ' already exists.<br><br>'); 
-            echo('<p>If you wish to add another horse, please click "Add Horse" after "Horse Actions."</p>');
+            echo('<p class="error">Unable to add to the database. <br>Another trainer named ' . $trainerName . ' already exists.<br><br>'); 
+            echo('<p>If you wish to add another trainer, please click "Add Horse" after "Horse Actions."</p>');
         }
         else {            
             //echo("<p>ADDING HORSE</p><br>");
-            $result = add_horse($horse);
+            $result = add_trainer($trainer);
             //echo('<p>Result: ' . $result . ".");
             //echo("<br>");
             if (!$result) 
-                echo('<p class="error">Unable to add horse to the database. <br>Please report this error.');
+                echo('<p class="error">Unable to add trainer to the database. <br>Please report this error.');
             else 
-                echo('<p>You have successfully added ' . $horse->get_horseName() . ' to the database. If you wish to add another horse, please click "Add Horse" after "Horse Actions."</p>');
+                echo('<p>You have successfully added ' . $trainer->get_trainerName() . ' to the database. If you wish to add another trainer, please click "Add Horse" after "Horse Actions."</p>');
         }
     }
 }
@@ -94,7 +94,7 @@ function process_form($horseName,$horse) {
         <title>
             <?PHP
             
-                //If the user navigated here from the home page and wants to add a horse,
+                //If the user navigated here from the home page and wants to add a trainer,
                 if($formAction == 'addHorse')  {
 
                     //Display "Enter Horse Information
@@ -122,49 +122,49 @@ function process_form($horseName,$horse) {
                 //If the user navigates here from the home page,
                 if($formAction == 'addHorse') {
 
-                    //show the horse form.
-                    include('o_horseForm.inc');
+                    //show the trainer form.
+                    include('o_trainerForm.inc');
                 }
 
                 //Otherwise, 
                 else if($formAction == 'confirmAdd') {
                     
                     //attempt to validate and process the form.
-                    include('o_horseValidate.inc'); 
+                    include('o_trainerValidate.inc'); 
                     if ($_POST['_form_submit'] != 1) {
                         //in this case, the form has not been submitted, so show it
-                        include('o_horseForm.inc');
+                        include('o_trainerForm.inc');
                     }
                     else {
                         //in this case, the form has been submitted, so validate it
-                        $errors = validate_form($horse);
+                        $errors = validate_form($trainer);
                         //errors array lists problems on the form submitted
 
                         if ($errors) {
 
                             //display the errors and the form to fix
                             show_errors($errors);
-                            include('o_horseForm.inc');
-                            //$horse = new Horse($horse->get_horseName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
+                            include('o_trainerForm.inc');
+                            //$trainer = new Horse($trainer->get_trainerName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
                         }
 
                         //this was a successful form submission; attempt to update the database.
                         else {
                             /*
-                            echo('<p>horse name: ' . $horseToAdd->get_horseName() . '.</p>');
+                            echo('<p>trainer name: ' . $trainerToAdd->get_trainerName() . '.</p>');
                             echo("<br>");
-                            echo('<p>horse color: ' . $horseToAdd->get_color() . '.</p>');
+                            echo('<p>trainer color: ' . $trainerToAdd->get_color() . '.</p>');
                             echo("<br>");
-                            echo('<p>horse breed: ' . $horseToAdd->get_breed() . '.</p>');
+                            echo('<p>trainer breed: ' . $trainerToAdd->get_breed() . '.</p>');
                             echo("<br>");
-                            echo('<p>horse pasture number: ' . $horseToAdd->get_pastureNum() . '.</p>');
+                            echo('<p>trainer pasture number: ' . $trainerToAdd->get_pastureNum() . '.</p>');
                             echo("<br>");
 
-                            //$horseToAdd->get_colorRank() works, but $colorRank doesn't!
-                            echo('<p>horse color rank: ' . $horseToAdd->get_colorRank() . '.</p>');
+                            //$trainerToAdd->get_colorRank() works, but $colorRank doesn't!
+                            echo('<p>trainer color rank: ' . $trainerToAdd->get_colorRank() . '.</p>');
                             echo("<br>");
                             */
-                            process_form($horseName,$horseToAdd);
+                            process_form($trainerName,$trainerToAdd);
                             echo ('</div>');
                        //include('footer.inc');
                             echo('</div></body></html>');
@@ -179,12 +179,12 @@ function process_form($horseName,$horse) {
                  * sanitizes data, concatenates needed data, and enters it all into a database
                  */
                 /*
-                function process_form($horseName,$horse) {
-                    if ($horse->get_horseName()=="new")
-                        //$horseName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['horseName']))));
-                        $horseName = $_POST['horseName'];
+                function process_form($trainerName,$trainer) {
+                    if ($trainer->get_trainerName()=="new")
+                        //$trainerName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['trainerName']))));
+                        $trainerName = $_POST['trainerName'];
                     else
-                        $horseName = $horse->get_horseName();
+                        $trainerName = $trainer->get_trainerName();
                     $color = $_POST['color'];
                     $breed = $_POST['breed'];
                     $pastureNum = $_POST['pastureNum'];
@@ -193,16 +193,16 @@ function process_form($horseName,$horse) {
                     //try to add a new person to the database
                     if ($_POST['old_name']=='new') {
                         //check if there's already an entry
-                        $dup = retrieve_horse($horseName);
+                        $dup = retrieve_trainer($trainerName);
                         if ($dup) 
-                            echo('<p class="error">Unable to add to the database. <br>Another horse with the same name already exists.'); 
+                            echo('<p class="error">Unable to add to the database. <br>Another trainer with the same name already exists.'); 
                         else {
-                            $newhorse = new Horse($horseName, $color, $breed, $pastureNum, $colorRank);
-                            $result = add_horse($newhorse);
+                            $newtrainer = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
+                            $result = add_trainer($newtrainer);
                             if (!$result) 
-                                echo('<p class="error">Unable to add horse to the database. <br>Please report this error.');
+                                echo('<p class="error">Unable to add trainer to the database. <br>Please report this error.');
                             else 
-                                echo('<p>You have successfully added horse to the database. </p>');
+                                echo('<p>You have successfully added trainer to the database. </p>');
                         }
                     }
                 }
