@@ -13,9 +13,9 @@
 
 //Comment session branch out, keep the "if($horseName == 'new") branch!
 
-if($formAction == 'addHorse') {
-    echo('<p><strong>Add Horse to the System.</strong><br />');
-    echo('Please provide as much information as you can about the horse. ' . 
+if($formAction == 'addTrainer') {
+    echo('<p><strong>Add Trainer to the System.</strong><br />');
+    echo('Please provide as much information as you can about the trainer. ' . 
             '<br>When finished, hit <b>Submit</b> at the bottom of this page.');
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
 
@@ -23,7 +23,7 @@ if($formAction == 'addHorse') {
 
 if ($formAction == 'edit') {
     //Have edit text
-    //Have edit form for selecting horse by name (redirects to this page) with $formAction = 'canEdit'
+    //Have edit form for selecting trainer by name (redirects to this page) with $formAction = 'canEdit'
 
 
 }
@@ -35,8 +35,8 @@ if($formAction = 'canEdit')
 
 /*
 if ($_SESSION['access_level'] == 0) {
-    echo('<p><strong>Add Horse to the System.</strong><br />');
-    echo('Please provide as much information as you can about the horse. ' . 
+    echo('<p><strong>Add Trainer to the System.</strong><br />');
+    echo('Please provide as much information as you can about the trainer. ' . 
             '<br>When finished, hit <b>Submit</b> at the bottom of this page.');
 } else if ($_SESSION['access_level'] == 1)
     if ($_SESSION['_id'] != $person->get_id()) {
@@ -45,17 +45,17 @@ if ($_SESSION['access_level'] == 0) {
         echo('</div></div></body></html>');
         die();
     } else {
-        echo '<p><strong>Horse Edit Form</strong>';
-        echo(' Here you can edit horse information in the database.' .
+        echo '<p><strong>Trainer Edit Form</strong>';
+        echo(' Here you can edit trainer information in the database.' .
         '<br>When finished, hit <b>Submit</b> at the bottom of this page.');
     } else if ($_SESSION['access_level'] == 2)
         if ($horseName == 'new') {
-            echo('<p><strong>Add Horse Form</strong><br />');
-            echo('Adding a new horse to the database. ' .
+            echo('<p><strong>Add Trainer Form</strong><br />');
+            echo('Adding a new trainer to the database. ' .
             '<br>When finished, hit <b>Submit</b> at the bottom of this page.');
             
         } else {
-            echo("<p id=\"error\">You do not have sufficient permission to add a new horse to the database.</p>");
+            echo("<p id=\"error\">You do not have sufficient permission to add a new trainer to the database.</p>");
             //include('footer.inc');
             echo('</div></div></body></html>');
             die();
@@ -64,11 +64,11 @@ if ($_SESSION['access_level'] == 0) {
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
 */
 ?>
-<form method="POST" action="/Horse/o_horseEdit.php?formAction=confirmAdd">
+<form method="POST" action="/Trainer/o_horseEdit.php?formAction=confirmAdd">
     <input type="hidden" name="old_name" value="new">
     <input type="hidden" name="_form_submit" value="1">
     <fieldset>
-        <legend>Horse Information:</legend>
+        <legend>Trainer Information:</legend>
     <?php
         /*
         if ($horse->get_horseName()=='new') {
@@ -79,9 +79,9 @@ if ($_SESSION['access_level'] == 0) {
         }
          
         */
-         //echo '<p>Horse Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="test">';
+         //echo '<p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="test">';
     ?>
-        <p>Horse Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="Horace">'
+        <p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="Horace">'
         <p>Color<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="color" tabindex="1" value="Rainbow">
         <p>Breed<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="breed" tabindex="1" value="Different">
         <p>Pasture Number (Number between 1 and 11)<span style="font-size:x-small;color:FF0000">*</span>: <input type="number" name="pastureNum" min="1" max="11" value="1">
