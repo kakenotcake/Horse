@@ -17,26 +17,28 @@ include_once('domain/trainer.php');
 //$formAction = str_replace("_", " ", $_GET["formAction"]);
 $formAction = $_GET["formAction"];
 $trainerToAdd;
-//$trainerName = str_replace("_", " ", $_POST["trainerName"]);
+//$trainerFirstName = str_replace("_", " ", $_POST["$trainerFirstName"]);
 
 if ($formAction == 'addtrainer') {
     //$trainerToAdd = __constructtrainer('new', null, null, null, null);
     //$trainerToAdd = new trainer('new', null, null, null, null);
 } 
 else if ($formAction == 'confirmAdd') {
-    //$newtrainer = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
-    //$trainertoAdd = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
+    //$newtrainer = new trainer($trainerFirstName, $color, $breed, $pastureNum, $colorRank);
+    //$trainertoAdd = new trainer($trainerFirstName, $color, $breed, $pastureNum, $colorRank);
 
-    //trainerName isn't passed through for some reason!
-    $trainerName = $_POST['trainerName'];
-    $trainerColor = $_POST['color'];
-    $trainerBreed = $_POST['breed'];
-    $trainerPastureNum = $_POST['pastureNum'];
+    //$trainerFirstName isn't passed through for some reason!
+    $trainerFirstName = $_POST['trainerFirstName'];
+    $trainerLastName = $_POST['trainerLastName'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $username= $_POST['username'];
+    $password= $_POST['password']
+    
 
     //trainerColorRank isn't passed through for some reason!
-    $trainerColorRank = $_POST['colorRank'];
-    //$trainerToAdd = __constructtrainer($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
-    $trainerToAdd = new trainer($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
+    //$trainerLastNameRank = $_POST['colorRank'];
+    //$trainerToAdd = __constructtrainer($trainerFirstName, $trainerLastName, $phoneNumber, $trainerPastureNum, $trainerLastNameRank);
+    $trainerToAdd = new Trainer($trainerFirstName, $trainerLastName, $phoneNumber, $username, $password);
 }
 else {
     $trainerToAdd = retrieve_trainer($name);
@@ -46,22 +48,22 @@ else {
     }
 }
 
-function process_form($trainerName,$trainer) {
+function process_form($trainerFirstName,$trainer) {
     /*
-    if ($trainer->get_trainerName()=="new")
-        //$trainerName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['trainerName']))));
-        $trainerName = $_POST['trainerName'];
+    if ($trainer->get_$trainerFirstName()=="new")
+        //$trainerFirstName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['$trainerFirstName']))));
+        $trainerFirstName = $_POST['$trainerFirstName'];
     else
-        $trainerName = $trainer->get_trainerName();
+        $trainerFirstName = $trainer->get_$trainerFirstName();
     */
     /*
-    $trainerName = $_POST['trainerName'];
+    $trainerFirstName = $_POST['$trainerFirstName'];
     $color = $_POST['color'];
     $breed = $_POST['breed'];
     $pastureNum = $_POST['pastureNum'];
     $colorRank = $_POST['colorRank'];
     
-    $trainer = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
+    $trainer = new trainer($trainerFirstName, $color, $breed, $pastureNum, $colorRank);
     */
     //try to add a new person to the database
     if ($_POST['old_name']=='new') {
@@ -69,10 +71,10 @@ function process_form($trainerName,$trainer) {
         //check if there's already an entry
         //echo("<p>LETS ADD!!!!!!</p>");
         //echo("<br>");
-        $dup = retrieve_trainer($trainerName);
+        $dup = retrieve_trainer($trainerFirstName);
         //echo("<p>!!!" . $dup . "!!!!</p><br>");
         if ($dup == true) {
-            echo('<p class="error">Unable to add to the database. <br>Another trainer named ' . $trainerName . ' already exists.<br><br>'); 
+            echo('<p class="error">Unable to add to the database. <br>Another trainer named ' . $trainerFirstName . ' already exists.<br><br>'); 
             echo('<p>If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
         }
         else {            
@@ -83,7 +85,7 @@ function process_form($trainerName,$trainer) {
             if (!$result) 
                 echo('<p class="error">Unable to add trainer to the database. <br>Please report this error.');
             else 
-                echo('<p>You have successfully added ' . $trainer->get_trainerName() . ' to the database. If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
+                echo('<p>You have successfully added ' . $trainer->get_$trainerFirstName() . ' to the database. If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
         }
     }
 }
@@ -145,13 +147,13 @@ function process_form($trainerName,$trainer) {
                             //display the errors and the form to fix
                             show_errors($errors);
                             include('o_trainerForm.inc');
-                            //$trainer = new trainer($trainer->get_trainerName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
+                            //$trainer = new trainer($trainer->get_$trainerFirstName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
                         }
 
                         //this was a successful form submission; attempt to update the database.
                         else {
                             /*
-                            echo('<p>trainer name: ' . $trainerToAdd->get_trainerName() . '.</p>');
+                            echo('<p>trainer name: ' . $trainerToAdd->get_$trainerFirstName() . '.</p>');
                             echo("<br>");
                             echo('<p>trainer color: ' . $trainerToAdd->get_color() . '.</p>');
                             echo("<br>");
@@ -164,7 +166,7 @@ function process_form($trainerName,$trainer) {
                             echo('<p>trainer color rank: ' . $trainerToAdd->get_colorRank() . '.</p>');
                             echo("<br>");
                             */
-                            process_form($trainerName,$trainerToAdd);
+                            process_form($trainerFirstName,$trainerToAdd);
                             echo ('</div>');
                        //include('footer.inc');
                             echo('</div></body></html>');
@@ -179,12 +181,12 @@ function process_form($trainerName,$trainer) {
                  * sanitizes data, concatenates needed data, and enters it all into a database
                  */
                 /*
-                function process_form($trainerName,$trainer) {
-                    if ($trainer->get_trainerName()=="new")
-                        //$trainerName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['trainerName']))));
-                        $trainerName = $_POST['trainerName'];
+                function process_form($trainerFirstName,$trainer) {
+                    if ($trainer->get_$trainerFirstName()=="new")
+                        //$trainerFirstName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['$trainerFirstName']))));
+                        $trainerFirstName = $_POST['$trainerFirstName'];
                     else
-                        $trainerName = $trainer->get_trainerName();
+                        $trainerFirstName = $trainer->get_$trainerFirstName();
                     $color = $_POST['color'];
                     $breed = $_POST['breed'];
                     $pastureNum = $_POST['pastureNum'];
@@ -193,11 +195,11 @@ function process_form($trainerName,$trainer) {
                     //try to add a new person to the database
                     if ($_POST['old_name']=='new') {
                         //check if there's already an entry
-                        $dup = retrieve_trainer($trainerName);
+                        $dup = retrieve_trainer($trainerFirstName);
                         if ($dup) 
                             echo('<p class="error">Unable to add to the database. <br>Another trainer with the same name already exists.'); 
                         else {
-                            $newtrainer = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
+                            $newtrainer = new trainer($trainerFirstName, $color, $breed, $pastureNum, $colorRank);
                             $result = add_trainer($newtrainer);
                             if (!$result) 
                                 echo('<p class="error">Unable to add trainer to the database. <br>Please report this error.');
