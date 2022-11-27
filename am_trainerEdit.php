@@ -76,7 +76,7 @@ function process_form($trainerName,$trainer) {
             echo('<p>If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
         }
         else {            
-            //echo("<p>ADDING HORSE</p><br>");
+            //echo("<p>ADDING TRAINER</p><br>");
             $result = add_trainer($trainer);
             //echo('<p>Result: ' . $result . ".");
             //echo("<br>");
