@@ -85,7 +85,7 @@ if ($_SESSION['access_level'] == 0) {
         <p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerName" tabindex="1" value="Horace">'
         <p>Trainer Last Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerLastName" tabindex="1" value="Rainbow">
         <p>Phone Number<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="phoneNumber" tabindex="1" value="Different">
-        <p>User Name<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="username" tabindex="1" value="Different">
+        <p>Username<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="username" tabindex="1" value="Different">
         <p>Password<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="password" tabindex="1" value="Different">
 <?PHP
 $colorRanks = array("Green", "Yellow", "Red");
