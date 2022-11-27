@@ -13,19 +13,19 @@ session_start();
 session_cache_expire(30);
 include_once('database/trainerdb.php');
 include_once('database/dbinfo.php');
-include_once('domain/Horse.php');
+include_once('domain/trainer.php');
 //$formAction = str_replace("_", " ", $_GET["formAction"]);
 $formAction = $_GET["formAction"];
 $trainerToAdd;
 //$trainerName = str_replace("_", " ", $_POST["trainerName"]);
 
-if ($formAction == 'addHorse') {
-    //$trainerToAdd = __constructHorse('new', null, null, null, null);
-    //$trainerToAdd = new Horse('new', null, null, null, null);
+if ($formAction == 'addtrainer') {
+    //$trainerToAdd = __constructtrainer('new', null, null, null, null);
+    //$trainerToAdd = new trainer('new', null, null, null, null);
 } 
 else if ($formAction == 'confirmAdd') {
-    //$newtrainer = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
-    //$trainertoAdd = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
+    //$newtrainer = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
+    //$trainertoAdd = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
 
     //trainerName isn't passed through for some reason!
     $trainerName = $_POST['trainerName'];
@@ -35,8 +35,8 @@ else if ($formAction == 'confirmAdd') {
 
     //trainerColorRank isn't passed through for some reason!
     $trainerColorRank = $_POST['colorRank'];
-    //$trainerToAdd = __constructHorse($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
-    $trainerToAdd = new Horse($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
+    //$trainerToAdd = __constructtrainer($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
+    $trainerToAdd = new trainer($trainerName, $trainerColor, $trainerBreed, $trainerPastureNum, $trainerColorRank);
 }
 else {
     $trainerToAdd = retrieve_trainer($name);
@@ -61,7 +61,7 @@ function process_form($trainerName,$trainer) {
     $pastureNum = $_POST['pastureNum'];
     $colorRank = $_POST['colorRank'];
     
-    $trainer = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
+    $trainer = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
     */
     //try to add a new person to the database
     if ($_POST['old_name']=='new') {
@@ -73,7 +73,7 @@ function process_form($trainerName,$trainer) {
         //echo("<p>!!!" . $dup . "!!!!</p><br>");
         if ($dup == true) {
             echo('<p class="error">Unable to add to the database. <br>Another trainer named ' . $trainerName . ' already exists.<br><br>'); 
-            echo('<p>If you wish to add another trainer, please click "Add Horse" after "Horse Actions."</p>');
+            echo('<p>If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
         }
         else {            
             //echo("<p>ADDING HORSE</p><br>");
@@ -83,7 +83,7 @@ function process_form($trainerName,$trainer) {
             if (!$result) 
                 echo('<p class="error">Unable to add trainer to the database. <br>Please report this error.');
             else 
-                echo('<p>You have successfully added ' . $trainer->get_trainerName() . ' to the database. If you wish to add another trainer, please click "Add Horse" after "Horse Actions."</p>');
+                echo('<p>You have successfully added ' . $trainer->get_trainerName() . ' to the database. If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
         }
     }
 }
@@ -95,13 +95,13 @@ function process_form($trainerName,$trainer) {
             <?PHP
             
                 //If the user navigated here from the home page and wants to add a trainer,
-                if($formAction == 'addHorse')  {
+                if($formAction == 'addtrainer')  {
 
-                    //Display "Enter Horse Information
-                    echo('Enter Horse information');
+                    //Display "Enter trainer Information
+                    echo('Enter trainer information');
                 }
                 else if($formAction == 'confirmAdd') {
-                    echo('Add Horse');
+                    echo('Add trainer');
                 }
                 else {
                     echo("IDK");
@@ -120,7 +120,7 @@ function process_form($trainerName,$trainer) {
                 <?PHP 
 
                 //If the user navigates here from the home page,
-                if($formAction == 'addHorse') {
+                if($formAction == 'addtrainer') {
 
                     //show the trainer form.
                     include('o_trainerForm.inc');
@@ -145,7 +145,7 @@ function process_form($trainerName,$trainer) {
                             //display the errors and the form to fix
                             show_errors($errors);
                             include('o_trainerForm.inc');
-                            //$trainer = new Horse($trainer->get_trainerName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
+                            //$trainer = new trainer($trainer->get_trainerName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
                         }
 
                         //this was a successful form submission; attempt to update the database.
@@ -197,7 +197,7 @@ function process_form($trainerName,$trainer) {
                         if ($dup) 
                             echo('<p class="error">Unable to add to the database. <br>Another trainer with the same name already exists.'); 
                         else {
-                            $newtrainer = new Horse($trainerName, $color, $breed, $pastureNum, $colorRank);
+                            $newtrainer = new trainer($trainerName, $color, $breed, $pastureNum, $colorRank);
                             $result = add_trainer($newtrainer);
                             if (!$result) 
                                 echo('<p class="error">Unable to add trainer to the database. <br>Please report this error.');
