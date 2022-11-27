@@ -6,12 +6,12 @@
  * and open the template in the editor.
  */
 /*
- * horseForm.inc
+ * trainerForm.inc
  * shows a form for a person to be added or edited in the database
  * 
  */
 
-//Comment session branch out, keep the "if($horseName == 'new") branch!
+//Comment session branch out, keep the "if($trainerName == 'new") branch!
 
 if($formAction == 'addTrainer') {
     echo('<p><strong>Add Trainer to the System.</strong><br />');
@@ -49,7 +49,7 @@ if ($_SESSION['access_level'] == 0) {
         echo(' Here you can edit trainer information in the database.' .
         '<br>When finished, hit <b>Submit</b> at the bottom of this page.');
     } else if ($_SESSION['access_level'] == 2)
-        if ($horseName == 'new') {
+        if ($trainerName == 'new') {
             echo('<p><strong>Add Trainer Form</strong><br />');
             echo('Adding a new trainer to the database. ' .
             '<br>When finished, hit <b>Submit</b> at the bottom of this page.');
@@ -64,24 +64,24 @@ if ($_SESSION['access_level'] == 0) {
     echo '<br> (<span style="font-size:x-small;color:FF0000">*</span> denotes required information).';
 */
 ?>
-<form method="POST" action="/Trainer/o_horseEdit.php?formAction=confirmAdd">
+<form method="POST" action="/Trainer/amtrainerEdit.php?formAction=confirmAdd">
     <input type="hidden" name="old_name" value="new">
     <input type="hidden" name="_form_submit" value="1">
     <fieldset>
         <legend>Trainer Information:</legend>
     <?php
         /*
-        if ($horse->get_horseName()=='new') {
-            echo '<p>First Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="'.$horse->get_horseName().'">';
+        if ($trainer->get_trainerName()=='new') {
+            echo '<p>First Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerName" tabindex="1" value="'.$trainer->get_trainerName().'">';
         }
         else {
-            echo '<p>First Name: '.$horse->get_horseName();
+            echo '<p>First Name: '.$trainer->get_trainerName();
         }
          
         */
-         //echo '<p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="test">';
+         //echo '<p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerName" tabindex="1" value="test">';
     ?>
-        <p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="horseName" tabindex="1" value="Horace">'
+        <p>Trainer Name<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="trainerName" tabindex="1" value="Horace">'
         <p>Color<span style="font-size:x-small;color:FF0000">*</span>: <input type="text" name="color" tabindex="1" value="Rainbow">
         <p>Breed<span style="font-size:x-small;color:FF0000"></span>: <input type="text" name="breed" tabindex="1" value="Different">
         <p>Pasture Number (Number between 1 and 11)<span style="font-size:x-small;color:FF0000">*</span>: <input type="number" name="pastureNum" min="1" max="11" value="1">
