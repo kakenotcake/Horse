@@ -6,116 +6,116 @@
  * and open the template in the editor.
  */
 include_once('dbinfo.php');
-include_once(dirname(__FILE__).'/../domain/Horse.php');
-//include_once('../domain/Horse.php');
-//include_once('../domain/o_Horse.php');
+include_once(dirname(__FILE__).'/../domain/Trainer.php');
+//include_once('../domain/Trainer.php');
+//include_once('../domain/o_Trainer.php');
 
 /*
- * add a horse to horsedb table: if already there, return false
+ * add a trainer to trainerdb table: if already there, return false
  */
 
-//add a horse to phpMyAdmin database
-function add_horse($horse) {
+//add a trainer to phpMyAdmin database
+function add_trainer($trainer) {
     
-    if (!$horse instanceof Horse) {
-        die("Error: add_horse type mismatch");
+    if (!$trainer instanceof Trainer) {
+        die("Error: add_trainer type mismatch");
     }
     
     $con=connect();
-    $query = "SELECT * FROM horsedb WHERE horseName='" . $horse->get_horseName() . "';";
+    $query = "SELECT * FROM trainerdb WHERE trainerName='" . $trainer->get_trainerName() . "';";
     //return $query;
     $result = mysqli_query($con,$query);
 
 
     //if there's no entry for this name, add it
     //Currently, the second condition is true. $result is NOT null!!
-    //If there's no row for the horse to add,
+    //If there's no row for the trainer to add,
     if ($result == null || mysqli_num_rows($result) == 0) {
         
-        //add the horse to the database/
-        mysqli_query($con,'INSERT INTO horsedb VALUES("' .
-                $horse->get_horseName() . '","' .
-                $horse->get_color() . '","' .
-                $horse->get_breed() . '","' .
-                $horse->get_pastureNum() . '","' .
-                $horse->get_colorRank() . '");');							        
+        //add the trainer to the database/
+        mysqli_query($con,'INSERT INTO trainerdb VALUES("' .
+                $trainer->get_trainerName() . '","' .
+                $trainer->get_color() . '","' .
+                $trainer->get_breed() . '","' .
+                $trainer->get_pastureNum() . '","' .
+                $trainer->get_colorRank() . '");');							        
         
         mysqli_close($con);
 
-        //Return that the horse was added.
+        //Return that the trainer was added.
         return true;
     }
     mysqli_close($con);
     return false;
 }
 /*
- * remove a horse from horsedb table. If already there, return false
+ * remove a trainer from trainerdb table. If already there, return false
  */
-function remove_horse($horseName) {
+function remove_trainer($trainerName) {
     $con=connect();
-    $query = 'SELECT * FROM horsedb WHERE horseName = "' . $horseName . '"';
+    $query = 'SELECT * FROM trainerdb WHERE trainerName = "' . $trainerName . '"';
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
-    $query = 'DELETE FROM horsedb WHERE horseName = "' . $horseName . '"';
+    $query = 'DELETE FROM trainerdb WHERE trainerName = "' . $trainerName . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return true;
 }
     /*
-     * @return a Horse from horsedb table matching a particular name. 
+     * @return a Trainer from trainerdb table matching a particular name. 
      * if not in table, return false
      */
-function retrieve_horse($horseName) {
+function retrieve_trainer($trainerName) {
     $con=connect();
 
-    //Save the rows that have the horseName
-    $query = "SELECT * FROM horsedb WHERE horseName='" . $horseName . "';";
+    //Save the rows that have the trainerName
+    $query = "SELECT * FROM trainerdb WHERE trainerName='" . $trainerName . "';";
     $result = mysqli_query($con,$query);
 
-    //If the horse does NOT exist in the database,
+    //If the trainer does NOT exist in the database,
     if (mysqli_num_rows($result) != 1) {
         mysqli_close($con);
 
-        //return false to indiciate the horse can be added,
+        //return false to indiciate the trainer can be added,
         return false;
     }
     /*
     $result_row = mysqli_fetch_assoc($result);
-    $theHorse = make_a_horse($result_row);
-    return $theHorse;
+    $theTrainer = make_a_trainer($result_row);
+    return $theTrainer;
     */
 
-    //Return true to indicate the horse canNOT be added.
+    //Return true to indicate the trainer canNOT be added.
     return true;
 }
     
     /*
-     * @return all rows from horsedb table ordered name
+     * @return all rows from trainerdb table ordered name
      * if none there, return false
      */
-function getall_horsedb($name_from, $name_to) {
+function getall_trainerdb($name_from, $name_to) {
     $con=connect();
-    $query = "SELECT * FROM horsedb ORDER BY horseName";
-    //$query.= " ORDER BY horseName";
+    $query = "SELECT * FROM trainerdb ORDER BY trainerName";
+    //$query.= " ORDER BY trainerName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
     $result = mysqli_query($con,$query);
-    $theHorses = array();
+    $theTrainers = array();
     while ($result_row = mysqli_fetch_assoc($result)) {
-        $theHorse = make_a_horse($result_row);
-        $theHorses[] = $theHorse;
+        $theTrainer = make_a_trainer($result_row);
+        $theTrainers[] = $theTrainer;
     }
-    return $theHorses;
+    return $theTrainers;
 }
-function getall_horse_names() {
+function getall_trainer_names() {
     $con=connect();
-    $query = "SELECT horseName FROM horsedb ORDER BY horseName";
+    $query = "SELECT trainerName FROM trainerdb ORDER BY trainerName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
@@ -124,18 +124,18 @@ function getall_horse_names() {
     $result = mysqli_query($con,$query);
     $names = array();
     while ($result_row = mysqli_fetch_assoc($result)) {
-        $names[] = $result_row['horseName'];
+        $names[] = $result_row['trainerName'];
     }
     mysqli_close($con);
     return $names;
 }
     
-function make_a_horse($result_row) {
-    $theHorse = new Horse(
-                $result_row['horseName'],
+function make_a_trainer($result_row) {
+    $theTrainer = new Trainer(
+                $result_row['trainerName'],
                 $result_row['color'],
                 $result_row['breed'],
                 $result_row['pastureNum'],
                 $result_row['colorRank']);
-    return $theHorse;
+    return $theTrainer;
 }
