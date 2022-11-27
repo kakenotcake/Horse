@@ -10,13 +10,17 @@
  * it returns are array of the errors with the form (string warnings)
  * this array is null (aka false) if there are no errors
  */
-function validate_form($horse) {
-    if ($_POST['horseName'] == null)
-        $errors[] = 'Please enter a horse name';
-    if ($_POST['color'] == null) 
-        $errors[] = 'Please enter the color of the horse';
-    if ($_POST['pastureNum'] == null)
-        $errors[] = 'Please enter the pasture number';
+function validate_form($trainer) {
+    if ($_POST['trainerFirstName'] == null)
+        $errors[] = 'Please enter a trainer first name';
+    if ($_POST['trainerLastName'] == null)
+        $errors[] = 'Please enter a trainer last name';
+    if ($_POST['phoneNumber'] == null)
+        $errors[] = 'Please enter a phone number';
+    if ($_POST['username'] == null) 
+        $errors[] = 'Please enter a username';
+    if ($_POST['password'] == null)
+        $errors[] = 'Please enter a password';
     return $errors;
 }
 function show_errors($e) {
