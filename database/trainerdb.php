@@ -22,7 +22,7 @@ function add_trainer($trainer) {
     }
     
     $con=connect();
-    $query = "SELECT * FROM trainerdb WHERE trainerName='" . $trainer->get_trainerName() . "';";
+    $query = "SELECT * FROM trainerdb WHERE trainerFirstName='" . $trainer->get_trainerFirstName() . "';";
     //return $query;
     $result = mysqli_query($con,$query);
 
@@ -34,11 +34,11 @@ function add_trainer($trainer) {
         
         //add the trainer to the database/
         mysqli_query($con,'INSERT INTO trainerdb VALUES("' .
-                $trainer->get_trainerName() . '","' .
-                $trainer->get_color() . '","' .
-                $trainer->get_breed() . '","' .
-                $trainer->get_pastureNum() . '","' .
-                $trainer->get_colorRank() . '");');							        
+                $trainer->get_trainerFirstName() . '","' .
+                $trainer->get_trainerLastName() . '","' .
+                $trainer->get_phoneNumber() . '","' .
+                $trainer->get_username() . '","' .
+                $trainer->get_password() . '");');							        
         
         mysqli_close($con);
 
@@ -51,15 +51,15 @@ function add_trainer($trainer) {
 /*
  * remove a trainer from trainerdb table. If already there, return false
  */
-function remove_trainer($trainerName) {
+function remove_trainer($trainerFirstName) {
     $con=connect();
-    $query = 'SELECT * FROM trainerdb WHERE trainerName = "' . $trainerName . '"';
+    $query = 'SELECT * FROM trainerdb WHERE trainerFirstName = "' . $trainerFirstName . '"';
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
-    $query = 'DELETE FROM trainerdb WHERE trainerName = "' . $trainerName . '"';
+    $query = 'DELETE FROM trainerdb WHERE trainerFirstName = "' . $trainerFirstName . '"';
     $result = mysqli_query($con,$query);
     mysqli_close($con);
     return true;
@@ -68,11 +68,11 @@ function remove_trainer($trainerName) {
      * @return a Trainer from trainerdb table matching a particular name. 
      * if not in table, return false
      */
-function retrieve_trainer($trainerName) {
+function retrieve_trainer($trainerFirstName) {
     $con=connect();
 
-    //Save the rows that have the trainerName
-    $query = "SELECT * FROM trainerdb WHERE trainerName='" . $trainerName . "';";
+    //Save the rows that have the trainerFirstName
+    $query = "SELECT * FROM trainerdb WHERE trainerFirstName='" . $trainerFirstName . "';";
     $result = mysqli_query($con,$query);
 
     //If the trainer does NOT exist in the database,
@@ -98,8 +98,8 @@ function retrieve_trainer($trainerName) {
      */
 function getall_trainerdb($name_from, $name_to) {
     $con=connect();
-    $query = "SELECT * FROM trainerdb ORDER BY trainerName";
-    //$query.= " ORDER BY trainerName";
+    $query = "SELECT * FROM trainerdb ORDER BY trainerFirstName";
+    //$query.= " ORDER BY trainerFirstName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
@@ -115,7 +115,7 @@ function getall_trainerdb($name_from, $name_to) {
 }
 function getall_trainer_names() {
     $con=connect();
-    $query = "SELECT trainerName FROM trainerdb ORDER BY trainerName";
+    $query = "SELECT trainerFirstName FROM trainerdb ORDER BY trainerFirstName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
@@ -124,7 +124,7 @@ function getall_trainer_names() {
     $result = mysqli_query($con,$query);
     $names = array();
     while ($result_row = mysqli_fetch_assoc($result)) {
-        $names[] = $result_row['trainerName'];
+        $names[] = $result_row['trainerFirstName'];
     }
     mysqli_close($con);
     return $names;
@@ -132,10 +132,10 @@ function getall_trainer_names() {
     
 function make_a_trainer($result_row) {
     $theTrainer = new Trainer(
-                $result_row['trainerName'],
-                $result_row['color'],
-                $result_row['breed'],
-                $result_row['pastureNum'],
-                $result_row['colorRank']);
+                $result_row['trainerFirstName'],
+                $result_row['trainerLastname'],
+                $result_row['phoneNumber'],
+                $result_row['username'],
+                $result_row['password']);
     return $theTrainer;
 }
