@@ -22,7 +22,7 @@ function add_trainer($trainer) {
     }
     
     $con=connect();
-    $query = "SELECT * FROM trainerdb WHERE trainerName='" . $trainer->get_trainerName() . "';";
+    $query = "SELECT * FROM trainerdb WHERE trainerFirstName='" . $trainer->get_trainerFirstName() . "';";
     //return $query;
     $result = mysqli_query($con,$query);
 
@@ -51,7 +51,7 @@ function add_trainer($trainer) {
 /*
  * remove a trainer from trainerdb table. If already there, return false
  */
-function remove_trainer($trainerName) {
+function remove_trainer($trainerFirstName) {
     $con=connect();
     $query = 'SELECT * FROM trainerdb WHERE trainerFirstName = "' . $trainerFirstName . '"';
     $result = mysqli_query($con,$query);
@@ -71,7 +71,7 @@ function remove_trainer($trainerName) {
 function retrieve_trainer($trainerFirstName) {
     $con=connect();
 
-    //Save the rows that have the trainerName
+    //Save the rows that have the trainerFirstName
     $query = "SELECT * FROM trainerdb WHERE trainerFirstName='" . $trainerFirstName . "';";
     $result = mysqli_query($con,$query);
 
@@ -99,7 +99,7 @@ function retrieve_trainer($trainerFirstName) {
 function getall_trainerdb($name_from, $name_to) {
     $con=connect();
     $query = "SELECT * FROM trainerdb ORDER BY trainerFirstName";
-    //$query.= " ORDER BY trainerName";
+    //$query.= " ORDER BY trainerFirstName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
@@ -115,7 +115,7 @@ function getall_trainerdb($name_from, $name_to) {
 }
 function getall_trainer_names() {
     $con=connect();
-    $query = "SELECT trainerName FROM trainerdb ORDER BY trainerFirstName";
+    $query = "SELECT trainerFirstName FROM trainerdb ORDER BY trainerFirstName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
