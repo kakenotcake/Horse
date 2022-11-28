@@ -1,8 +1,8 @@
 <?php
 /* i am mike
- * Copyright 2015 by Allen Tucker. This program is part of RMHC-Homebase, which is free 
- * software.  It comes with absolutely no warranty. You can redistribute and/or 
- * modify it under the terms of the GNU General Public License as published by the 
+ * Copyright 2015 by Allen Tucker. This program is part of RMHC-Homebase, which is free
+ * software.  It comes with absolutely no warranty. You can redistribute and/or
+ * modify it under the terms of the GNU General Public License as published by the
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
  */
 /*
@@ -22,7 +22,7 @@ $trainerToAdd;
 if ($formAction == 'addtrainer') {
     //$trainerToAdd = __constructtrainer('new', null, null, null, null);
     //$trainerToAdd = new trainer('new', null, null, null, null);
-} 
+}
 else if ($formAction == 'confirmAdd') {
     //$newtrainer = new trainer($trainerFirstName, $color, $breed, $pastureNum, $colorRank);
     //$trainertoAdd = new trainer($trainerFirstName, $color, $breed, $pastureNum, $colorRank);
@@ -33,12 +33,12 @@ else if ($formAction == 'confirmAdd') {
     $phoneNumber = $_POST['phoneNumber'];
     $username= $_POST['username'];
     $password= $_POST['password']
-    
+
 
     //trainerColorRank isn't passed through for some reason!
     //$trainerLastNameRank = $_POST['colorRank'];
     //$trainerToAdd = __constructtrainer($trainerFirstName, $trainerLastName, $phoneNumber, $trainerPastureNum, $trainerLastNameRank);
-    $trainerToAdd = new Trainer($trainerFirstName, $trainerLastName, $phoneNumber, $username, $password);
+    $trainerToAdd = new Trainer ($trainerFirstName,$trainerLastName,$phoneNumber,$username,$password);
 }
 else {
     $trainerToAdd = retrieve_trainer($name);
@@ -62,7 +62,7 @@ function process_form($trainerFirstName,$trainer) {
     $breed = $_POST['breed'];
     $pastureNum = $_POST['pastureNum'];
     $colorRank = $_POST['colorRank'];
-    
+
     $trainer = new trainer($trainerFirstName, $color, $breed, $pastureNum, $colorRank);
     */
     //try to add a new person to the database
@@ -74,17 +74,17 @@ function process_form($trainerFirstName,$trainer) {
         $dup = retrieve_trainer($trainerFirstName);
         //echo("<p>!!!" . $dup . "!!!!</p><br>");
         if ($dup == true) {
-            echo('<p class="error">Unable to add to the database. <br>Another trainer named ' . $trainerFirstName . ' already exists.<br><br>'); 
+            echo('<p class="error">Unable to add to the database. <br>Another trainer named ' . $trainerFirstName . ' already exists.<br><br>');
             echo('<p>If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
         }
-        else {            
+        else {
             //echo("<p>ADDING TRAINER</p><br>");
             $result = add_trainer($trainer);
             //echo('<p>Result: ' . $result . ".");
             //echo("<br>");
-            if (!$result) 
+            if (!$result)
                 echo('<p class="error">Unable to add trainer to the database. <br>Please report this error.');
-            else 
+            else
                 echo('<p>You have successfully added ' . $trainer->get_$trainerFirstName() . ' to the database. If you wish to add another trainer, please click "Add trainer" after "trainer Actions."</p>');
         }
     }
