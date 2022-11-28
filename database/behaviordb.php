@@ -33,6 +33,25 @@ function add_behavior($behavior) {
     return false;
     
 }
+function retrieve_behavior($title) {
+    $con=connect();
+    $query = "SELECT * FROM behaviordb WHERE title='" . $title . "';";
+    $result = mysqli_query($con,$query);
+    
+    if (mysqli_num_rows($result) != 1) {
+        mysqli_close($con);
+        return false;
+    }
+    $result_row = mysqli_fetch_assoc($result);
+    $theBehavior = make_a_behavior($result_row);
+    return $theBehavior;
+}
+function make_a_behavior($result_row) {
+    $theBehavior = new Behavior(
+                   $result_row['title'],
+                   $result_row['behaviorLevel']);
+    return $theBehavior;
+}
 
 //Edit an existing behavior in the database.
 //Parameters:
