@@ -1,6 +1,6 @@
 <?php
 
-    //Display form instructions based on what the user wants to do.
+    //Display the form instructions based on what the user wants to do.
     //Also, change the form's destination URL based on what the user wants to do.
     if($formAction == "selectBehavior") {
 
