@@ -117,7 +117,7 @@ function process_form($trainerFirstName,$trainer) {
     </head>
     <body>
         <div id="container">
-            <?PHP include('o_header.php'); ?>
+            <?PHP include('am_header.php'); ?>
             <div id="content">
                 <?PHP 
 
@@ -125,17 +125,17 @@ function process_form($trainerFirstName,$trainer) {
                 if($formAction == 'addtrainer') {
 
                     //show the trainer form.
-                    include('o_trainerForm.inc');
+                    include('am_trainerForm.inc');
                 }
 
                 //Otherwise, 
                 else if($formAction == 'confirmAdd') {
                     
                     //attempt to validate and process the form.
-                    include('o_trainerValidate.inc'); 
+                    include('am_trainerValidate.inc'); 
                     if ($_POST['_form_submit'] != 1) {
                         //in this case, the form has not been submitted, so show it
-                        include('o_trainerForm.inc');
+                        include('am_trainerForm.inc');
                     }
                     else {
                         //in this case, the form has been submitted, so validate it
@@ -146,7 +146,7 @@ function process_form($trainerFirstName,$trainer) {
 
                             //display the errors and the form to fix
                             show_errors($errors);
-                            include('o_trainerForm.inc');
+                            include('am_trainerForm.inc');
                             //$trainer = new trainer($trainer->get_$trainerFirstName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
                         }
 
