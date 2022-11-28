@@ -21,7 +21,7 @@ $behaviorToAdd;
 $behaviorToEdit;
 $oldTitle;
 
-function process_form($title, $behaviorToEdit, $action) {
+function process_form($title, $behavior, $action) {
 
     //If the user used the form to add a behavior, 
     if ($action == "add") {
@@ -43,13 +43,13 @@ function process_form($title, $behaviorToEdit, $action) {
         else {            
 
             //so add it to the database.
-            $result = add_behavior($behaviorToEdit);
+            $result = add_behavior($behavior);
 
             //Another check to see if the behavior to add already exists.
             if (!$result) 
                 echo('<p class="error">Unable to add to the database. <br>Please report this error.');
             else 
-                echo('<p>You have successfully added ' . $behaviorToEdit->get_title() . ' to the database! If you wish to add another behavior, please click "Add Behavior" after "Behavior Actions."</p>');
+                echo('<p>You have successfully added ' . $behavior->get_title() . ' to the database! If you wish to add another behavior, please click "Add Behavior" after "Behavior Actions."</p>');
         }
     }
 
@@ -57,7 +57,7 @@ function process_form($title, $behaviorToEdit, $action) {
     else if($action == "edit") {
 
         //edit the existing behavior in the database.
-        $result = edit_behavior($title, $behaviorToEdit);
+        $result = edit_behavior($title, $behavior);
 
         if (!$result) 
             echo('<p class="error">Unable to edit the database. <br>Please report this error.');
@@ -69,7 +69,12 @@ function process_form($title, $behaviorToEdit, $action) {
     else {
 
         //so remove a behavior from the database.
-        echo("SIKE but how");
+        //echo("<h1>Title of behavior to remove is " . $behavior->get_title() . "!</h1>");
+        $result = remove_behavior($behavior->get_title());
+        if (!$result) 
+            echo('<p class="error">Unable to remove from the database. <br>Please report this error.');
+        else 
+            echo('<p>You have successfully removed ' . $behavior->get_title() . ' the database! If you wish to remove another behavior, please click "Remove Behavior" after "Behavior Actions."</p>');
     }
 }
 
@@ -80,7 +85,10 @@ function process_form($title, $behaviorToEdit, $action) {
             <?PHP
             
                 //Set the page title based on what the user wants to do.
-                if($formAction == 'addBehavior')  {
+                if($formAction == 'searchBehavior') {
+                    echo("Search Behaviors");
+                }
+                else if($formAction == 'addBehavior')  {
                     echo('Add Behavior information');
                 }
                 else if($formAction == 'confirmAdd') {
@@ -98,11 +106,20 @@ function process_form($title, $behaviorToEdit, $action) {
                 else if($formAction == 'removeBehavior') {
                     echo("Select Behavior to Remove");
                 }
-                else {
+                else { //$formAction == 'confirmRemove'
                     echo("Remove Behavior");
                 }
             ?>
         </title>
+        <style>
+            th, tr, td 
+            {
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+            }
+        </style>
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css" />
         <script src="lib/jquery-1.9.1.js"></script>
@@ -114,8 +131,31 @@ function process_form($title, $behaviorToEdit, $action) {
             <div id="content">
                 <?PHP 
 
-                //If the user wants to add a behavior,
-                if($formAction == 'addBehavior') {
+                //If the user wanted to search all behaviors,
+                if($formAction == 'searchBehavior') {
+
+                    //Retrieve and show all of the behaviors in a table.
+                    $allBehaviors = getall_behaviordb();
+
+                    echo("<h2><strong>List of behaviors</strong></h2>");
+                    echo("<br>");
+                    echo("<table>
+                            <tr>
+                                <th>Title</th>
+                                <th>Level</th>
+                            </tr>");
+                    
+                    for($x = 0; $x < count($allBehaviors); $x++) {
+                        echo("<tr>
+                                <td> " . $allBehaviors[$x]->get_title() . " </td>
+                                <td style='border-left: 1px solid black'> " . $allBehaviors[$x]->get_behaviorLevel() . " </td>
+                            </tr>");
+                    }
+                    
+                    echo("</table>");  
+                }
+                //Else, if the user wants to add a behavior,
+                else if($formAction == 'addBehavior') {
 
 
                     //show the form to add/edit behavior information.
@@ -250,6 +290,59 @@ function process_form($title, $behaviorToEdit, $action) {
 
                 //FINISH LATER
                 else if($formAction == 'confirmRemove') {
+
+                    //attempt to validate and process the form.
+                    include('o_behaviorValidate.inc'); 
+                    $oldTitle = $_POST['oldTitle'];
+                    $newTitle = $_POST['behaviorTitle'];
+                    $newLevel = $_POST['behaviorLevel'];
+
+                    //If the form has not been submitted (somehow).
+                    if ($_POST['_form_submit'] != 1) {
+
+                        //show the form again.
+                        include('o_editBehaviorForm.inc');
+                    }
+
+                    //Else, the form has been submitted,
+                    else {
+
+                        //so validate it. BTW, the parameter doesn't matter, because "validate_form" uses the form's $_POST values, NOT the parameter.
+                        $errors = validate_form($behavior);
+                        //errors array lists problems on the form submitted.
+
+                        //If the user left required fields blank,
+                        if ($errors) {
+
+                            //display the errors and the form again.
+                            show_errors($errors);
+                            include('o_editBehaviorForm.inc');
+                        }
+                                
+                        //Else, if the user changed the title of a behavior to a title that already exists,
+                            //Conditions: (1) The behavior must exist, and (2) the user wants to change the title of the existing behavior.
+                            //If the user left the title the same, then the existing behavior will be edited under the same title.
+                        /*
+                        else if((retrieve_behavior($newTitle)) && (strcmp($oldTitle, $newTitle) != 0)) {
+                            
+                            //print that the user cannot change a behavior name to an existing name, and then show the form again.
+                            echo("<p>" . $newTitle . " is the name of an existing behavior. Please enter another title.</p><br>");
+                            include("o_editBehaviorForm.inc");
+                        }
+                        */
+                    
+                        //Else, this was a successful form submission,
+                        else {
+
+                            //so create a Behavior object and process the form to remove a behavior.
+                            $behaviorToRemove = new Behavior($newTitle, $newLevel);
+                            process_form($oldTitle, $behaviorToRemove, "remove");
+                            echo ('</div>');
+                            //include('footer.inc');
+                            echo('</div></body></html>');
+                            die();
+                        }
+                    } 
 
                 }
 

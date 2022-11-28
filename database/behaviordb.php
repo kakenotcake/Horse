@@ -58,21 +58,28 @@ function edit_behavior($title, $behavior) {
  */
 
 
-/*
-function remove_horse($horseName) {
+
+function remove_behavior($title) {
+    /*
+    if (!$behavior instanceof Behavior) {
+        die("Error: remove_behavior type mismatch");
+    }
+    */
     $con=connect();
-    $query = 'SELECT * FROM horsedb WHERE horseName = "' . $horseName . '"';
+    $query = 'DELETE FROM behaviordb WHERE title = "' . $title . '"';
     $result = mysqli_query($con,$query);
+    /*
     if ($result == null || mysqli_num_rows($result) == 0) {
         mysqli_close($con);
         return false;
     }
     $query = 'DELETE FROM horsedb WHERE horseName = "' . $horseName . '"';
     $result = mysqli_query($con,$query);
+    */
     mysqli_close($con);
     return true;
 }
-*/
+
     /*
      * @return a Horse from horsedb table matching a particular name. 
      * if not in table, return false
@@ -105,13 +112,13 @@ function retrieve_behavior($behaviorTitle) {
 
     
     /*
-     * @return all rows from horsedb table ordered name
+     * @return all rows from behaviordb table ordered name
      * if none there, return false
      */
-/*
-function getall_horsedb($name_from, $name_to) {
+
+function getall_behaviordb() {
     $con=connect();
-    $query = "SELECT * FROM horsedb ORDER BY horseName";
+    $query = "SELECT * FROM behaviordb ORDER BY title";
     //$query.= " ORDER BY horseName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
@@ -119,14 +126,14 @@ function getall_horsedb($name_from, $name_to) {
         return false;
     }
     $result = mysqli_query($con,$query);
-    $theHorses = array();
+    $theBehaviors = array();
     while ($result_row = mysqli_fetch_assoc($result)) {
-        $theHorse = make_a_horse($result_row);
-        $theHorses[] = $theHorse;
+        $theBehavior = make_a_behavior($result_row);
+        $theBehaviors[] = $theBehavior;
     }
-    return $theHorses;
+    return $theBehaviors;
 }
-*/
+
 
 //Get all behavior titles in the database.
 //Parameters: None.
@@ -155,16 +162,13 @@ function getall_behavior_titles() {
     return $titles;
 }
  
-/*
-function make_a_horse($result_row) {
-    $theHorse = new Horse(
-                $result_row['horseName'],
-                $result_row['color'],
-                $result_row['breed'],
-                $result_row['pastureNum'],
-                $result_row['colorRank']);
-    return $theHorse;
+
+function make_a_behavior($result_row) {
+    $theBehavior = new Behavior(
+                $result_row['title'],
+                $result_row['behaviorLevel']);
+    return $theBehavior;
 }
-*/
+
 
 ?>
