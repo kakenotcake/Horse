@@ -31,10 +31,11 @@
         //echo('<br>master schedules: <a href="' . $path . 'viewSchedule.php?venue=portland'."".'">Portland, </a>');
         //echo('<a href="' . $path . 'viewSchedule.php?venue=bangor'."".'">Bangor</a>');
         echo('<br>');
-        echo('<strong>Horse Actions</strong> (Only "Add Horse" works) | <a href="' . $path . 'personSearch.php"><u>Search Horses</u></a>, 
+        echo('<strong>Horse Actions</strong> (Only "Add Horse" works) | 
+                        <a href="horseEdit.php?formAction=searchHorse"><u>Search Horses</u></a>, 
                         <a href="o_horseEdit.php?formAction=addHorse"><u>Add Horse</u></a>, 
                         <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Horse</u></a>,
-                        <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
+                        <a href="horseEdit.php?formAction=removeHorse"><u>Remove Horse</u></a>,
                         <u>Remove Horse</u>');
         echo('<br><br>');
         echo('<strong>Behavior Actions</strong> | 

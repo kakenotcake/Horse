@@ -1,0 +1,76 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/*
+ * editBehaviorForm.inc
+ * shows a form for a behavior to be added or edited in the database
+ * 
+ */
+
+?>
+
+
+<?php
+
+    //Display the form instructions based on what the user wants to do.
+    //Also, change the form's destination URL based on what the user wants to do.
+    if($formAction == "addHorse") {
+
+        echo("<p><strong>Add Horse Information</strong></p>");
+        echo("<p>Add Horse information using the fields below.</p>");
+        echo("<p>When finished, hit <b>Add Horse</b> at the bottom of this page.</p>");
+        echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
+       
+        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmAdd'>");
+    }
+    else if($formAction == "editHorse") {
+
+        echo("<p><strong>Edit Horse Information</strong></p>");
+        echo("<p>Edit the Name and/or the other fields of information as you wish. If you do not wish to change the title, please leave it untouched.</p>");
+        echo("<p>Please use the dropdown menu to select the Horse you want to edit.</p>");
+        echo("<p>When finished, hit <b>Edit Horse</b> at the bottom of this page.</p>");
+        echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
+
+        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
+    }
+    else { //The user wants to remove a behavior
+        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
+    }
+?>
+    <input type="hidden" name="old_name" value="new">
+    <input type="hidden" name="_form_submit" value="1">
+    <?PHP
+        //If the user is editing an existing behavior, pass the existing title in "oldTitle" back to "o_behaviorEdit.php" for editing purposes.
+        echo("<input type='hidden' name='oldTitle' value='$oldTitle'/>");
+    ?>
+    <fieldset>
+        <legend>Horse Name:</legend>
+        <?php
+
+            //Set the value of the behavior title input field as the old title. If the user is adding to the database, the field is blank, as there's no old title.
+            echo("<p>Horse Name<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='Name' tabindex='1' value='$oldTitle'></p>");
+        ?>
+       
+
+        <script src="lib/>jquery-1.9.1.js"></script>
+        <script src="lib/>jquery-ui.js"></script>
+    </fieldset>
+    <br>
+    <?PHP
+
+        //Display the appropriate submit button text based on what the user wants to do.
+        if($formAction == "addHorse") {
+            echo("<input type='submit' value='Add Horse'/>");
+        }
+        else if ($formAction == "editHorse") {
+            echo("<input type='submit' value='Edit Horse'/>");
+        }
+        else {
+            echo("<input type='submit' value='Submit Horse Information'/>");
+        }
+    ?>
+</form>

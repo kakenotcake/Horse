@@ -89,14 +89,20 @@ function retrieve_horse($horseName) {
     */
 
     //Return true to indicate the horse canNOT be added.
-    return true;
+    
+    while ($result_row = mysqli_fetch_assoc($result)) {
+        $theHorse = make_a_horse($result_row);
+        $theHorses[] = $theHorse;
+    }
+    return $theHorses;
+    //return true;
 }
     
     /*
      * @return all rows from horsedb table ordered name
      * if none there, return false
      */
-function getall_horsedb($name_from, $name_to) {
+function getall_horsedb() {
     $con=connect();
     $query = "SELECT * FROM horsedb ORDER BY horseName";
     //$query.= " ORDER BY horseName";
