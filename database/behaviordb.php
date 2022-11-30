@@ -163,38 +163,18 @@ function getall_behavior_titles() {
     return $titles;
 }
 
-//Use this to check if the user can edit or remove from the database.
+//Get the number of behaviors in the database.
+//Currently, it's used to check if the user can edit or remove from the database.
 function get_numBehaviors() {
 
     if(getall_behavior_titles() == 0 ) {
         return 0;
     }
-    
+
     $numTitles = getall_behavior_titles();
     return count($numTitles);
-    /*
-    $con=connect();
-    $query = "SELECT count(*) FROM behaviordb";
-
-    $result = mysqli_query($con,$query);
-    $result_row = mysqli_fetch_assoc($result)
-    return $result_row;
-
-    if ($result == null || mysqli_num_rows($result) == 0) {
-        mysqli_close($con);
-        return false;
-    }
-    $result = mysqli_query($con,$query);
-    $theBehaviors = array();
-    while ($result_row = mysqli_fetch_assoc($result)) {
-        $theBehavior = make_a_behavior($result_row);
-        $theBehaviors[] = $theBehavior;
-    }
-    return $theBehaviors;
-    */
 }
  
-
 function make_a_behavior($result_row) {
     $theBehavior = new Behavior(
                 $result_row['title'],
