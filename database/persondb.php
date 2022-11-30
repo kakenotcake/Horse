@@ -17,7 +17,7 @@ function add_trainer($trainer) {
     }
     $con=connect();
 
-    $query = "SELECT * FROM persondb WHERE firstName='" . $trainer->get_trainerFirstName() . "' AND lastName='" . $trainer->get_trainerLastName() . "';";
+    $query = "SELECT * FROM persondb WHERE personName='" . $trainer->get_name() . "';";
     $result = mysqli_query($con,$query);
 
     //if there is no trainer with the title,
@@ -25,8 +25,7 @@ function add_trainer($trainer) {
 
         //add it to teh database.
         mysqli_query($con,'INSERT INTO persondb VALUES("' .
-                $trainer->get_trainerFirstName() . '","' .
-                $trainer->get_trainerLastName() . '","' .
+                $trainer->get_name() . '","' .
                 $trainer->get_phoneNumber() . '","' .
                 $trainer->get_email() . '","' .
                 $trainer->get_username() . '","' .
@@ -46,19 +45,18 @@ function add_trainer($trainer) {
     //$trainer: the Trainer object of the updated trainer.
 
 //Return: true. By this point, we've confirmed that the user can edit the database.
-function edit_trainer($title, $trainer) {
+function edit_trainer($name, $trainer) {
     if (!$trainer instanceof Trainer) {
         die("Error: edit_trainer type mismatch");
     }
     $con=connect();
 
-    $query = "UPDATE persondb SET firstName='" . $trainer->get_trainerFirstName() .
-        "', lastName='" . $trainer->get_trainerLastName() .
+    $query = "UPDATE persondb SET personName='" . $trainer->get_name() .
         "', phone='" . $trainer->get_phoneNumber() .
         "', email='" . $trainer->get_email() .
         "', username='" . $trainer->get_username() .
         "', personPassword='" . $trainer->get_password() .
-        "' WHERE firstName='" . $trainer->get_trainerFirstName() . "' AND lastName='" . $trainer->get_trainerLastName() . "';";
+        "' WHERE personName='" . $trainer->get_name() . "';";
     $result = mysqli_query($con,$query);
 
     mysqli_close($con);
@@ -71,14 +69,14 @@ function edit_trainer($title, $trainer) {
 
 
 
-function remove_trainer($title) {
+function remove_trainer($name) {
     /*
     if (!$trainer instanceof Trainer) {
         die("Error: remove_trainer type mismatch");
     }
     */
     $con=connect();
-    $query = "DELETE FROM persondb WHERE firstName='" . $trainer->get_trainerFirstName() . "' AND lastName='" . $trainer->get_trainerLastName() . "';";
+    $query = "DELETE FROM persondb WHERE personName='" . $trainer->get_name() . "';";
     $result = mysqli_query($con,$query);
     /*
     if ($result == null || mysqli_num_rows($result) == 0) {
@@ -98,11 +96,11 @@ function remove_trainer($title) {
      */
 
 
-function retrieve_trainer($trainerTitle) {
+function retrieve_trainer($name) {
     $con=connect();
 
     //Save the rows that have the horseName
-    $query = "SELECT * FROM persondb WHERE firstName='" . $trainer->get_trainerFirstName() . "' AND lastName='" . $trainer->get_trainerLastName() . "';";
+    $query = "SELECT * FROM persondb WHERE personName='" . $trainer->get_name() . "';";
     $result = mysqli_query($con,$query);
 
     //If the horse does NOT exist in the database,
@@ -130,7 +128,7 @@ function retrieve_trainer($trainerTitle) {
 
 function getall_persondb() {
     $con=connect();
-    $query = "SELECT * FROM persondb ORDER BY lastName";
+    $query = "SELECT * FROM persondb ORDER BY personName";
     //$query.= " ORDER BY horseName";
     $result = mysqli_query($con,$query);
     if ($result == null || mysqli_num_rows($result) == 0) {
@@ -155,7 +153,7 @@ function getall_persondb() {
 function getall_trainer_names() {
     $con=connect();
 
-    $query = "SELECT firstName, lastName FROM persondb ORDER BY lastName";
+    $query = "SELECT personName FROM persondb ORDER BY personName";
     $result = mysqli_query($con,$query);
 
     if ($result == null || mysqli_num_rows($result) == 0) {
@@ -167,7 +165,7 @@ function getall_trainer_names() {
     $names = array();
 
     while ($result_row = mysqli_fetch_assoc($result)) {
-        $names[] = $result_row['lastName'];
+        $names[] = $result_row['personName'];
     }
 
     mysqli_close($con);
@@ -177,8 +175,7 @@ function getall_trainer_names() {
 
 function make_a_trainer($result_row) {
     $theTrainer = new Trainer(
-                $result_row['firstName'],
-                $result_row['lastName'],
+                $result_row['personName'],
                 $result_row['phone'],
                 $result_row['email'],
                 $result_row['username'],
