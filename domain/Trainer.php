@@ -10,28 +10,23 @@
 //First name, last name, phone number, user name, and password
 
 class Trainer {
-    private $trainerFirstName; //string
-    private $trainerLastName; //string
+    private $name; //string
     private $phoneNumber; //string
     private $email; //string
     private $username; //string
     private $password; //string
-    private $access //int (0 or 1)
+    private $access; //int (0 or 1)
 
-    function __construct($trainerFirstName, $trainerLastName, $phoneNumber, $email, $username, $password, $access) {
-        $this->trainerFirstName = $trainerFirstName;
-        $this->trainerLastName = $trainerLastName;
+    function __construct($name, $phoneNumber, $email, $username, $password, $access) {
+        $this->name = $name;
         $this->phoneNumber = $phoneNumber;
         $this->email = $email;
         $this->username = $username;
         $this->password = $password;
         $this->access = $access;
     }
-    function get_trainerFirstName() {
-        return $this->trainerFirstName;
-    }
-    function get_trainerLastName() {
-        return $this->trainerLastName;
+    function get_name() {
+        return $this->name;
     }
     function get_phoneNumber() {
         return $this->phoneNumber;

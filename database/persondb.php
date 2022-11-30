@@ -155,7 +155,7 @@ function getall_persondb() {
 function getall_trainer_names() {
     $con=connect();
 
-    $query = "SELECT firstName AND lastName FROM persondb ORDER BY lastName";
+    $query = "SELECT firstName, lastName FROM persondb ORDER BY lastName";
     $result = mysqli_query($con,$query);
 
     if ($result == null || mysqli_num_rows($result) == 0) {
