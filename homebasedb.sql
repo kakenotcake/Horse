@@ -39,6 +39,7 @@ DROP TABLE IF EXISTS dbweeks;
 DROP TABLE IF EXISTS notesDB;
 DROP TABLE IF EXISTS horseDB;
 DROP TABLE IF EXISTS personDB;
+DROP TABLE IF EXISTS trainerDB;
 DROP TABLE IF EXISTS behaviorDB;
 
 
@@ -62,12 +63,12 @@ CREATE TABLE behaviorDB (
 );
 
 CREATE TABLE personDB (
-  firstName varchar(50) NOT NULL,
-  lastName varchar(50) NOT NULL,
+  personName varchar(50) primary key NOT NULL,
   phone text,
   email text,
-  access int NOT NULL,
-  primary key (firstName, lastName)
+  username text,
+  personPassword text,
+  access int NOT NULL
 );
 
 CREATE TABLE notesDB (
@@ -75,11 +76,10 @@ CREATE TABLE notesDB (
   noteDate date,
   noteTimestamp timestamp,
   note text,
-  trainerFirstName varchar(50),
-  trainerLastName varchar(50),
+  trainerName varchar(50),
   primary key (horseName, noteDate, noteTimestamp),
   FOREIGN KEY (horseName) REFERENCES horseDB(horseName),
-  FOREIGN KEY (trainerFirstName, trainerLastName) REFERENCES personDB(firstName, lastName)
+  FOREIGN KEY (trainerName) REFERENCES personDB(personName)
 ); 
 
 

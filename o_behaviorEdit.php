@@ -28,7 +28,7 @@ function process_form($title, $behavior, $action) {
 
         //try to add a new behavior to the database.
 
-        //check if there's already an entry
+        //Check if there's already an entry.
         $dup = retrieve_behavior($title);
 
         //If there's already a behavior with this title,
@@ -69,12 +69,11 @@ function process_form($title, $behavior, $action) {
     else {
 
         //so remove a behavior from the database.
-        //echo("<h1>Title of behavior to remove is " . $behavior->get_title() . "!</h1>");
-        $result = remove_behavior($behavior->get_title());
+        $result = remove_behavior($title); 
         if (!$result) 
             echo('<p class="error">Unable to remove from the database. <br>Please report this error.');
         else 
-            echo('<p>You have successfully removed ' . $behavior->get_title() . ' the database! If you wish to remove another behavior, please click "Remove Behavior" after "Behavior Actions."</p>');
+            echo('<p>You have successfully removed ' . $title . ' the database! If you wish to remove another behavior, please click "Remove Behavior" after "Behavior Actions."</p>');
     }
 }
 
@@ -212,8 +211,19 @@ function process_form($title, $behavior, $action) {
                 //Else, if the user wants to edit a behavior,
                 else if($formAction == 'selectBehavior') {
 
-                    //display the form for selecting a behavior to edit.
-                    include('o_getBehaviorForm.inc');
+                    //check if there are behaviors in the database to edit.
+                    $numBehaviors = get_numBehaviors();
+
+                    //If there aren't any behaviors in the database, 
+                    if($numBehaviors == 0) {
+                        echo("<p><strong>There are no behaviors to edit.</strong></p>");
+                        echo('<p>Please add behaviors using the "Add Behavior" link next to "Behavior Actions".</p><br>');
+                    }
+
+                    //Else, display the form for selecting a behavior to edit.
+                    else {
+                        include('o_getBehaviorForm.inc');
+                    }    
                 }
 
                 //Else, if the user has selected a behavior to edit,
@@ -229,13 +239,13 @@ function process_form($title, $behavior, $action) {
                 //Else, if the user has submitted behavior information to edit,
                 else if($formAction == 'confirmEdit') {
                     
-                    //attempt to validate and process the form.
                     include('o_behaviorValidate.inc'); 
                     $oldTitle = $_POST['oldTitle'];
                     $newTitle = $_POST['behaviorTitle'];
                     $newLevel = $_POST['behaviorLevel'];
 
-                    //If the form has not been submitted (somehow).
+                    //attempt to validate and process the form.
+                    //If the form has not been submitted (somehow, cuz this code shouldn't run),
                     if ($_POST['_form_submit'] != 1) {
 
                         //show the form again.
@@ -284,8 +294,19 @@ function process_form($title, $behavior, $action) {
                 //Else, if the user wants to remove a behavior,
                 else if ($formAction == 'removeBehavior') { //For removing behaviors, will have "selectBehavior" and "removeBehavior" as "formAction" values.
                     
-                    //display the form for selecting a behavior to remove.
-                    include('o_getBehaviorForm.inc');
+                    //check if there are behaviors in the database to edit.
+                    $numBehaviors = get_numBehaviors();
+                    
+                    //If there aren't any behaviors in the database, 
+                    if($numBehaviors == 0) {
+                        echo("<p><strong>There are no behaviors to remove.</strong></p>");
+                        echo('<p>Please add behaviors using the "Add Behavior" link next to "Behavior Actions".</p><br>');
+                    }
+
+                    //Else, display the form for selecting a behavior to edit.
+                    else {
+                        include('o_getBehaviorForm.inc');
+                    }  
                 }
 
                 //FINISH LATER
@@ -293,9 +314,7 @@ function process_form($title, $behavior, $action) {
 
                     //attempt to validate and process the form.
                     include('o_behaviorValidate.inc'); 
-                    $oldTitle = $_POST['oldTitle'];
-                    $newTitle = $_POST['behaviorTitle'];
-                    $newLevel = $_POST['behaviorLevel'];
+                    $oldTitle = $_POST['behaviorTitle'];
 
                     //If the form has not been submitted (somehow).
                     if ($_POST['_form_submit'] != 1) {
@@ -335,7 +354,8 @@ function process_form($title, $behavior, $action) {
                         else {
 
                             //so create a Behavior object and process the form to remove a behavior.
-                            $behaviorToRemove = new Behavior($newTitle, $newLevel);
+                            //Removing only requires the name, so this behavior is created JUST to have a valid parameter.
+                            $behaviorToRemove = new Behavior($oldTitle, $newLevel);
                             process_form($oldTitle, $behaviorToRemove, "remove");
                             echo ('</div>');
                             //include('footer.inc');
