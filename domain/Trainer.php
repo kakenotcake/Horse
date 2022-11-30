@@ -13,15 +13,19 @@ class Trainer {
     private $trainerFirstName; //string
     private $trainerLastName; //string
     private $phoneNumber; //string
+    private $email; //string
     private $username; //string
     private $password; //string
+    private $access //int (0 or 1)
 
-    function __construct($trainerFirstName, $phoneNumber, $username, $password, $trainerLastName) {
-        $this->trainerFirstName = $name;
+    function __construct($trainerFirstName, $trainerLastName, $phoneNumber, $email, $username, $password, $access) {
+        $this->trainerFirstName = $trainerFirstName;
+        $this->trainerLastName = $trainerLastName;
         $this->phoneNumber = $phoneNumber;
+        $this->email = $email;
         $this->username = $username;
         $this->password = $password;
-        $this->trainerLastName = $trainerLastName;
+        $this->access = $access;
     }
     function get_trainerFirstName() {
         return $this->trainerFirstName;
@@ -32,11 +36,17 @@ class Trainer {
     function get_phoneNumber() {
         return $this->phoneNumber;
     }
+    function get_email() { 
+        return $this->email;
+    }
     function get_username() {
         return $this->username;
     }
     function get_password() {
         return $this->password;
+    }
+    function get_access() {
+        return $this->access;
     }
 }
 
