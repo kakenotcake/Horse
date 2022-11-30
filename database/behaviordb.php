@@ -83,32 +83,30 @@ function remove_behavior($title) {
 
     /*
      * @return a Horse from horsedb table matching a particular name. 
-     * if not in table, return false
+     * if not in table, return false (0)
      */
 
-
+//Modify to pass to forms to put existing fields in input!!
 function retrieve_behavior($behaviorTitle) {
     $con=connect();
 
-    //Save the rows that have the horseName
+    //Save the rows that have the title
     $query = "SELECT * FROM behaviordb WHERE title='" . $behaviorTitle . "';";
     $result = mysqli_query($con,$query);
 
-    //If the horse does NOT exist in the database,
+    //If the behavior does NOT exist in the database,
     if (mysqli_num_rows($result) != 1) {
         mysqli_close($con);
 
-        //return false to indiciate the horse can be added,
+        //return false to indiciate the retrieval process "failed".
         return false;
     }
     
-    //$result_row = mysqli_fetch_assoc($result);
-    //$theHorse = make_a_horse($result_row);
-    //return $theHorse;
-    
-
-    //Return true to indicate the horse canNOT be added.
-    return true;
+    //Otherwise, create a Behavior object based on the returned row and return it.
+    $result_row = mysqli_fetch_assoc($result);
+    $theBehavior = make_a_behavior($result_row);
+    return $theBehavior;   
+    //return true;
 }
 
     
@@ -134,6 +132,8 @@ function getall_behaviordb() {
     }
     return $theBehaviors;
 }
+
+//Create a method to get a specific behavior from the database by the title!
 
 
 //Get all behavior titles in the database.
@@ -162,8 +162,19 @@ function getall_behavior_titles() {
     mysqli_close($con);
     return $titles;
 }
- 
 
+//Get the number of behaviors in the database.
+//Currently, it's used to check if the user can edit or remove from the database.
+function get_numBehaviors() {
+
+    if(getall_behavior_titles() == 0 ) {
+        return 0;
+    }
+
+    $numTitles = getall_behavior_titles();
+    return count($numTitles);
+}
+ 
 function make_a_behavior($result_row) {
     $theBehavior = new Behavior(
                 $result_row['title'],
