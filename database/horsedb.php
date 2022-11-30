@@ -90,6 +90,7 @@ function retrieve_horse($horseName) {
 
     //Return true to indicate the horse canNOT be added.
     
+    $theHorses = array();
     while ($result_row = mysqli_fetch_assoc($result)) {
         $theHorse = make_a_horse($result_row);
         $theHorses[] = $theHorse;

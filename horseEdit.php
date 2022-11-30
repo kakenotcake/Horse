@@ -310,7 +310,7 @@ function process_form($name, $horse, $action) {
                    // $newTitle = $_POST['behaviorTitle'];
                    // $newLevel = $_POST['behaviorLevel'];
                         
-                      $oldName = $_POST['oldName'];
+                      $oldName = $_POST['oldTitle'];
                       //$newName = $_POST['Name'];
                       //$newColor = $_POST['Color'];
                       //$newBreed = $_POST['Breed'];
@@ -360,7 +360,7 @@ function process_form($name, $horse, $action) {
                             //$horseToRemove = new Horse($Name, $Color, $Breed, $PastNum, $ColRank);
                             $horseToRemove = retrieve_horse($oldName);
                             
-                            process_form($oldTitle, $horseToRemove[0], "remove");
+                            process_form($oldTitle, $horseToRemove, "remove");
                             echo ('</div>');
                             //include('footer.inc');
                             echo('</div></body></html>');
