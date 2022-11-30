@@ -191,7 +191,6 @@ function process_form($title, $behavior, $action) {
                             //display the errors and the form to fix.
                             show_errors($errors);
                             include('o_editBehaviorForm.inc');
-                            //$horse = new Horse($horse->get_horseName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
                         }
 
                         //Else, this was a successful form submission,
@@ -309,7 +308,6 @@ function process_form($title, $behavior, $action) {
                     }  
                 }
 
-                //FINISH LATER
                 else if($formAction == 'confirmRemove') {
 
                     //attempt to validate and process the form.
@@ -337,19 +335,7 @@ function process_form($title, $behavior, $action) {
                             show_errors($errors);
                             include('o_editBehaviorForm.inc');
                         }
-                                
-                        //Else, if the user changed the title of a behavior to a title that already exists,
-                            //Conditions: (1) The behavior must exist, and (2) the user wants to change the title of the existing behavior.
-                            //If the user left the title the same, then the existing behavior will be edited under the same title.
-                        /*
-                        else if((retrieve_behavior($newTitle)) && (strcmp($oldTitle, $newTitle) != 0)) {
-                            
-                            //print that the user cannot change a behavior name to an existing name, and then show the form again.
-                            echo("<p>" . $newTitle . " is the name of an existing behavior. Please enter another title.</p><br>");
-                            include("o_editBehaviorForm.inc");
-                        }
-                        */
-                    
+                                                    
                         //Else, this was a successful form submission,
                         else {
 
@@ -363,7 +349,6 @@ function process_form($title, $behavior, $action) {
                             die();
                         }
                     } 
-
                 }
 
                 ?>
