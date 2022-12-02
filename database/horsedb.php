@@ -139,3 +139,11 @@ function make_a_horse($result_row) {
                 $result_row['colorRank']);
     return $theHorse;
 }
+function get_numHorses() {
+    if (getall_horse_names() == 0) {
+        return 0;
+    }
+    $numNames = getall_horse_names();
+    return count($numNames);
+}
+
