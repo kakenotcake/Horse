@@ -32,22 +32,24 @@
         //echo('<a href="' . $path . 'viewSchedule.php?venue=bangor'."".'">Bangor</a>');
         echo('<br>');
         echo('<strong>Horse Actions</strong> (Only "Add Horse" works) | <a href="' . $path . 'personSearch.php"><u>Search Horses</u></a>, 
-                         <a href="o_horseEdit.php?formAction=addHorse"><u>Add Horse</u></a>, 
-                         <a href="o_horseEdit.php?formAction=editHorse"><u>Edit Horse</u></a>,
-                         <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
-                         <u>Remove Horse</u>');
+                        <a href="o_horseEdit.php?formAction=addHorse"><u>Add Horse</u></a>, 
+                        <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Horse</u></a>,
+                        <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
+                        <u>Remove Horse</u>');
         echo('<br><br>');
-        echo('<strong>Behavior Actions</strong> (In progress, links later!) | <a href="' . $path . 'personSearch.php"><u>Search Behaviors</u></a>, 
-                         <a href="behaviorAdd.php?formAction=addBehavior"><u>Add Behavior</u></a>, 
-                         <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Behavior</u></a>,
-                         <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
-                         <u>Remove Behavior</u>');
+        echo('<strong>Behavior Actions</strong> | 
+                        <a href="o_behaviorEdit.php?formAction=searchBehavior"><u>Search Behaviors</u></a>, 
+                        <a href="o_behaviorEdit.php?formAction=addBehavior"><u>Add Behavior</u></a>, 
+                        <a href="o_behaviorEdit.php?formAction=selectBehavior"><u>Edit Behavior</u></a>,
+                        <a href="o_behaviorEdit.php?formAction=removeBehavior"><u>Remove Behavior</u></a>');
         echo('<br><br>');
-         echo('<strong>Trainer Actions</strong> (In progress, links later!) | <a href="' . $path . 'personSearch.php"><u>Search Trainers</u></a>, 
+        echo('<strong>Trainer Actions</strong> (In progress, links later!) | <a href="' . $path . 'personSearch.php"><u>Search Trainers</u></a>, 
                          <a href="o_horseEdit.php?horseName=' . 'new' . '"><u>Add Trainer</u></a>, 
                          <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Trainer</u></a>,
                          <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
                          <u>Remove Trainer</u>');
+        echo("<br>");
+        echo("_______________________________________________________________________________________________________________________________________");
 
         //echo(' | <a href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">reports</a>');
         //echo(' | <a href="' . $path . 'logout.php">logout</a><br>');

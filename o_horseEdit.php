@@ -83,7 +83,7 @@ function process_form($horseName,$horse) {
             if (!$result) 
                 echo('<p class="error">Unable to add horse to the database. <br>Please report this error.');
             else 
-                echo('<p>You have successfully added ' . $horse->get_horseName() . ' to the database. If you wish to add another horse, please click "Add Horse" after "Horse Actions."</p>');
+                echo('<p>You have successfully added ' . $horse->get_horseName() . ' to the database! If you wish to add another horse, please click "Add Horse" after "Horse Actions."</p>');
         }
     }
 }
