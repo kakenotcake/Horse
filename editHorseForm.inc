@@ -22,7 +22,7 @@
     //Also, change the form's destination URL based on what the user wants to do.
     if($formAction == "addHorse") {
 
-        echo("<p><strong>Add HOrse Information</strong></p>");
+        echo("<p><strong>Add Horse Information</strong></p>");
         echo("<p>Add horse information using the fields below.</p>");
         echo("<p>When finished, hit <b>Add Horse</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
