@@ -12,7 +12,6 @@
  * shows a form for a behavior to be added or edited in the database
  * 
  */
-
 ?>
 
 
@@ -45,19 +44,32 @@
 ?>
     <input type="hidden" name="old_name" value="new">
     <input type="hidden" name="_form_submit" value="1">
+
     <?PHP
-        //If the user is editing an existing behavior, pass the existing title in "oldTitle" back to "o_behaviorEdit.php" for editing purposes.
+        //If the user is editing an existing horse, pass the existing name in "oldName" back to "horseEdit.php" for editing purposes.
         echo("<input type='hidden' name='oldName' value='$oldName'/>");
+
     ?>
     <fieldset>
         <legend>Horse Name:</legend>
         <?php
-
-            //Set the value of the behavior title input field as the old title. If the user is adding to the database, the field is blank, as there's no old title.
-            echo("<p>Horse Name<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='horseName' tabindex='1' value='$oldName'></p>");
-            echo("<p>Breed<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='breed' tabindex='1' value='$oldBreed'></p>");
-            echo("<p>Color<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='color' tabindex='1' value='$oldColor'></p>");
-            echo("<p>Pasture Number<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='pastureNum' tabindex='1' value='$oldPastureNum'></p>");
+            if($formAction == "addHorse"){
+                //leave the fields blank
+                echo("<p>Horse Name<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='horseName' tabindex='1' value='$oldName'></p>");
+                echo("<p>Breed<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='breed' tabindex='1' value='$currentBreed'></p>");
+                echo("<p>Color<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='color' tabindex='1' value='$currentColor'></p>");
+                echo("<p>Pasture Number<span style='font-size:x-small;color:FF0000'>*</span>: <input type='number' name='pastureNum' tabindex='1' min='1' max='11'></p>");
+            //editing a hourse
+            } else  {
+                //auto-populate the fields with the exisitng information
+                $currentBreed = retrieve_horse($oldName)->get_breed();
+                $currentColor = retrieve_horse($oldName)->get_color();
+                $currentPastureNum = retrieve_horse($oldName)->get_pastureNum();
+                echo("<p>Horse Name<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='horseName' tabindex='1' value='$oldName'></p>");
+                echo("<p>Breed<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='breed' tabindex='1' value='$currentBreed'></p>");
+                echo("<p>Color<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='color' tabindex='1' value='$currentColor'></p>");
+                echo("<p>Pasture Number<span style='font-size:x-small;color:FF0000'>*</span>: <input type='number' name='pastureNum' tabindex='1' min='1' max='11' value='$currentPastureNum'></p>");
+            }
         ?>
         <p>Color Rank<span style="font-size:x-small;color:FF0000"></span>:
             <select name="colorRank" tabindex="1">
@@ -65,9 +77,26 @@
                 
                 //create an array of the color ranks
                 $colorRanks = array("Green", "Yellow", "Red");
-                foreach ($colorRanks as $color) {
-                    echo "<option value=" . $color . ">" . $color . "</option>";
+                
+                //if the user is adding a horse
+                if($formAction == 'addHorse') {
+                    //display the colors
+                    foreach ($colorRanks as $color) {
+                        echo "<option value=" . $color . ">" . $color . "</option>";
+                    }
                 }
+                //the user is editing a horse
+                else {
+                    $currentColorRank = retrieve_horse($oldName)->get_colorRank();
+                    echo "<option value=" . $currentColorRank . ">" . $currentColorRank . "</option>";
+                    //display the other colors after
+                    foreach($colorRanks as $colors) {
+                        if(strcmp($colors, $currentColorRank) != 0) {
+                            echo "<option value=" . $colors . ">" . $colors . "</option>";
+                        }
+                    }
+                }
+
                 ?>
             </select>
           
