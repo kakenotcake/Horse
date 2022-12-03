@@ -1,0 +1,42 @@
+ADMIN ACTIONS:
+
+Horse
+1. Add Horse
+2. Edit Horse
+3. Remove Horse
+4. Search Horse
+
+Behavior
+5. Add Behavior
+6. Edit Behavior
+7. Remove Behavior
+8. Search Behavior
+
+TrainER
+9. Add/Create Trainer 
+10. Edit Trainer
+11. Remove Trainer
+12. Search Trainer
+
+TrainING
+13. Assign Horse
+14. Unassign Horse
+15. Assign Behavior
+16. Unassign Behavior
+17. Add Training Notes
+18. Edit Training Notes
+19. Remove Training Notes
+20. Search Training Notes
+
+Personal
+18. Edit Profile
+
+Trainer Actions:
+4. Search Horse
+8. Search Behavior
+12. Search Trainer
+17. Add Training Notes
+18. Edit Training Notes
+19. Remove Training Notes
+20. Search Training Notes
+
