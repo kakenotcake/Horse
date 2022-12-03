@@ -71,11 +71,11 @@ function process_form($name, $horse, $action) {
     }
 
     //Else, the user wants to remove a behavior (FOR LATER),
-    else {
+    else if($action == "remove"){
 
         //so remove a behavior from the database.
         //echo("<h1>Title of Horse to remove is " . $horse->get_name() . "!</h1>");
-        $result = remove_horse($horse->get_name());
+        $result = remove_horse($name);
         if (!$result) 
             echo('<p class="error">Unable to remove from the database. <br>Please report this error.');
         else 
@@ -310,7 +310,7 @@ function process_form($name, $horse, $action) {
                    // $newTitle = $_POST['behaviorTitle'];
                    // $newLevel = $_POST['behaviorLevel'];
                         
-                      $oldName = $_POST['horseName'];
+                      $oldName = $_POST['HorseName'];
                       //$newName = $_POST['Name'];
                       //$newColor = $_POST['Color'];
                       //$newBreed = $_POST['Breed'];
@@ -358,7 +358,8 @@ function process_form($name, $horse, $action) {
 
                             //so create a Behavior object and process the form to remove a behavior.
                             //$horseToRemove = new Horse($Name, $Color, $Breed, $PastNum, $ColRank);
-                            $horseToRemove = retrieve_horse($oldName);
+                           
+                             $horseToRemove = retrieve_horse($oldName);
                            
                             process_form($oldName, $horseToRemove, "remove");
                             echo ('</div>');
