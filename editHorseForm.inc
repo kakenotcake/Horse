@@ -38,7 +38,7 @@
         echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
     }
     else { //The user wants to remove a behavior
-        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
+        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmRemove'>");
     }
 ?>
     <input type="hidden" name="old_name" value="new">

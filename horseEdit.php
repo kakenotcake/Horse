@@ -74,12 +74,12 @@ function process_form($name, $horse, $action) {
     else {
 
         //so remove a behavior from the database.
-        //echo("<h1>Title of behavior to remove is " . $behavior->get_title() . "!</h1>");
-        $result = remove_behavior($behavior->get_title());
+        //echo("<h1>Title of Horse to remove is " . $horse->get_name() . "!</h1>");
+        $result = remove_horse($horse->get_name());
         if (!$result) 
             echo('<p class="error">Unable to remove from the database. <br>Please report this error.');
         else 
-            echo('<p>You have successfully removed ' . $behavior->get_title() . ' the database! If you wish to remove another behavior, please click "Remove Behavior" after "Behavior Actions."</p>');
+            echo('<p>You have successfully removed ' . $horse->get_name() . ' the database! If you wish to remove another horse, please click "Remove Horse" after "Horse Actions."</p>');
     }
 }
 
@@ -310,7 +310,7 @@ function process_form($name, $horse, $action) {
                    // $newTitle = $_POST['behaviorTitle'];
                    // $newLevel = $_POST['behaviorLevel'];
                         
-                      $oldName = $_POST['oldTitle'];
+                      $oldName = $_POST['horseName'];
                       //$newName = $_POST['Name'];
                       //$newColor = $_POST['Color'];
                       //$newBreed = $_POST['Breed'];
@@ -359,8 +359,8 @@ function process_form($name, $horse, $action) {
                             //so create a Behavior object and process the form to remove a behavior.
                             //$horseToRemove = new Horse($Name, $Color, $Breed, $PastNum, $ColRank);
                             $horseToRemove = retrieve_horse($oldName);
-                            
-                            process_form($oldTitle, $horseToRemove, "remove");
+                           
+                            process_form($oldName, $horseToRemove, "remove");
                             echo ('</div>');
                             //include('footer.inc');
                             echo('</div></body></html>');

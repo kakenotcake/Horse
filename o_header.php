@@ -35,8 +35,7 @@
                         <a href="horseEdit.php?formAction=searchHorse"><u>Search Horses</u></a>, 
                         <a href="o_horseEdit.php?formAction=addHorse"><u>Add Horse</u></a>, 
                         <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Horse</u></a>,
-                        <a href="horseEdit.php?formAction=removeHorse"><u>Remove Horse</u></a>,
-                        <u>Remove Horse</u>');
+                        <a href="horseEdit.php?formAction=removeHorse"><u>Remove Horse</u></a>');
         echo('<br><br>');
         echo('<strong>Behavior Actions</strong> | 
                         <a href="o_behaviorEdit.php?formAction=searchBehavior"><u>Search Behaviors</u></a>, 
