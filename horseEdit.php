@@ -330,7 +330,7 @@ function process_form($name, $horse, $action) {
                     else {
 
                         //so validate it. BTW, the parameter doesn't matter, because "validate_form" uses the form's $_POST values, NOT the parameter.
-                        $errors = validate_form($horse);
+                        //$errors = validate_form($horse);
                         //errors array lists problems on the form submitted.
 
                         //If the user left required fields blank,
@@ -338,7 +338,7 @@ function process_form($name, $horse, $action) {
 
                             //display the errors and the form again.
                             show_errors($errors);
-                            include('editHorseForm.inc');
+                           include('editHorseForm.inc');
                         }
                                 
                         //Else, if the user changed the title of a behavior to a title that already exists,
