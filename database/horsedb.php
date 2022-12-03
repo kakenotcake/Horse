@@ -88,8 +88,14 @@ function retrieve_horse($horseName) {
     return $theHorse;
     */
 
-    //Return true to indicate the horse canNOT be added.
-    return true;
+    //if the horse does not exist return false
+    if(mysqli_num_rows($result) != 1) {
+        mysqli_close($con);
+        return false;
+    }
+    $result_row = mysqli_fetch_assoc($result);
+    $theHorse = make_a_horse($result_row);
+    return $theHorse;
 }
     
     /*
@@ -161,4 +167,11 @@ function edit_horse($name, $horse) {
     }
     mysqli_close($con);
     return true;
+}
+function get_breed($horseName) {
+    $con=connect();
+    $query = "SELECT breed from horsedb WHERE horseName='" . $horseName . '"';
+    $result = mysqli_query($con,$query);
+    mysqli_close($con);
+    return $result;
 }

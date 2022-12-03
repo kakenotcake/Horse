@@ -20,6 +20,10 @@ $formAction = $_GET["formAction"];
 $horseToAdd;
 $horseToEdit;
 $oldName;
+$oldBreed;
+$oldColor;
+$oldPastureNum;
+$oldColorRank;
 
 function process_form($name, $horse, $action) {
 
