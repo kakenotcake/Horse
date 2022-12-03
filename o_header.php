@@ -50,6 +50,9 @@
                         <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
                         <u>Remove Trainer</u>');
         echo("<br><br>");
+
+        echo("_______________________________________________________________________________________________________________________________________");
+        echo("<br><br>");
         echo('<strong>Notes Actions</strong> (links later!) | 
                         <a><u>Search Training Notes</u></a>, 
                         <a><u>Add Training Notes</u></a>, 
@@ -61,7 +64,6 @@
                         <a><u>Unassign Trainer</u></a>, 
                         <a><u>Assign Behavior</u></a>,
                         <a><u>Unassign Behavior</u></a>');
-        echo("_______________________________________________________________________________________________________________________________________");
 
         //echo(' | <a href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">reports</a>');
         //echo(' | <a href="' . $path . 'logout.php">logout</a><br>');
