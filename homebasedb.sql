@@ -37,6 +37,8 @@ DROP TABLE IF EXISTS dbweeks;
 
 /*Drop our Horse tables*/
 DROP TABLE IF EXISTS notesDB;
+DROP TABLE IF EXISTS trainerToHorseDB;
+DROP TABLE IF EXISTS horseToBehaviorDB;
 DROP TABLE IF EXISTS horseDB;
 DROP TABLE IF EXISTS personDB;
 DROP TABLE IF EXISTS trainerDB;
@@ -71,6 +73,22 @@ CREATE TABLE personDB (
   access int NOT NULL
 );
 
+CREATE TABLE trainerToHorseDB (
+  trainerName varchar(50) NOT NULL,
+  horseName varchar(100) NOT NULL,
+  primary key (trainerName, horseName)/*,
+  FOREIGN KEY (horseName) REFERENCES horseDB(horseName)
+  FOREIGN KEY (behaviorTitle) REFERENCES behaviorDB(title) */
+);
+
+CREATE TABLE horseToBehaviorDB (
+  horseName varchar(50) NOT NULL,
+  behaviorTitle varchar(50) NOT NULL,
+  primary key (horseName, behaviorTitle)/*,
+  FOREIGN KEY (trainerName) REFERENCES personDB(personName)
+  FOREIGN KEY (horseName) REFERENCES horseDB(horseName) */
+);
+
 CREATE TABLE notesDB (
   horseName varchar(50) NOT NULL,
   noteDate date,
@@ -81,6 +99,13 @@ CREATE TABLE notesDB (
   FOREIGN KEY (horseName) REFERENCES horseDB(horseName),
   FOREIGN KEY (trainerName) REFERENCES personDB(personName)
 ); 
+
+
+
+
+/*THIS IS NO LONGER NEEDED, BUT HERE JUST BECAUSE WE DON'T REALLY NEED TO DELETE IT AT THE MOMENT!!*/
+
+
 
 
 

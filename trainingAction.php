@@ -20,15 +20,14 @@
 
 session_start();
 session_cache_expire(30);
-include_once('database/behaviordb.php');
 include_once('database/dbinfo.php');
+include_once('domain/Horse.php');
+include_once('domain/horsedb.php'); //Horse-to-behavior assignment methods can be added here for now.
 include_once('domain/Behavior.php');
 include_once('database/behaviordb.php');
-include_once('database/dbinfo.php');
-include_once('domain/Behavior.php');
-include_once('database/behaviordb.php');
-include_once('database/dbinfo.php');
-include_once('domain/Behavior.php');
+include_once('domain/Trainer.php');
+include_once('domain/persondb.php'); //Trainer-to-horse assignment methods can be added here for now.
+
 
 $formAction = $_GET["formAction"];
 $behaviorToAdd;
