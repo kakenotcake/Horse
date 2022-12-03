@@ -6,99 +6,361 @@
  * Free Software Foundation (see <http://www.gnu.org/licenses/ for more information).
  */
 /*
- * 	horseEdit.php
- *  oversees the editing of a horse to be added, changed, or deleted from the database
+ * 	behaviorEdit.php
+ *  oversees the editing of a behavior to be added, edited, or deleted from the database
  */
+
 session_start();
 session_cache_expire(30);
 include_once('database/horsedb.php');
+include_once('database/dbinfo.php');
 include_once('domain/Horse.php');
-include_once('database/dbApplicantScreenings.php');
-include_once('domain/ApplicantScreeining.php');
-include_once('database/dbLog/php');
-$horseName = str_replace("_", " ", $_GET["horseName"]);
 
-if ($horseName == 'new') {
-    $horse = new Horse('new', null, null, null, null);
-} else {
-    $horse = retrieve_horse($name);
-    if (!$horse) {
-        echo('<p name="error">Error: there\'s no horse with this name in the database</p>' . $name);
-        die();
+$formAction = $_GET["formAction"];
+$horseToAdd;
+$horseToEdit;
+$oldName;
+
+function process_form($name, $horse, $action) {
+
+    //If the user used the form to add a horse, 
+    if ($action == "add") {
+
+        //try to add a new horse to the database.
+
+        //Check if there's already an entry.
+        $dup = retrieve_horse($name);
+
+        //If there's already a horse with this name,
+        if ($dup == true) {
+
+            //print an error message.
+            echo('<p class="error">Unable to alter the database. <br>Another horse named ' . $name . ' already exists.<br><br>'); 
+            echo('<p>If you wish to add another horse, please click "Add Horse" after "Horse Actions."</p>');
+        }
+
+        //Else, this horse would be a new entry,
+        else {            
+
+            //so add it to the database.
+            $result = add_horse($horse);
+
+            //Another check to see if the horse to add already exists.
+            if (!$result) 
+                echo('<p class="error">Unable to add to the database. <br>Please report this error.');
+            else 
+                echo('<p>You have successfully added ' . $horse->get_horseName() . ' to the database! If you wish to add another horse, please click "Add Horse" after "Horse Actions."</p>');
+        }
+    }
+
+    //Else, if the user used the form to edit a behavior,
+    else if($action == "edit") {
+
+        //edit the existing behavior in the database.
+        $result = edit_horse($name, $horse);
+
+        if (!$result) 
+            echo('<p class="error">Unable to edit the database. <br>Please report this error.');
+        else 
+            echo('<p>You have successfully edited the database! If you wish to edit another horse, please click "Edit Horse" after "Horse Actions."</p>');
+    }
+
+    //Else, the user wants to remove a behavior (FOR LATER),
+    else {
+
+        //so remove a behavior from the database.
+        $result = remove_horse($name); 
+        if (!$result) 
+            echo('<p class="error">Unable to remove from the database. <br>Please report this error.');
+        else 
+            echo('<p>You have successfully removed ' . $name . ' the database! If you wish to remove another horse, please click "Remove Horse" after "Horse Actions."</p>');
     }
 }
+
 ?>
 <html>
     <head>
         <title>
-            Editing <?PHP echo($horse->get_horseName()); ?>
+            <?PHP
+            
+                //Set the page title based on what the user wants to do.
+                if($formAction == 'searchHorse') {
+                    echo("Search Horses");
+                }
+                else if($formAction == 'addHorse')  {
+                    echo('Add Horse Information');
+                }
+                else if($formAction == 'confirmAdd') {
+                    echo('Add Horse');
+                }
+                else if($formAction == 'selectHorse') {
+                    echo("Select Horse to Edit");
+                }
+                else if($formAction == 'editBehavior') {
+                    echo("Edit Horse Information");
+                }
+                else if($formAction == 'confirmEdit') {
+                    echo("Edit Horse");
+                }
+                else if($formAction == 'removeBehavior') {
+                    echo("Select Behavior to Remove");
+                }
+                else { //$formAction == 'confirmRemove'
+                    echo("Remove Behavior");
+                }
+            ?>
         </title>
+        <style>
+            th, tr, td 
+            {
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+            }
+        </style>
         <link rel="stylesheet" href="lib/jquery-ui.css" />
         <link rel="stylesheet" href="styles.css" type="text/css" />
         <script src="lib/jquery-1.9.1.js"></script>
-            <script src="lib/jquery-ui.js"></script>      
+        <script src="lib/jquery-ui.js"></script>      
     </head>
     <body>
-        <div id=""container">
-            <?PHP include('header.php'); ?>
+        <div id="container">
+            <?PHP include('o_header.php'); ?>
             <div id="content">
                 <?PHP 
-                include('horseValidate.inc'); 
-                if ($_POST['_form_submit'] != 1)
-                    //in this case, the form has not been submitted, so show it
-                    include('horseForm.inc');
-                else {
-                    //in this case, the form has been submitted, so validate it
-                    $errors = validate_form($horse);
-                    //errors array lists problems on the form submitted
-                    if ($errors) {
-                        //display the errors and the form to fix
-                        show_errors($errors);
-                        $horse = new Horse($horse->get_horseName(), $_POST['color'], $_POST['breed'], $_POST['pastureNum'], $_POST['colorRank']);
-                        include('horseForm.inc');
+
+                //If the user wanted to search all behaviors,
+                if($formAction == 'searchBehavior') {
+
+                    //Retrieve and show all of the behaviors in a table.
+                    $allBehaviors = getall_behaviordb();
+
+                    echo("<h2><strong>List of behaviors</strong></h2>");
+                    echo("<br>");
+                    echo("<table>
+                            <tr>
+                                <th>Title</th>
+                                <th>Level</th>
+                            </tr>");
+                    
+                    for($x = 0; $x < count($allBehaviors); $x++) {
+                        echo("<tr>
+                                <td> " . $allBehaviors[$x]->get_title() . " </td>
+                                <td style='border-left: 1px solid black'> " . $allBehaviors[$x]->get_behaviorLevel() . " </td>
+                            </tr>");
                     }
-                    //this was a successful form submission; update the database and exit
-                    else 
-                        process_form($horseName,$horse);
-                        echo "</div>";
-                    include('footer.inc');
-                    echo('</div></body></html>');
-                    die();
                     
+                    echo("</table>");  
                 }
-                /*
-                 * sanitizes data, concatenates needed data, and enters it all into a database
-                 */
-                function process_form($horseName,$horse) {
-                    if ($horse->get_horseName()=="new")
-                        //$horseName = trim(str_replace('\\\'', '', htmlentities(str_replace('&', 'and', $_POST['horseName']))));
-                        $horseName = $_POST['horseName'];
-                    else
-                        $horseName = $horse->get_horseName();
-                    $color = $_POST['color'];
-                    $breed = $_POST['breed'];
-                    $pastureNum = $_POST['pastureNum'];
-                    $colorRank = $_POST['colorRank'];
-                    
-                    //try to add a new person to the database
-                    if ($_POST['old_name']=='new') {
-                        //check if there's already an entry
-                        $dup = retrieve_horse($horseName);
-                        if ($dup) 
-                            echo('<p class="error">Unable to add to the database. <br>Another horse with the same name already exists.'); 
-                        else {
-                            $newhorse = new Horse($horseName, $color, $breed, $pastureNum, $colorRank);
-                            $result = add_horse($newhorse);
-                            if (!$result) 
-                                echo('<p class="error">Unable to add horse to the database. <br>Please report this error.');
-                            else 
-                                echo('<p>You have successfully added horse to the database. </p>');
+                //Else, if the user wants to add a behavior,
+                else if($formAction == 'addHorse') {
+
+
+                    //show the form to add/edit behavior information.
+                    include('editHorseForm.inc');
+                }
+
+                //Else, if the user has submitted behavior information to add,
+                else if($formAction == 'confirmAdd') {
+
+                    //attempt to validate and process the form.
+                    include('horseValidate.inc'); 
+
+                    //If the form has not been submitted (somehow),
+                    if ($_POST['_form_submit'] != 1) {
+
+                        //show it again.
+                        include('editHorseForm.inc');
+                    }
+
+                    //Else, the form has been submitted,
+                    else {
+
+                        //so retrieve the form answers and validate it.
+                        $newName = $_POST['horseName'];
+                        $newColor = $_POST['color'];
+                        $newBreed = $_POST['breed'];
+                        $newPastureNum = $_POST['pastureNum'];
+                        $newColorRank = $_POST['colorRank'];
+                        $newHorse = new Horse($newName, $newColor, $newBreed, $newPastureNum, $newColorRank);
+
+                        $errors = validate_form($newHorse);
+                        //errors array lists problems on the form submitted
+
+                        //If the user left required fields blank,
+                        if ($errors) {
+
+                            //display the errors and the form to fix.
+                            show_errors($errors);
+                            include('editHorseForm.inc');
                         }
+
+                        //Else, this was a successful form submission,
+                        else {
+
+                            //so process the form to add a behavior.
+                            process_form($newName, $newHorse, "add");
+                            echo ('</div>');
+                       //include('footer.inc');
+                            echo('</div></body></html>');
+                            die();
+                        }
+
                     }
                 }
+
+                //Else, if the user wants to edit a horse,
+                else if($formAction == 'selectHorse') {
+
+                    //check if there are horses in the database to edit.
+                    $numHorses = get_numHorses();
+
+                    //If there aren't any horses in the database, 
+                    if($numHorses == 0) {
+                        echo("<p><strong>There are no horses to edit.</strong></p>");
+                        echo('<p>Please add horses using the "Add Horses" link next to "Horse Actions".</p><br>');
+                    }
+
+                    //Else, display the form for selecting a horse to edit.
+                    else {
+                        include('getHorseForm.inc');
+                    }    
+                }
+
+                //Else, if the user has selected a horse to edit,
+                else if($formAction == 'editHorse') {
+
+                    //get the old title of the horse, in case the user edited the horse.
+                    $oldName = $_POST['horseName'];
+
+                    //Then, display the form for adding/editing behaviors.
+                    include("editHorseForm.inc");
+                }
+
+                //Else, if the user has submitted behavior information to edit,
+                else if($formAction == 'confirmEdit') {
+                    
+                    include('o_horseValidate.inc'); 
+                    $oldName = $_POST['oldName'];
+                    $newName = $_POST['horseName'];
+                    $newColor = $_POST['color'];
+                    $newBreed = $_POST['breed'];
+                    $newPastureNum = $_POST['pastureNum'];
+                    $newColorRank = $_POST['colorRank'];
+                    
+
+                    //attempt to validate and process the form.
+                    //If the form has not been submitted (somehow, cuz this code shouldn't run),
+                    if ($_POST['_form_submit'] != 1) {
+
+                        //show the form again.
+                        include('editHorseForm.inc');
+                    }
+
+                    //Else, the form has been submitted,
+                    else {
+
+                        //so validate it. BTW, the parameter doesn't matter, because "validate_form" uses the form's $_POST values, NOT the parameter.
+                        $errors = validate_form($horse);
+                        //errors array lists problems on the form submitted.
+
+                        //If the user left required fields blank,
+                        if ($errors) {
+
+                            //display the errors and the form again.
+                            show_errors($errors);
+                            include('editHorseForm.inc');
+                        }
+                                
+                        //Else, if the user changed the name of a horse to a name that already exists,
+                            //Conditions: (1) The horse must exist, and (2) the user wants to change the name of the existing horse.
+                            //If the user left the name the same, then the existing horse will be edited under the same name.
+                        else if((retrieve_horse($newName)) && (strcmp($oldName, $newName) != 0)) {
+                            
+                            //print that the user cannot change a horse name to an existing name, and then show the form again.
+                            echo("<p>" . $newName . " is the name of an existing horse. Please enter another name.</p><br>");
+                            include("editHorseForm.inc");
+                        }
+                    
+                        //Else, this was a successful form submission,
+                        else {
+
+                            //so create a Behavior object and process the form to edit a behavior.
+                            $horseToEdit = new Horse($newName, $newColor, $newBreed, $newPastureNum, $newColorRank);
+                            process_form($oldName, $horseToEdit, "edit");
+                            echo ('</div>');
+                            //include('footer.inc');
+                            echo('</div></body></html>');
+                            die();
+                        }
+                    } 
+                }
+
+                //Else, if the user wants to remove a behavior,
+                else if ($formAction == 'removeBehavior') { //For removing behaviors, will have "selectBehavior" and "removeBehavior" as "formAction" values.
+                    
+                    //check if there are behaviors in the database to edit.
+                    $numBehaviors = get_numBehaviors();
+                    
+                    //If there aren't any behaviors in the database, 
+                    if($numBehaviors == 0) {
+                        echo("<p><strong>There are no behaviors to remove.</strong></p>");
+                        echo('<p>Please add behaviors using the "Add Behavior" link next to "Behavior Actions".</p><br>');
+                    }
+
+                    //Else, display the form for selecting a behavior to edit.
+                    else {
+                        include('o_getBehaviorForm.inc');
+                    }  
+                }
+
+                else if($formAction == 'confirmRemove') {
+
+                    //attempt to validate and process the form.
+                    include('o_behaviorValidate.inc'); 
+                    $oldTitle = $_POST['behaviorTitle'];
+
+                    //If the form has not been submitted (somehow).
+                    if ($_POST['_form_submit'] != 1) {
+
+                        //show the form again.
+                        include('o_editBehaviorForm.inc');
+                    }
+
+                    //Else, the form has been submitted,
+                    else {
+
+                        //so validate it. BTW, the parameter doesn't matter, because "validate_form" uses the form's $_POST values, NOT the parameter.
+                        $errors = validate_form($behavior);
+                        //errors array lists problems on the form submitted.
+
+                        //If the user left required fields blank,
+                        if ($errors) {
+
+                            //display the errors and the form again.
+                            show_errors($errors);
+                            include('o_editBehaviorForm.inc');
+                        }
+                                                    
+                        //Else, this was a successful form submission,
+                        else {
+
+                            //so create a Behavior object and process the form to remove a behavior.
+                            //Removing only requires the name, so this behavior is created JUST to have a valid parameter.
+                            $behaviorToRemove = new Behavior($oldTitle, $newLevel);
+                            process_form($oldTitle, $behaviorToRemove, "remove");
+                            echo ('</div>');
+                            //include('footer.inc');
+                            echo('</div></body></html>');
+                            die();
+                        }
+                    } 
+                }
+
                 ?>
             </div>
-            <?PHP include('footer.inc'); ?>
+            <?PHP //include('footer.inc'); ?>
         </div>
     </body>
 </html>    

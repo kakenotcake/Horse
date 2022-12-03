@@ -139,3 +139,26 @@ function make_a_horse($result_row) {
                 $result_row['colorRank']);
     return $theHorse;
 }
+function get_numHorses() {
+    if (getall_horse_names() == 0) {
+        return 0;
+    }
+    $numNames = getall_horse_names();
+    return count($numNames);
+}
+function edit_horse($name, $horse) {
+    if (!$horse instanceof Horse) {
+        die("Errors: edit_horse type mismatch");
+    }
+    $con=connect();
+    
+   $query = "UPDATE horsedb SET horseName='" . $horse->get_horseName() . "', color='" . $horse->get_color() . "', breed='" . $horse->get_breed() . "', pastureNum='" . $horse->get_pastureNum() . "', colorRank='" . $horse->get_colorRank() . "' WHERE horseName='" . $name . "';";
+    $result = mysqli_query($con,$query);
+    
+    if($result == null) {
+        echo("RESULT IS NULL");
+        echo("color is: " . $horse->get_color() . " breed is: " . $horse->get_breed());
+    }
+    mysqli_close($con);
+    return true;
+}
