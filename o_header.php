@@ -43,12 +43,24 @@
                         <a href="o_behaviorEdit.php?formAction=selectBehavior"><u>Edit Behavior</u></a>,
                         <a href="o_behaviorEdit.php?formAction=removeBehavior"><u>Remove Behavior</u></a>');
         echo('<br><br>');
-        echo('<strong>Trainer Actions</strong> (In progress, links later!) | <a href="' . $path . 'personSearch.php"><u>Search Trainers</u></a>, 
-                         <a href="o_horseEdit.php?horseName=' . 'new' . '"><u>Add Trainer</u></a>, 
-                         <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Trainer</u></a>,
-                         <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
-                         <u>Remove Trainer</u>');
-        echo("<br>");
+        echo('<strong>Trainer Actions</strong> (links later!) | 
+                        <a href="' . $path . 'personSearch.php"><u>Search Trainers</u></a>, 
+                        <a href="o_horseEdit.php?horseName=' . 'new' . '"><u>Add Trainer</u></a>, 
+                        <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Trainer</u></a>,
+                        <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
+                        <u>Remove Trainer</u>');
+        echo("<br><br>");
+        echo('<strong>Notes Actions</strong> (links later!) | 
+                        <a><u>Search Training Notes</u></a>, 
+                        <a><u>Add Training Notes</u></a>, 
+                        <a><u>Edit Training Notes</u></a>,
+                        <a><u>Remove Training Notes</u></a>');
+        echo("<br><br>");
+        echo('<strong>Management Actions</strong> (links later!) | 
+                        <a><u>Assign Trainer</u></a>, 
+                        <a><u>Unassign Trainer</u></a>, 
+                        <a><u>Assign Behavior</u></a>,
+                        <a><u>Unassign Behavior</u></a>');
         echo("_______________________________________________________________________________________________________________________________________");
 
         //echo(' | <a href="' . $path . 'reports.php?venue='.$_SESSION['venue'].'">reports</a>');
