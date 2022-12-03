@@ -27,7 +27,7 @@
        
         echo("<form method='POST' action='/Horse/o_behaviorEdit.php?formAction=confirmAdd'>");
     }
-    else if($formAction == "editBehavior") {
+    else {
 
         echo("<p><strong>Edit Behavior Information</strong></p>");
         echo("<p>Edit the title and/or difficulty behavior information as you wish. If you do not wish to change the title, please leave it untouched.</p>");
@@ -35,9 +35,6 @@
         echo("<p>When finished, hit <b>Edit Behavior</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
 
-        echo("<form method='POST' action='/Horse/o_behaviorEdit.php?formAction=confirmEdit'>");
-    }
-    else { //The user wants to remove a behavior
         echo("<form method='POST' action='/Horse/o_behaviorEdit.php?formAction=confirmEdit'>");
     }
 ?>
@@ -58,11 +55,33 @@
         <select name="behaviorLevel" tabindex="1"> 
             <?PHP
 
-            //Create an array of the behavior levels to restrict the user to the three options.
-            $levels = array("Beginner", "Intermediate", "Hard");
-            foreach ($levels as $L) {
-                echo "<option value=" . $L . ">" . $L . "</option>";
-            }
+                //Create an array of the behavior levels to restrict the user to the three options.
+                $levels = array("Beginner", "Intermediate", "Hard");
+
+                //If the user is adding a behavior,
+                if($formAction == 'addBehavior') {
+
+                    //display the levels in order.
+                    foreach ($levels as $L) {
+                            echo "<option value=" . $L . ">" . $L . "</option>";
+                    }
+                }
+
+                //Else, the user is editing a behavior.
+                else {
+                    //For convenience, get the level of the behavior the user wants to edit.
+                    $currentLevel = retrieve_behavior($oldTitle)->get_behaviorLevel();
+
+                    //Then, display this level first in the dropdown menu.
+                    echo "<option value=" . $currentLevel . ">" . $currentLevel . "</option>";
+
+                    //Lastly, display the other levels afterwards.
+                    foreach ($levels as $L) {
+                        if(strcmp($L, $currentLevel) != 0) {
+                            echo "<option value=" . $L . ">" . $L . "</option>";
+                        }
+                    }
+                }
             ?>
         </select>
 
