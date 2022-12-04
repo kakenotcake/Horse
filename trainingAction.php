@@ -97,29 +97,33 @@ function process_form($title, $behavior, $action) {
             <?PHP
             
                 //Set the page title based on what the user wants to do.
-                if($formAction == 'searchBehavior') {
-                    echo("Search Behaviors");
+                if($formAction == 'searchAssignments') {
+                    echo("Search Assignments");
                 }
-                else if($formAction == 'addBehavior')  {
-                    echo('Add Behavior information');
+                else if($formAction == 'assignTrainer') {
+                    echo("Select Trainer to Assign");
                 }
-                else if($formAction == 'confirmAdd') {
-                    echo('Add Behavior');
+                else if($formAction == 'assignBehavior') {
+                    echo("Select Horse to Assign");
                 }
-                else if($formAction == 'selectBehavior') {
-                    echo("Select Behavior to Edit");
+                else if($formAction == 'confirmAssign')  {
+                    if($_POST['assignVal'] == 'Trainer')
+                    {
+                        echo('Assign Trainer to Horse');
+                    }
+                    else {
+                        echo('Assign Horse to Behavior');
+                    }
                 }
-                else if($formAction == 'editBehavior') {
-                    echo("Edit Behavior Information");
+                else if($formAction == 'unassignTrainer') {
+                    echo('Select Trainer to Unassign');
                 }
-                else if($formAction == 'confirmEdit') {
-                    echo("Edit Behavior");
+                else if($formAction == 'unassignBehavior') {
+                    echo("Select Horse to Unassign");
                 }
-                else if($formAction == 'removeBehavior') {
-                    echo("Select Behavior to Remove");
-                }
-                else { //$formAction == 'confirmRemove'
-                    echo("Remove Behavior");
+                else { //$formAction == 'confirmUnassign
+                    //Handle if assignVal is "Trainer" or "Horse"
+                    echo("Unassign Trainer or Horse");
                 }
             ?>
         </title>
@@ -143,13 +147,15 @@ function process_form($title, $behavior, $action) {
             <div id="content">
                 <?PHP 
 
-                //If the user wanted to search all behaviors,
-                if($formAction == 'searchBehavior') {
+                //If the user wanted to search all of the trainer and horse assignments,
+                if($formAction == 'searchAssignments') {
 
-                    //Retrieve and show all of the behaviors in a table.
-                    $allBehaviors = getall_behaviordb();
+                    //Retrieve and show all of the trainer and horse assignments (LATER).
 
-                    echo("<h2><strong>List of behaviors</strong></h2>");
+                    //$allBehaviors = getall_behaviordb();
+
+                    echo("<h2><strong>List of assignments</strong></h2>");
+                    /*
                     echo("<br>");
                     echo("<table>
                             <tr>
@@ -165,13 +171,14 @@ function process_form($title, $behavior, $action) {
                     }
                     
                     echo("</table>");  
+                    */
                 }
-                //Else, if the user wants to add a behavior,
-                else if($formAction == 'addBehavior') {
+                //Else, if the user wants to assign a trainer to a horse,
+                else if($formAction == 'assignTrainer') {
 
 
-                    //show the form to add/edit behavior information.
-                    include('o_editBehaviorForm.inc');
+                    //show the form to assign a trainer to a horse.
+                    include('assignmentForm.inc');
                 }
 
                 //Else, if the user has submitted behavior information to add,
