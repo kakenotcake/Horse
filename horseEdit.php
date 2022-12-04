@@ -77,7 +77,7 @@ function process_form($name, $horse, $action) {
         if (!$result) 
             echo('<p class="error">Unable to remove from the database. <br>Please report this error.');
         else 
-            echo('<p>You have successfully removed ' . $name . ' the database! If you wish to remove another horse, please click "Remove Horse" after "Horse Actions."</p>');
+            echo('<p>You have successfully removed ' . $horse->get_horseName() . ' the database! If you wish to remove another horse, please click "Remove Horse" after "Horse Actions."</p>');
     }
 }
 
@@ -106,11 +106,11 @@ function process_form($name, $horse, $action) {
                 else if($formAction == 'confirmEdit') {
                     echo("Edit Horse");
                 }
-                else if($formAction == 'removeBehavior') {
-                    echo("Select Behavior to Remove");
+                else if($formAction == 'removeHorse') {
+                    echo("Select Horse to Remove");
                 }
                 else { //$formAction == 'confirmRemove'
-                    echo("Remove Behavior");
+                    echo("Remove Horse");
                 }
             ?>
         </title>
@@ -134,24 +134,30 @@ function process_form($name, $horse, $action) {
             <div id="content">
                 <?PHP 
 
-                //If the user wanted to search all behaviors,
-                if($formAction == 'searchBehavior') {
+                //If the user wanted to search all horses,
+                if($formAction == 'searchHorse') {
 
-                    //Retrieve and show all of the behaviors in a table.
-                    $allBehaviors = getall_behaviordb();
+                    //Retrieve and show all of the horses in a table.
+                    $allHorses = getall_horsedb();
 
-                    echo("<h2><strong>List of behaviors</strong></h2>");
+                    echo("<h2><strong>List of Horses</strong></h2>");
                     echo("<br>");
                     echo("<table>
                             <tr>
-                                <th>Title</th>
-                                <th>Level</th>
+                                <th>Name</th>
+                                <th>Color</th>
+                                <th>Breed</th>
+                                <th>Pasture Number</th>
+                                <th>Color Rank</th>
                             </tr>");
                     
-                    for($x = 0; $x < count($allBehaviors); $x++) {
+                    for($x = 0; $x < count($allHorses); $x++) {
                         echo("<tr>
-                                <td> " . $allBehaviors[$x]->get_title() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allBehaviors[$x]->get_behaviorLevel() . " </td>
+                                <td> " . $allHorses[$x]->get_horseName() . " </td>
+                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_color() . " </td>
+                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_breed() . " </td>
+                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_pastureNum() . " </td>
+                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_colorRank() . " </td>
                             </tr>");
                     }
                     
@@ -301,42 +307,33 @@ function process_form($name, $horse, $action) {
                     } 
                 }
 
-                //Else, if the user wants to remove a behavior,
-                else if ($formAction == 'removeBehavior') { //For removing behaviors, will have "selectBehavior" and "removeBehavior" as "formAction" values.
+                //Else, if the user wants to remove a horse
+                else if ($formAction == 'removeHorse') { 
                     
                     //check if there are behaviors in the database to edit.
-                    $numBehaviors = get_numBehaviors();
+                    include('getHorseForm.inc');
                     
-                    //If there aren't any behaviors in the database, 
-                    if($numBehaviors == 0) {
-                        echo("<p><strong>There are no behaviors to remove.</strong></p>");
-                        echo('<p>Please add behaviors using the "Add Behavior" link next to "Behavior Actions".</p><br>');
-                    }
-
-                    //Else, display the form for selecting a behavior to edit.
-                    else {
-                        include('o_getBehaviorForm.inc');
-                    }  
                 }
 
                 else if($formAction == 'confirmRemove') {
 
                     //attempt to validate and process the form.
-                    include('o_behaviorValidate.inc'); 
-                    $oldTitle = $_POST['behaviorTitle'];
+                    include('o_horseValidate.inc'); 
+                    
+                    $oldName = $_POST['horseName'];
 
                     //If the form has not been submitted (somehow).
                     if ($_POST['_form_submit'] != 1) {
 
                         //show the form again.
-                        include('o_editBehaviorForm.inc');
+                        include('editHorseForm.inc');
                     }
 
                     //Else, the form has been submitted,
                     else {
 
                         //so validate it. BTW, the parameter doesn't matter, because "validate_form" uses the form's $_POST values, NOT the parameter.
-                        $errors = validate_form($behavior);
+                        //$errors = validate_form($behavior);
                         //errors array lists problems on the form submitted.
 
                         //If the user left required fields blank,
@@ -344,16 +341,18 @@ function process_form($name, $horse, $action) {
 
                             //display the errors and the form again.
                             show_errors($errors);
-                            include('o_editBehaviorForm.inc');
+                            include('editHorseForm.inc');
                         }
                                                     
                         //Else, this was a successful form submission,
                         else {
 
                             //so create a Behavior object and process the form to remove a behavior.
-                            //Removing only requires the name, so this behavior is created JUST to have a valid parameter.
-                            $behaviorToRemove = new Behavior($oldTitle, $newLevel);
-                            process_form($oldTitle, $behaviorToRemove, "remove");
+                            //$horseToRemove = new Horse($Name, $Color, $Breed, $PastNum, $ColRank);
+                           
+                             $horseToRemove = retrieve_horse($oldName);
+                           
+                            process_form($oldName, $horseToRemove, "remove");
                             echo ('</div>');
                             //include('footer.inc');
                             echo('</div></body></html>');
