@@ -11,7 +11,7 @@
  * this array is null (aka false) if there are no errors
  */
 function validate_form($horse) {
-    if ($_POST['horseName'] == null)
+    if ($_POST['HorseName'] == null)
         $errors[] = 'Please enter a horse name';
     if ($_POST['color'] == null) 
         $errors[] = 'Please enter the color of the horse';

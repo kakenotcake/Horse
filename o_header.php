@@ -32,10 +32,10 @@
         //echo('<a href="' . $path . 'viewSchedule.php?venue=bangor'."".'">Bangor</a>');
         echo('<br>');
         echo('<strong>Horse Actions</strong>| 
-                        <a href="' . $path . 'personSearch.php"><u>Search Horses</u></a>, 
+                        <a href="horseEdit.php?formAction=searchHorse"><u>Search Horse</u></a>,
                         <a href="horseEdit.php?formAction=addHorse"><u>Add Horse</u></a>, 
                         <a href="horseEdit.php?formAction=selectHorse"><u>Edit Horse</u></a>,
-                        <u>Remove Horse</u>');
+                        <a href="horseEdit.php?formAction=removeHorse"><u>Remove Horse</u></a>');
         echo('<br><br>');
         echo('<strong>Behavior Actions</strong> | 
                         <a href="o_behaviorEdit.php?formAction=searchBehavior"><u>Search Behaviors</u></a>, 

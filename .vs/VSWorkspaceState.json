@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\database"
   ],
+  "SelectedNode": "\\database\\behaviordb.php",
   "PreviewInSolutionExplorer": false
 }
