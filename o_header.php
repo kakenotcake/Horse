@@ -44,11 +44,10 @@
                         <a href="o_behaviorEdit.php?formAction=removeBehavior"><u>Remove Behavior</u></a>');
         echo('<br><br>');
         echo('<strong>Trainer Actions</strong> (links later!) | 
-                        <a href="' . $path . 'personSearch.php"><u>Search Trainers</u></a>, 
-                        <a href="o_horseEdit.php?horseName=' . 'new' . '"><u>Add Trainer</u></a>, 
-                        <a href="o_horseEdit.php?horseName=' . 'edit' . '"><u>Edit Trainer</u></a>,
-                        <a href="viewScreenings.php?type=new"><u>screenings</u></a>,
-                        <u>Remove Trainer</u>');
+                        <a href="o_personEdit.php?formAction=searchPeople"><u>Search Trainers</u></a>, 
+                        <a href="o_personEdit.php?formAction=addPerson"><u>Add Trainer</u></a>, 
+                        <a href="o_personEdit.php?formAction=selectPerson"><u>Edit Trainer</u></a>,
+                        <a href="o_personEdit.php?formAction=removePerson"><u>Remove Trainer</u></a>');
         echo("<br><br>");
 
         echo("_______________________________________________________________________________________________________________________________________");

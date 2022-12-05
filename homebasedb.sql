@@ -65,12 +65,14 @@ CREATE TABLE behaviorDB (
 );
 
 CREATE TABLE personDB (
-  personName varchar(50) primary key NOT NULL,
+  firstName text,
+  lastName text, 
+  fullName varchar(50) primary key NOT NULL,
   phone text,
   email text,
   username text,
-  personPassword text,
-  access int NOT NULL
+  pass text,
+  userType text NOT NULL
 );
 
 CREATE TABLE trainerToHorseDB (
@@ -97,7 +99,7 @@ CREATE TABLE notesDB (
   trainerName varchar(50),
   primary key (horseName, noteDate, noteTimestamp),
   FOREIGN KEY (horseName) REFERENCES horseDB(horseName),
-  FOREIGN KEY (trainerName) REFERENCES personDB(personName)
+  FOREIGN KEY (trainerName) REFERENCES personDB(fullName)
 ); 
 
 
