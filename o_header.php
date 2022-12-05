@@ -43,7 +43,7 @@
                         <a href="o_behaviorEdit.php?formAction=selectBehavior"><u>Edit Behavior</u></a>,
                         <a href="o_behaviorEdit.php?formAction=removeBehavior"><u>Remove Behavior</u></a>');
         echo('<br><br>');
-        echo('<strong>Trainer Actions</strong> (links later!) | 
+        echo('<strong>Trainer Actions</strong> | 
                         <a href="o_personEdit.php?formAction=searchPeople"><u>Search Trainers</u></a>, 
                         <a href="o_personEdit.php?formAction=addPerson"><u>Add Trainer</u></a>, 
                         <a href="o_personEdit.php?formAction=selectPerson"><u>Edit Trainer</u></a>,
