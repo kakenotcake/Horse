@@ -251,7 +251,9 @@ function process_form($name, $horse, $action) {
                 //Else, if the user has submitted behavior information to edit,
                 else if($formAction == 'confirmEdit') {
                     
-                    include('o_horseValidate.inc'); 
+                    //attempt to validate and process the form.
+                    include('horseValidate.inc'); 
+                    
                     $oldName = $_POST['oldName'];
                     $newName = $_POST['horseName'];
                     $newColor = $_POST['color'];
@@ -259,8 +261,6 @@ function process_form($name, $horse, $action) {
                     $newPastureNum = $_POST['pastureNum'];
                     $newColorRank = $_POST['colorRank'];
                     
-
-                    //attempt to validate and process the form.
                     //If the form has not been submitted (somehow, cuz this code shouldn't run),
                     if ($_POST['_form_submit'] != 1) {
 
@@ -273,6 +273,7 @@ function process_form($name, $horse, $action) {
 
                         //so validate it. BTW, the parameter doesn't matter, because "validate_form" uses the form's $_POST values, NOT the parameter.
                         $errors = validate_form($horse);
+
                         //errors array lists problems on the form submitted.
 
                         //If the user left required fields blank,

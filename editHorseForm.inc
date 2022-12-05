@@ -38,8 +38,8 @@
 
         echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
     }
-    else { //The user wants to remove a behavior
-        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
+    else { //The user wants to remove a horse
+        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmRemove'>");
     }
 ?>
     <input type="hidden" name="old_name" value="new">
@@ -59,6 +59,7 @@
                 echo("<p>Breed<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='breed' tabindex='1' value='$currentBreed'></p>");
                 echo("<p>Color<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='color' tabindex='1' value='$currentColor'></p>");
                 echo("<p>Pasture Number<span style='font-size:x-small;color:FF0000'>*</span>: <input type='number' name='pastureNum' tabindex='1' min='1' max='11'></p>");
+                
             //editing a hourse
             } else  {
                 //auto-populate the fields with the exisitng information
