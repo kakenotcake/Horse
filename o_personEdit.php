@@ -140,7 +140,7 @@ function process_form($name, $person, $action) {
                 //If the user wanted to search all persons,
                 if($formAction == 'searchPeople') {
 
-                    //Retrieve and show all of the persons in a table (LATER).
+                    //retrieve and show all of the persons in a table.
                     
                     $allPersons = getall_persondb();
 
