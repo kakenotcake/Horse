@@ -312,7 +312,8 @@ function process_form($name, $horse, $action) {
                 else if ($formAction == 'removeHorse') { 
                     
                     //check if there are behaviors in the database to edit.
-
+                    $numHorses = get_numHorses();
+                   // $numHorses = 1;
                     if($numHorses == 0) {
                         echo("<p><strong>There are no horses to remove.</strong></p>");
                         echo('<p>Please add horses using the "Add Horses" link next to "Horse Actions".</p><br>');
