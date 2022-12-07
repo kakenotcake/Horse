@@ -19,7 +19,7 @@
 
     //Display the form instructions based on what the user wants to do.
     //Also, change the form's destination URL based on what the user wants to do.
-    if($formAction == "addPerson") {
+    if($formAction == "addPerson" || $formAction == "confirmAdd") {
 
         echo("<p><strong>Add Person Information</strong></p>");
         echo("<p>Add person information using the fields below.</p>");
@@ -49,7 +49,7 @@
     <fieldset>
         <legend>Person Information:</legend>
         <?php
-            if($formAction == "addPerson"){
+            if($formAction == "addPerson" || $formAction == "confirmAdd"){
                 //leave the fields blank
                 echo("<p>First Name<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='firstName' tabindex='1' value=''></p>");
                 echo("<p>Last Name<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='lastName' tabindex='1' value=''></p>");
@@ -57,7 +57,8 @@
                 echo("<p>Email: <input type='email' name='email' tabindex='1' value=''></p>");
                 
             //editing a person
-            } else  {
+            } 
+            else  { //$formAction = "editPerson" or "confirmEdit"
                 //auto-populate the fields with the exisitng information
                 $currentFirstName = retrieve_person($oldName)->get_firstName();
                 $currentLastName = retrieve_person($oldName)->get_lastName();
@@ -82,7 +83,7 @@
                 $userTypes = array("Volunteer", "Administrator");
                 
                 //If the user is adding a person,
-                if($formAction == 'addPerson') {
+                if($formAction == 'addPerson' || $formAction == "confirmAdd") {
 
                     //display the user types as they are.
                     foreach ($userTypes as $u) {
@@ -115,7 +116,7 @@
     <?PHP
 
         //Display the appropriate submit button text based on what the user wants to do.
-        if($formAction == "addPerson") {
+        if($formAction == "addPerson" || $formAction == "confirmAdd") {
             echo("<input type='submit' value='Add Person'/>");
         }
         else { //$formAction == 'editPerson' or 'confirmEdit'

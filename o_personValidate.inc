@@ -15,6 +15,7 @@ function validate_form($horse) {
         $errors[] = 'Please enter a first name';
     if ($_POST['lastName'] == null) 
         $errors[] = 'Please enter a last name';
+    return $errors;
 }
 function show_errors($e) {
     //this function should display all of the errors

@@ -137,31 +137,43 @@ function process_form($name, $horse, $action) {
                 //If the user wanted to search all horses,
                 if($formAction == 'searchHorse') {
 
-                    //Retrieve and show all of the horses in a table.
-                    $allHorses = getall_horsedb();
+                    //check if there are horses in the database to edit.
+                    $numHorses = get_numHorses();
 
-                    echo("<h2><strong>List of Horses</strong></h2>");
-                    echo("<br>");
-                    echo("<table>
-                            <tr>
-                                <th>Name</th>
-                                <th>Color</th>
-                                <th>Breed</th>
-                                <th>Pasture Number</th>
-                                <th>Color Rank</th>
-                            </tr>");
-                    
-                    for($x = 0; $x < count($allHorses); $x++) {
-                        echo("<tr>
-                                <td> " . $allHorses[$x]->get_horseName() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_color() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_breed() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_pastureNum() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_colorRank() . " </td>
-                            </tr>");
+                    //If there aren't any horses in the database, 
+                    if($numHorses == 0) {
+                        echo("<p><strong>There are no horses to search.</strong></p>");
+                        echo('<p>Please add horses using the "Add Horse" link next to "Horse Actions".</p><br>');
                     }
-                    
-                    echo("</table>");  
+
+                    //Else, there are horses in the database,
+                    else {
+                        //so retrieve and show all of the horses in a table.
+                        $allHorses = getall_horsedb();
+
+                        echo("<h2><strong>List of Horses</strong></h2>");
+                        echo("<br>");
+                        echo("<table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Color</th>
+                                    <th>Breed</th>
+                                    <th>Pasture Number</th>
+                                    <th>Color Rank</th>
+                                </tr>");
+                        
+                        for($x = 0; $x < count($allHorses); $x++) {
+                            echo("<tr>
+                                    <td> " . $allHorses[$x]->get_horseName() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_color() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_breed() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_pastureNum() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allHorses[$x]->get_colorRank() . " </td>
+                                </tr>");
+                        }
+                        
+                        echo("</table>");
+                    }
                 }
                 //Else, if the user wants to add a behavior,
                 else if($formAction == 'addHorse') {
@@ -229,7 +241,7 @@ function process_form($name, $horse, $action) {
                     //If there aren't any horses in the database, 
                     if($numHorses == 0) {
                         echo("<p><strong>There are no horses to edit.</strong></p>");
-                        echo('<p>Please add horses using the "Add Horses" link next to "Horse Actions".</p><br>');
+                        echo('<p>Please add horses using the "Add Horse" link next to "Horse Actions".</p><br>');
                     }
 
                     //Else, display the form for selecting a horse to edit.
@@ -316,7 +328,7 @@ function process_form($name, $horse, $action) {
 
                     if($numHorses == 0) {
                         echo("<p><strong>There are no horses to remove.</strong></p>");
-                        echo('<p>Please add horses using the "Add Horses" link next to "Horse Actions".</p><br>');
+                        echo('<p>Please add horses using the "Add Horse" link next to "Horse Actions".</p><br>');
                     }
                     else {
                         include('getHorseForm.inc');

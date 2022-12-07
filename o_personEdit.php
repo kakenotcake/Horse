@@ -137,35 +137,50 @@ function process_form($name, $person, $action) {
             <div id="content">
                 <?PHP 
 
-                //If the user wanted to search all persons,
+                //If the user wanted to search all people,
                 if($formAction == 'searchPeople') {
 
-                    //retrieve and show all of the persons in a table.
-                    
-                    $allPersons = getall_persondb();
+                    //check if there are people in the database to edit.
+                    $numPersons = get_numPersons();
 
-                    echo("<h2><strong>List of People</strong></h2>");
-                    echo("<br>");
-                    echo("<table>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                            </tr>");
-                    
-                    for($x = 0; $x < count($allPersons); $x++) {
-                        echo("<tr>
-                                <td> " . $allPersons[$x]->get_firstName() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_lastName() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_phone() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_email() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_userType() . " </td>
-                            </tr>");
+                    //If there aren't any people in the database, 
+                    if($numPersons == 0) {
+
+                        //display an error messsage.
+                        echo("<p><strong>There are no people to search.</strong></p>");
+                        echo('<p>Please add people using the "Add Trainer" link next to "Trainer Actions".</p><br>');
+                    }
+                    //Else, there are people in the database,
+                    else {
+
+                        //so retrieve and show all of the people in a table.
+                        $allPersons = getall_persondb();
+
+                        echo("<h2><strong>List of People</strong></h2>");
+                        echo("<br>");
+                        echo("<table>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>");
+                        
+                        for($x = 0; $x < count($allPersons); $x++) {
+                            echo("<tr>
+                                    <td> " . $allPersons[$x]->get_firstName() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_lastName() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_phone() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_email() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allPersons[$x]->get_userType() . " </td>
+                                </tr>");
                     }
                     
                     echo("</table>");  
+                    }
+
+
                     
                 }
                 //Else, if the user wants to add a behavior,
@@ -224,7 +239,6 @@ function process_form($name, $person, $action) {
                             //so process the form to add a behavior.
                             process_form($newFullName, $newPerson, "add");
                             echo ('</div>');
-                       //include('footer.inc');
                             echo('</div></body></html>');
                             die();
                         }
@@ -240,8 +254,8 @@ function process_form($name, $person, $action) {
 
                     //If there aren't any persons in the database, 
                     if($numpersons == 0) {
-                        echo("<p><strong>There are no persons to edit.</strong></p>");
-                        echo('<p>Please add persons using the "Add persons" link next to "person Actions".</p><br>');
+                        echo("<p><strong>There are no people to edit.</strong></p>");
+                        echo('<p>Please add people using the "Add Trainer" link next to "Trainer Actions".</p><br>');
                     }
 
                     //Else, display the form for selecting a person to edit.
@@ -339,8 +353,8 @@ function process_form($name, $person, $action) {
                     if($numPersons == 0) {
 
                         //display a message as such.
-                        echo("<p><strong>There are no persons to edit.</strong></p>");
-                        echo('<p>Please add persons using the "Add persons" link next to "person Actions".</p><br>');
+                        echo("<p><strong>There are no people to remove.</strong></p>");
+                        echo('<p>Please add people using the "Add Trainer" link next to "Trainer Actions".</p><br>');
                     }
 
                     //Else, display the form for selecting a person to edit.

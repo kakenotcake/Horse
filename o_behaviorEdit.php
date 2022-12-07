@@ -133,25 +133,39 @@ function process_form($title, $behavior, $action) {
                 //If the user wanted to search all behaviors,
                 if($formAction == 'searchBehavior') {
 
-                    //Retrieve and show all of the behaviors in a table.
-                    $allBehaviors = getall_behaviordb();
+                    //check if there are behaviors in the database to search.
+                    $numBehaviors = get_numBehaviors();
 
-                    echo("<h2><strong>List of behaviors</strong></h2>");
-                    echo("<br>");
-                    echo("<table>
-                            <tr>
-                                <th>Title</th>
-                                <th>Level</th>
-                            </tr>");
-                    
-                    for($x = 0; $x < count($allBehaviors); $x++) {
-                        echo("<tr>
-                                <td> " . $allBehaviors[$x]->get_title() . " </td>
-                                <td style='border-left: 1px solid black'> " . $allBehaviors[$x]->get_behaviorLevel() . " </td>
-                            </tr>");
+                    //If there aren't any behaviors in the database, 
+                    if($numBehaviors== 0) {
+
+                        //display an error messsage.
+                        echo("<p><strong>There are no behaviors to search.</strong></p>");
+                        echo('<p>Please add behaviors using the "Add Behavior" link next to "Behavior Actions".</p><br>');
                     }
-                    
-                    echo("</table>");  
+
+                    //Else, there are behaviors in the database,
+                    else {
+                        //so retrieve and show all of the behaviors in a table.
+                        $allBehaviors = getall_behaviordb();
+
+                        echo("<h2><strong>List of behaviors</strong></h2>");
+                        echo("<br>");
+                        echo("<table>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Level</th>
+                                </tr>");
+                        
+                        for($x = 0; $x < count($allBehaviors); $x++) {
+                            echo("<tr>
+                                    <td> " . $allBehaviors[$x]->get_title() . " </td>
+                                    <td style='border-left: 1px solid black'> " . $allBehaviors[$x]->get_behaviorLevel() . " </td>
+                                </tr>");
+                        }
+                        
+                        echo("</table>");  
+                    }
                 }
                 //Else, if the user wants to add a behavior,
                 else if($formAction == 'addBehavior') {
