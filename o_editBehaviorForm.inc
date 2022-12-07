@@ -18,21 +18,21 @@
 
     //Display the form instructions based on what the user wants to do.
     //Also, change the form's destination URL based on what the user wants to do.
-    if($formAction == "addBehavior") {
+    if($formAction == "addBehavior" || $formAction == "confirmAdd") {
 
         echo("<p><strong>Add Behavior Information</strong></p>");
         echo("<p>Add behavior information using the fields below.</p>");
-        echo("<p>When finished, hit <b>Add Behavior</b> at the bottom of this page.</p>");
+        echo('<p>When finished, hit <b>"Add Behavior"</b> at the bottom of this page.</p>');
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
        
         echo("<form method='POST' action='/Horse/o_behaviorEdit.php?formAction=confirmAdd'>");
     }
-    else {
+    else { //$formAction == "editBehavior"
 
         echo("<p><strong>Edit Behavior Information</strong></p>");
         echo("<p>Edit the title and/or difficulty behavior information as you wish. If you do not wish to change the title, please leave it untouched.</p>");
         echo("<p>Please use the dropdown menu to select the behavior you want to edit.</p>");
-        echo("<p>When finished, hit <b>Edit Behavior</b> at the bottom of this page.</p>");
+        echo('<p>When finished, hit <b>"Edit Behavior"</b> at the bottom of this page.</p>');
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
 
         echo("<form method='POST' action='/Horse/o_behaviorEdit.php?formAction=confirmEdit'>");
@@ -51,7 +51,7 @@
             //Set the value of the behavior title input field as the old title. If the user is adding to the database, the field is blank, as there's no old title.
             echo("<p>Behavior Title<span style='font-size:x-small;color:FF0000'>*</span>: <input type='text' name='behaviorTitle' tabindex='1' value='$oldTitle'></p>");
         ?>
-        <p>Level of Difficulty<span style="font-size:x-small;color:FF0000"></span>:
+        <p>Level of Difficulty:
         <select name="behaviorLevel" tabindex="1"> 
             <?PHP
 
@@ -59,16 +59,15 @@
                 $levels = array("Beginner", "Intermediate", "Hard");
 
                 //If the user is adding a behavior,
-                if($formAction == 'addBehavior') {
+                if($formAction == 'addBehavior' || $formAction == "confirmAdd") {
 
                     //display the levels in order.
                     foreach ($levels as $L) {
                             echo "<option value=" . $L . ">" . $L . "</option>";
                     }
                 }
+                else { //$formAction == "editBehavior"
 
-                //Else, the user is editing a behavior.
-                else {
                     //For convenience, get the level of the behavior the user wants to edit.
                     $currentLevel = retrieve_behavior($oldTitle)->get_behaviorLevel();
 
@@ -92,7 +91,7 @@
     <?PHP
 
         //Display the appropriate submit button text based on what the user wants to do.
-        if($formAction == "addBehavior") {
+        if($formAction == "addBehavior" || $formAction == "confirmAdd") {
             echo("<input type='submit' value='Add Behavior'/>");
         }
         else if ($formAction == "editBehavior") {
