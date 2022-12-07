@@ -37,7 +37,6 @@
 				<p> For more information, please visit our <a href="http://https://centralvahorserescue.org/">website</a>.</p>
 				
 			</div>
-		<?PHP include('footer.inc');?>
 		</div>
 	</body>
 </html>
