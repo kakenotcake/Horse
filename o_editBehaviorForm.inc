@@ -29,10 +29,10 @@
     }
     else { //$formAction == "editBehavior"
 
-        echo("<p><strong>Edit Behavior Information</strong></p>");
+        echo("<p><strong>Edit " . $oldTitle . "'s Information</strong></p>");
         echo("<p>Edit the title and/or difficulty behavior information as you wish. If you do not wish to change the title, please leave it untouched.</p>");
         echo("<p>Please use the dropdown menu to select the behavior you want to edit.</p>");
-        echo('<p>When finished, hit <b>"Edit Behavior"</b> at the bottom of this page.</p>');
+        echo('<p>When finished, hit <b>"Edit ' . $oldTitle . '"</b> at the bottom of this page.</p>');
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
 
         echo("<form method='POST' action='/Horse/o_behaviorEdit.php?formAction=confirmEdit'>");
@@ -95,7 +95,7 @@
             echo("<input type='submit' value='Add Behavior'/>");
         }
         else if ($formAction == "editBehavior") {
-            echo("<input type='submit' value='Edit Behavior'/>");
+            echo("<input type='submit' value='Edit " . $oldTitle . "'/>");
         }
         else {
             echo("<input type='submit' value='Submit Behavior Information'/>");

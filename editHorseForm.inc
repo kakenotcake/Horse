@@ -30,10 +30,10 @@
     }
     else { //$formAction == "editHorse" 
 
-        echo("<p><strong>Edit Horse Information</strong></p>");
+        echo("<p><strong>Edit " . $oldName . "'s Information</strong></p>");
         echo("<p>Edit the name, breed, color, pasture number, and color rank horse information as you wish. If you do not wish to change any information, please leave it untouched.</p>");
         echo("<p>Please use the dropdown menu to select the horse you want to edit.</p>");
-        echo('<p>When finished, hit <b>"Edit Horse"</b> at the bottom of this page.</p>');
+        echo('<p>When finished, hit <b>"Edit ' . $oldName . '"</b> at the bottom of this page.</p>');
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
 
         echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
@@ -109,7 +109,7 @@
             echo("<input type='submit' value='Add Horse'/>");
         }
         else {  //$formAction == "editHorse"
-            echo("<input type='submit' value='Edit Horse'/>");
+            echo("<input type='submit' value='Edit " . $oldName . "'/>");
         }
     ?>
 </form>
