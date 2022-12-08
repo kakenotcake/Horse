@@ -227,8 +227,16 @@ function getall_person_names() {
 }
   
 
+/*
+ * Function name: make_a_person($result_row)
+ * Description: makes a Person object from the query row parameter
+ * Parameters: 
+ *      $result_row, a row from a MySQL query containing person information.
+ * Return Values:
+ *      $thePerson, a Person object created using the parameter information.
+ */
 function make_a_person($result_row) {
-    $theperson = new person(
+    $thePerson = new Person(
                 $result_row['firstName'],
                 $result_row['lastName'],
                 $result_row['fullName'],
@@ -237,7 +245,7 @@ function make_a_person($result_row) {
                 $result_row['username'],
                 $result_row['pass'],
                 $result_row['userType']);
-    return $theperson;
+    return $thePerson;
 }
 
 /*
