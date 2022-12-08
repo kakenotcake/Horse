@@ -1,13 +1,8 @@
 <?php
-/*
- * Copyright 2015 by Jerrick Hoang, Ivy Xing, Sam Roberts, James Cook, 
- * Johnny Coster, Judy Yang, Jackson Moniaga, Oliver Radwan, 
- * Maxwell Palmer, Nolan McNair, Taylor Talmage, and Allen Tucker. 
- * This program is part of RMH Homebase, which is free software.  It comes with 
- * absolutely no warranty. You can redistribute and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation
- * (see <http://www.gnu.org/licenses/ for more information).
- * 
+
+/* 
+ * about.php: a PHP file for information about CVHR.
+ * Will hopefully contains pictures and links later.
  */
 
 	session_start();
@@ -22,7 +17,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?PHP include('o_header.php');?>
+			<?PHP include('header.php');?>
 			<div id="content">
 				<p><strong>Background</strong><br /><br />
 

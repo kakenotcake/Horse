@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * getHorseForm.inc: shows a form for the user to select a horse name from a dropdown menu.
+ */
+
+?>
+<?php
+
     //Display the form instructions based on what the user wants to do.
     //Also, change the form's destination URL based on what the user wants to do.
     if($formAction == "selectHorse") {
@@ -9,7 +16,7 @@
         echo("<p>When finished, hit <b>Select Name</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
        
-        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=editHorse'>");
+        echo("<form method='POST' action='/Horse/horseActions.php?formAction=editHorse'>");
     }
     else {
 
@@ -18,7 +25,7 @@
         echo("<p>When finished, hit <b>Remove Horse</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
        
-        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmRemove'>");
+        echo("<form method='POST' action='/Horse/horseActions.php?formAction=confirmRemove'>");
     }
 ?>
 

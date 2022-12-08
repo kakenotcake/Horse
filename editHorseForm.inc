@@ -1,16 +1,6 @@
-
-
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /*
- * editBehaviorForm.inc
- * shows a form for a behavior to be added or edited in the database
- * 
+ * editBehaviorForm.inc: shows a form for a behavior to be added or edited in the database.
  */
 ?>
 
@@ -26,9 +16,9 @@
         echo('<p>When finished, hit <b>"Add Horse"</b> at the bottom of this page.</p>');
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
        
-        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmAdd'>");
+        echo("<form method='POST' action='/Horse/horseActions.php?formAction=confirmAdd'>");
     }
-    else { //$formAction == "editHorse" 
+    else { //$formAction == "editHorse" or "confirmEdit"
 
         echo("<p><strong>Edit " . $oldName . "'s Information</strong></p>");
         echo("<p>Edit the name, breed, color, pasture number, and color rank horse information as you wish. If you do not wish to change any information, please leave it untouched.</p>");
@@ -36,14 +26,14 @@
         echo('<p>When finished, hit <b>"Edit ' . $oldName . '"</b> at the bottom of this page.</p>');
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
 
-        echo("<form method='POST' action='/Horse/horseEdit.php?formAction=confirmEdit'>");
+        echo("<form method='POST' action='/Horse/horseActions.php?formAction=confirmEdit'>");
     }
 ?>
     <input type="hidden" name="old_name" value="new">
     <input type="hidden" name="_form_submit" value="1">
 
     <?PHP
-        //If the user is editing an existing horse, pass the existing name in "oldName" back to "horseEdit.php" for editing purposes.
+        //If the user is editing an existing horse, pass the existing name in "oldName" back to "horseActions.php" for editing purposes.
         echo("<input type='hidden' name='oldName' value='$oldName'/>");
     ?>
     <fieldset>
@@ -56,7 +46,7 @@
                 echo("<p>Color: <input type='text' name='color' tabindex='1' value='$currentColor'></p>");
                 echo("<p>Pasture Number: <input type='number' name='pastureNum' tabindex='1' min='1' max='11'></p>");
             } 
-            else  { //$formAction == "editHorse"
+            else  { //$formAction == "editHorse" or "confirmEdit"
                 //auto-populate the fields with the exisitng information
                 $currentBreed = retrieve_horse($oldName)->get_breed();
                 $currentColor = retrieve_horse($oldName)->get_color();
@@ -82,7 +72,7 @@
                     }
                 }
                 //the user is editing a horse
-                else {
+                else { //$formAction == "editHorse" or "confirmEdit"
                     $currentColorRank = retrieve_horse($oldName)->get_colorRank();
                     echo "<option value=" . $currentColorRank . ">" . $currentColorRank . "</option>";
                     //display the other colors after
@@ -105,10 +95,10 @@
     <?PHP
 
         //Display the appropriate submit button text based on what the user wants to do.
-        if($formAction == "addHorse") {
+        if($formAction == "addHorse" || $formAction == "confirmAdd") {
             echo("<input type='submit' value='Add Horse'/>");
         }
-        else {  //$formAction == "editHorse"
+        else {  //$formAction == "editHorse" or "confirmEdit"
             echo("<input type='submit' value='Edit " . $oldName . "'/>");
         }
     ?>

@@ -1,17 +1,9 @@
-
-
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /*
- * editBehaviorForm.inc
- * shows a form for a behavior to be added or edited in the database
- * 
+ * editPersonForm.inc: shows a form for a person to be added or edited in the database.
  */
+ 
 ?>
 
 
@@ -26,7 +18,7 @@
         echo("<p>When finished, hit <b>Add Person</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
        
-        echo("<form method='POST' action='/Horse/o_personEdit.php?formAction=confirmAdd'>");
+        echo("<form method='POST' action='/Horse/personActions.php?formAction=confirmAdd'>");
     }
     else { //$formAction = 'editPerson' or 'confirmEdit'
 
@@ -35,7 +27,7 @@
         echo("<p>When finished, hit <b>Edit " . $oldName . "</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
 
-        echo("<form method='POST' action='/Horse/o_personEdit.php?formAction=confirmEdit'>");
+        echo("<form method='POST' action='/Horse/personActions.php?formAction=confirmEdit'>");
     }
 ?>
     <input type="hidden" name="old_name" value="new">

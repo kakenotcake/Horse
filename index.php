@@ -11,7 +11,7 @@ session_cache_expire(30);
 <html>
     <head>
         <title>
-            RMH Homebase
+            CVHR Horse Training Management System
         </title>
         <link rel="stylesheet" href="styles.css" type="text/css" />
         <style>
@@ -25,12 +25,16 @@ session_cache_expire(30);
             <?PHP include('header.php'); ?>
             <div id="content">
                 <?PHP
-                include_once('database/dbPersons.php');
-                include_once('domain/Person.php');
-                include_once('database/dbLog.php');
-                include_once('domain/Shift.php');
-                include_once('database/dbShifts.php');
+                include_once('../domain/Horse.php');
+                include_once('../database/dbinfo.php');
+                include_once('../database/horsedb.php');
+                //include_once('database/dbPersons.php');
+                //include_once('domain/Person.php');
+                //include_once('database/dbLog.php');
+                //include_once('domain/Shift.php');
+                //include_once('database/dbShifts.php');
                 date_default_timezone_set('America/New_York');
+                /*
             //    fix_all_birthdays();
                 if ($_SESSION['_id'] != "guest") {
                     $person = retrieve_person($_SESSION['_id']);
@@ -48,6 +52,7 @@ session_cache_expire(30);
                         echo('<p> To apply for volunteering at the Portland or Bangor Ronald McDonald House, '.
                         		'please select <b>apply</b>.');
                     if ($person) {
+                */
                         /*
                          * Check type of person, and display home page based on that.
                          * all: password check
@@ -58,6 +63,7 @@ session_cache_expire(30);
                          */
 
                         //APPLICANT CHECK
+                        /*
                         if ($person->get_first_name() != 'guest' && $person->get_status() == 'applicant') {
                             //SHOW STATUS
                             echo('<div class="infobox"><p><strong>Your application has been submitted.</strong><br><br /><table><tr><td><strong>Step</strong></td><td><strong>Completed?</strong></td></tr><tr><td>Background Check</td><td>' . $person['background_check'] . '</td></tr><tr><td>Interview</td><td>' . $person['interview'] . '</td></tr><tr><td>Shadow</td><td>' . $person['shadow'] . '</td></tr></table></p></div>');
@@ -161,10 +167,12 @@ session_cache_expire(30);
                             }
                             echo('<br clear="all">');
                         }
+                        
                     }
+                    */
                     ?>
                     </div>
-                    <?PHP include('footer.inc'); ?>
+                    <?PHP //include('footer.inc'); ?>
         </div>
     </body>
 </html>

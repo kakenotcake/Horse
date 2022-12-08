@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * getPersonForm.inc: shows a form for the user to select a person name from a dropdown menu.
+ */
+
+?>
+
+<?php
+
     //Display the form instructions based on what the user wants to do.
     //Also, change the form's destination URL based on what the user wants to do.
     if($formAction == "selectPerson") {
@@ -9,7 +17,7 @@
         echo("<p>When finished, hit <b>Select Person</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
        
-        echo("<form method='POST' action='/Horse/o_personEdit.php?formAction=editPerson'>");
+        echo("<form method='POST' action='/Horse/personActions.php?formAction=editPerson'>");
     }
     else {
 
@@ -18,7 +26,7 @@
         echo("<p>When finished, hit <b>Remove Person</b> at the bottom of this page.</p>");
         echo("<p>(<span style='font-size:x-small;color:FF0000'>*</span> denotes required information).</p>");
        
-        echo("<form method='POST' action='/Horse/o_personEdit.php?formAction=confirmRemove'>");
+        echo("<form method='POST' action='/Horse/personActions.php?formAction=confirmRemove'>");
     }
 ?>
 

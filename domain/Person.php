@@ -1,5 +1,9 @@
 <?php
 
+/* 
+ * Person.php: a PHP file acting as a class file for Person objects.
+ */
+
 class Person {
     private $firstName; //string
     private $lastName; //string

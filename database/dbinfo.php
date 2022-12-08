@@ -15,13 +15,14 @@
  * @version updated 2/12/08
  */
 
+//Create a connection to the database
+    //If the directions are the same as the Fall 2022 semester, these credentials are correct.
 function connect() {
     $host = "localhost"; 
     $username = "homebasedb";
     $password = "homebasedb";
     $database = "homebasedb";
 
-    //$con = mysqli_connect($host,$user,$pass,$database);
     $con = mysqli_connect($host, $username, $password, $database);
     if (!$con) { 
         echo "not connected to server"; 
@@ -33,9 +34,6 @@ function connect() {
         return mysqli_error($con); 
     }
     else {
-        //echo("<p>We've got a connection!</p>");
-        //echo("<br>");
-        //echo("<strong>Database: " . $database . "</strong>");
         return $con;
     } 
     
