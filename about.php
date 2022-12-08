@@ -29,7 +29,7 @@
 				or abandoned equines; provide them with care and rehabilitation; and finally find them a compatible, loving home.  
 				We believe that education is the long-term solution to improving the lives of equines.
 
-				<p> For more information, please visit our <a href="http://https://centralvahorserescue.org/">website</a>.</p>
+				<p> For more information, please visit our <a href="https://centralvahorserescue.org/"><strong><u>website</u></strong></a>.</p>
 				
 			</div>
 		</div>
