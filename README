@@ -23,3 +23,5 @@ To access the application:
     3. Follow Steps 1-3 of setting up phpMyAdmin using the following link: https://github.com/megandalster/homebasedemo2017/wiki/installation-and-reuse/
         
         - Import the "homebasedb.sql" file in the "database" folder here to set up the CVHR database.
+
+If you wish to see the legacy Homebase code for reference, follow all the steps in the two links provided above.
